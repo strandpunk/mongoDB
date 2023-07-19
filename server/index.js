@@ -1,11 +1,15 @@
-const express = require('express');
+const express = require('express')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+const db = require('./config/db')
 
-const app = express();
+dotenv.config()
 
-const PORT = process.env.PORT || 5000;
+// set up server
 
-app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+const app = express()
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
 
-app.get("/test", (req, res) =>  {
-    res.send("It works");
-})
+db()
+
