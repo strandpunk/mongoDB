@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-const MongoDB = require('./config/db')
+const mongoDB = require('./config/mongoDB')
 
 dotenv.config()
 
@@ -13,5 +13,5 @@ app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
 
 // connect to mongoDB
 
-MongoDB()
+mongoDB()
 
