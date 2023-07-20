@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const User = require('../models/userModel')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
     try {
@@ -23,11 +25,38 @@ router.post('/', async (req, res) => {
                 .json({ errorMessage: 'Please enter the same password twice.' });
 
         const existingUser = await User.findOne({ email: email })
-
         if (existingUser)
             return res
                 .status(400)
                 .json({ errorMessage: 'An account with this email already exists.' });
+
+        // hash the password
+
+        const salt = await bcrypt.genSalt()
+        const passwordHash = await bcrypt.hash(password, salt)
+
+        // save a new user account to database
+
+        const newUser = new User({
+            email, passwordHash
+        })
+
+        const savedUser = await newUser.save()
+
+        // sign the token
+
+        const token = jwt.sign({
+            user: savedUser._id
+        }, process.env.JWT_SECRET)
+
+        // send the token in a HTTP-only cookie
+
+        res.cookie('token', token, {
+            httpOnly: true
+        })
+        .send()
+
+
     } catch (error) {
         consle.error(error)
         res.sendStatus(500).send()
