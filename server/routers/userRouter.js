@@ -7,11 +7,11 @@ const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
     try {
-        const { email, password, passwordVerify } = req.body
+        const { name, email, password, passwordVerify } = req.body
 
         // validation
 
-        if (!email || !password || !passwordVerify)
+        if (!name || !email || !password || !passwordVerify)
             return res
                 .status(400)
                 .json({ errorMessage: 'Please enter all required fields.' });
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
         // save a new user account to database
 
         const newUser = new User({
-            email, passwordHash
+            name, email, passwordHash
         })
 
         const savedUser = await newUser.save()
