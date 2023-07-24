@@ -24,7 +24,7 @@ const Navbar = () => {
                 {loggedIn === true && (
                     <>
                         <div className="navbar-linkWrapper">
-                            <div className='navbar-user'>User</div>
+                            <div className='navbar-loggedIn'>Logged In</div>
                             <SignOut />
                         </div>
                     </>
