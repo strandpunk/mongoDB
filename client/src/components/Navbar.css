@@ -1,0 +1,42 @@
+.navbar-header {
+    background-color: lightblue;
+    /* background-color: #CC0000; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vh;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+img {
+    height: 40px;
+
+}
+
+.navbar-navlink{
+    color: black;
+    margin-right: 10px;
+}
+
+.active {
+    color: black;
+    opacity: 0.5;
+    cursor: default;
+}
+
+.navbar-linkWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-user, .navbar-signout {
+    margin-right: 10px;
+}
+
+.navbar-signout {
+    cursor: pointer;
+    border-bottom: 1px solid black;
+}

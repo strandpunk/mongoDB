@@ -47,9 +47,7 @@ router.post('/', async (req, res) => {
 
         // sign the token
 
-        const token = jwt.sign({
-            user: savedUser._id
-        }, process.env.JWT_SECRET)
+        const token = jwt.sign({user: savedUser._id}, process.env.JWT_SECRET)
 
         // send the token in a HTTP-only cookie
 
@@ -118,6 +116,19 @@ router.get('/logout', (req, res) => {
         expires: new Date(0)
     })
         .send()
+})
+
+router.get('/loggedIn', (req, res) => {
+    try {
+        const token = req.cookies.token
+        if (!token) return res.json(false)
+
+        jwt.verify(token, process.env.JWT_SECRET)
+
+        res.send(true)
+    } catch (error) {
+        res.json(false)
+    }
 })
 
 module.exports = router

@@ -1,0 +1,14 @@
+.layout-footer{
+    background-color: lightblue;
+    /* background-color: #CC0000; */
+    height: 5vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout-container{
+    height: 90vh;
+    background-color: slategrey;
+}

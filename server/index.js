@@ -5,6 +5,7 @@ const mongoDB = require('./config/mongoDB')
 const userRouter = require('./routers/userRouter')
 const dataRouter = require('./routers/dataRouter')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 dotenv.config()
 
@@ -16,6 +17,11 @@ app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+}))
 
 // connect to mongoDB
 

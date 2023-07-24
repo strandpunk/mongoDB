@@ -1,0 +1,16 @@
+.home-wrapper {
+    display: flex;
+    justify-content: center;
+
+    padding-top: 15vh;
+    align-items:flex-end;
+    text-align: center;
+}
+
+.home-main {
+    height: 600px;
+    width: 800px;
+    background-color: lightsteelblue;
+    border-radius: 15px;
+    /* background-color: #000000; */
+}
