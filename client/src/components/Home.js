@@ -10,6 +10,7 @@ const Home = () => {
     // const navigate = useNavigate()
 
     return (
+        // content-wrapper?
         <main>
             {loggedIn === true &&
                 (
