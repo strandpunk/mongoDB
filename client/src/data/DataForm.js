@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 
-function DataForm() {
+function DataForm({getData}) {
 
     const [data, setData] = useState('')
 
@@ -13,7 +13,7 @@ function DataForm() {
                 content: data
             }
             await axios.post('http://localhost:5000/data/', Data)
-            
+            getData()
         } catch (error) {
             console.error(error)
         }

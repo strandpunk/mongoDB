@@ -2,7 +2,7 @@ import { useContext } from 'react'
 // import { useNavigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import './Home.css'
-import Data from '../data/DataList'
+import Data from '../data/Data'
 
 const Home = () => {
 

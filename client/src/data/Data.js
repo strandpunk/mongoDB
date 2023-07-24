@@ -20,7 +20,7 @@ function Data() {
 
     return (
         <div>
-            <DataForm />
+            <DataForm getData={getData}/>
             <DataList data={data}/>
         </div>
     )
