@@ -28,14 +28,8 @@ const Home = () => {
             {loggedIn === false &&
                 (
                     <>
-                        <div className="home-wrapper">
-                            <div className="home-main">
-                                <section>
-                                    Register or sign in
-                                    {/* {datas?.map(d => <DataItem {...d} key={d._id} onClick={handleDataItemClick(d)} />)} */}
-                                </section>
-
-                            </div>
+                        <div>
+                            <h1>Register or sign up</h1>
                         </div>
                     </>
                 )}

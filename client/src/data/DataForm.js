@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import './DataForm.css'
 
 function DataForm({getData}) {
 
@@ -20,10 +21,10 @@ function DataForm({getData}) {
     }
 
     return (
-        <div>
+        <div className="dataForm-wrapper">
             <form onSubmit={saveData}>
                 <input onChange={(e) => setData(e.target.value)} value={data} name='data' type='text' placeholder='Enter your data....' />
-                <button type="submit">Enter Data</button>
+                <button type="submit" className="registerbtn">POST</button>
             </form>
         </div>
     )

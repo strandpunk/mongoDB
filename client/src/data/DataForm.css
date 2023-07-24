@@ -1,0 +1,21 @@
+.dataForm-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.registerbtn {
+
+    color: black;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}

@@ -1,4 +1,4 @@
-
+import './DataList.css'
 
 function DataList({ data }) {
 
@@ -9,8 +9,9 @@ function DataList({ data }) {
     }
 
     return (
-        <div>
+        <div className='dataList-wrapper'>
             <div>
+                <h1>Content:</h1><br></br>
                 <ul>
                     {renderData()}
                 </ul>
