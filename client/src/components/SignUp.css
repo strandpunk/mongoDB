@@ -11,7 +11,6 @@
     background-color: lightgrey;
     width: 800px;
     height: 800px;
-
     display: flex;
 
     justify-content: center;
@@ -54,4 +53,10 @@ input[type=password]:focus {
 
 .registerbtn:hover {
     opacity: 1;
+}
+
+form {
+    border: 1px solid black;
+    padding: 20px;
+    background-color: lightgray;
 }

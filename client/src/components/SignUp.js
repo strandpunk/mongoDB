@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import AuthContext from "../context/AuthContext";
 import axios from 'axios'
@@ -28,10 +28,9 @@ const SignUp = () => {
 
             await axios.post('http://localhost:5000/auth/', registerData)
             navigate('/')
-            console.log(getLoggedIn())
 
         } catch (error) {
-            console.error(error)
+            setFormError('Не удалось зарегистрировать данный аккаунт')
         }
     }
 
@@ -41,7 +40,16 @@ const SignUp = () => {
     const [emailError, setEmailError] = useState('Поле почты не может быть пустым')
     const [passwordError, setPasswordError] = useState('Поле пароля не может быть пустым')
     const [passwordVerifyError, setPasswordVerifyError] = useState('Это поле не может быть пустым')
+    const [formValid, setFormValid] = useState(false)
+    const [formError, setFormError] = useState('')
 
+    useEffect(() => {
+        if (nameError || emailError || passwordError || passwordVerifyError) {
+            setFormValid(false)
+        } else {
+            setFormValid(true)
+        }
+    }, [nameError, emailError, passwordError, passwordVerifyError])
 
 
     const nameHandler = (e) => {
@@ -151,10 +159,11 @@ const SignUp = () => {
                         <input onChange={(e) => confirmPasswordHandler(e)} value={passwordVerify} name='confirmPassword' type='password' placeholder='Confirm your password...' />
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{passwordVerifyError}</div>
 
-                        <button onClick={ e => {Pass(e)}} type='submit' className='registerbtn'>REGISTER</button>
-                </form>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{formError}</div>
+                        <button onClick={e => { Pass(e) }} disabled={!formValid} type='submit' className='registerbtn'>REGISTER</button>
+                    </form>
+                </div>
             </div>
-        </div>
         </>
     )
 }
