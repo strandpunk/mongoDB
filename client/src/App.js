@@ -6,6 +6,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import axios from 'axios'
 import { AuthContextProvider } from './context/AuthContext';
+import './App.css'
 
 axios.defaults.withCredentials = true
 

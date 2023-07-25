@@ -20,8 +20,12 @@ function Data() {
 
     return (
         <div>
-            <DataForm getData={getData}/>
-            <DataList data={data}/>
+            <div>
+                <DataForm getData={getData} />
+            </div>
+            <div>
+                <DataList data={data} />
+            </div>
         </div>
     )
 }

@@ -5,7 +5,7 @@ function DataList({ data }) {
     function renderData() {
         return data.map((data, i) => {
             // content-wrapper?
-            return <li key={i}>{data.content}</li>
+            return <div className='content-wrapper' key={i}>{data.content}</div>
         })
     }
 
