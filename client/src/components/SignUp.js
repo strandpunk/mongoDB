@@ -28,8 +28,11 @@ const SignUp = () => {
 
             await axios.post('http://localhost:5000/auth/', registerData)
             navigate('/')
+            getLoggedIn()
+            //console.log(getLoggedIn())
 
         } catch (error) {
+            console.error(error)
             setFormError('Не удалось зарегистрировать данный аккаунт')
         }
     }

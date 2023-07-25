@@ -27,7 +27,9 @@ const SignIn = () => {
             navigate('/')
 
         } catch (error) {
-            setFormError('Данный аккаунт не найден')
+            console.log(error.response.data);
+            const x = error.response.data
+            setFormError(x.errorMessage)
         }
     }
 
