@@ -17,7 +17,7 @@ const Home = () => {
                     <>
                         <div className="home-wrapper">
                             <div className="home-main">
-                                <div className='user-info'></div>
+                                <div className='user-info'>User Info</div>
                                 <section>
                                     <Data />
                                 </section>
