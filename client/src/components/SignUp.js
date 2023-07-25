@@ -32,8 +32,9 @@ const SignUp = () => {
             //console.log(getLoggedIn())
 
         } catch (error) {
-            console.error(error)
-            setFormError('Не удалось зарегистрировать данный аккаунт')
+            // console.log(error.response.data);
+            const x = error.response.data
+            setFormError(x.errorMessage)
         }
     }
 
@@ -130,11 +131,7 @@ const SignUp = () => {
         if (passwordVerify.length === 0) {
             setPasswordVerifyError('Это поле не может быть пустым')
         } else {
-            if (passwordVerify !== password) {
-                setPasswordVerifyError('Пароли не совпали')
-            } else {
-                setPasswordVerifyError('')
-            }
+            setPasswordVerifyError('')
         }
     }
 
