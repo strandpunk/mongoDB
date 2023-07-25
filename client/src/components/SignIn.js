@@ -27,7 +27,7 @@ const SignIn = () => {
             navigate('/')
 
         } catch (error) {
-            console.log(error.response.data);
+            // console.log(error.response.data);
             const x = error.response.data
             setFormError(x.errorMessage)
         }
