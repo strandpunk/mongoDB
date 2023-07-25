@@ -30,8 +30,8 @@ const Home = () => {
             {loggedIn === false &&
                 (
                     <>
-                        <div>
-                            <h1>Register or sign up</h1>
+                        <div className="home-unauthorized">
+                            <h1>Register or sign in</h1>
                         </div>
                     </>
                 )}

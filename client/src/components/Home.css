@@ -21,3 +21,8 @@
     border-bottom: 1px solid black;
     color: white;
 }
+
+.home-unauthorized {
+    min-height: 90vh;
+    height: auto;
+}
