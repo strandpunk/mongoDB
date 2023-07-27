@@ -1,4 +1,4 @@
-.dataForm-wrapper{
+.dataForm-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,4 +18,14 @@
 
 .registerbtn:hover {
     opacity: 1;
+}
+
+.hidden {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    line-height: 0;
 }

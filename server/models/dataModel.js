@@ -11,7 +11,7 @@ const DataSchema = mongoose.Schema({
         ref: "User"
     }
 }, {
-    timestaps: true
+    timestamps: true
 })
 
 const Data = mongoose.model('Data', DataSchema)

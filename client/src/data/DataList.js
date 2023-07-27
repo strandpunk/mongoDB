@@ -5,7 +5,10 @@ function DataList({ data }) {
     function renderData() {
         return data.map((data, i) => {
             // content-wrapper?
-            return <div className='content-wrapper' key={i}>{data.content}</div>
+            return <div key={i}>
+                <div className='content-wrapper'>{data.content}</div>
+                <div >{data.createdAt}</div>
+            </div>
         })
     }
 
@@ -14,9 +17,7 @@ function DataList({ data }) {
         <div className='dataList-wrapper'>
             <div>
                 <h1>Content:</h1><br></br>
-                <ul>
-                    {renderData()}
-                </ul>
+                {renderData()}
             </div>
         </div>
     )
