@@ -20,3 +20,7 @@ ul {
     margin-bottom: 10px;
     height: 500px;
 }
+.content-date {
+    border: 1px solid black;
+    margin-bottom: 40px;
+}

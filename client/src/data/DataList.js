@@ -7,7 +7,7 @@ function DataList({ data }) {
             // content-wrapper?
             return <div key={i}>
                 <div className='content-wrapper'>{data.content}</div>
-                <div >{data.createdAt}</div>
+                <div className='content-date'>{data.createdAt}</div>
             </div>
         })
     }
