@@ -3,6 +3,8 @@ import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 import './Home.css'
 import Data from '../data/Data'
+import User from '../user/User'
+
 
 const Home = () => {
 
@@ -17,7 +19,7 @@ const Home = () => {
                     <>
                         <div className="home-wrapper">
                             <div className="home-main">
-                                <div className='user-info'>User Info</div>
+                                <div className='user-info'> <User /></div>
                                 <section>
                                     <Data />
                                 </section>

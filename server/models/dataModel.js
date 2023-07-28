@@ -9,6 +9,10 @@ const DataSchema = mongoose.Schema({
         require: true,
         type: mongoose.Types.ObjectId,
         ref: "User"
+    },
+    image: {
+        require: true,
+        type: String
     }
 }, {
     timestamps: true

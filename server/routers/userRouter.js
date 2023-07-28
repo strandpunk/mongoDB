@@ -2,6 +2,8 @@ const router = require('express').Router()
 const User = require('../models/userModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const upload = require('../middleware/upload')
+const auth = require('../middleware/auth')
 
 // register
 
@@ -37,17 +39,20 @@ router.post('/', async (req, res) => {
         const salt = await bcrypt.genSalt()
         const passwordHash = await bcrypt.hash(password, salt)
 
+        // create avatar
+
+        avatar = 'avatar.png'
         // save a new user account to database
 
         const newUser = new User({
-            name, email, passwordHash
+            name, email, passwordHash, avatar
         })
 
         const savedUser = await newUser.save()
 
         // sign the token
 
-        const token = jwt.sign({user: savedUser._id}, process.env.JWT_SECRET)
+        const token = jwt.sign({ user: savedUser._id }, process.env.JWT_SECRET)
 
         // send the token in a HTTP-only cookie
 
@@ -128,6 +133,33 @@ router.get('/loggedIn', (req, res) => {
         res.send(true)
     } catch (error) {
         res.json(false)
+    }
+})
+
+ // get user info
+
+router.get('/info', auth, async (req, res) => {
+    try {
+
+        const user = req.user
+        const userInfo = await User.findById(user)
+        // console.log(userInfo)
+        res.send(userInfo.name)
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500).send()
+    }
+})
+
+
+ // user avatar
+
+router.get('/avatar', upload.single('avatar'), (req, res) => {
+    try {
+        const avatar = ''
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500).send()
     }
 })
 
