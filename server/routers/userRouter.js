@@ -141,22 +141,14 @@ router.get('/loggedIn', (req, res) => {
 router.get('/info', auth, async (req, res) => {
     try {
 
-        const user = req.user
-        const userInfo = await User.findById(user)
-        // console.log(userInfo)
-        res.send(userInfo.name)
-    } catch (error) {
-        console.error(error)
-        res.sendStatus(500).send()
-    }
-})
-
-
- // user avatar
-
-router.get('/avatar', upload.single('avatar'), (req, res) => {
-    try {
-        const avatar = ''
+        const userID = req.user
+        const userInfo = await User.findById(userID).select('-passwordHash') //.select('-passwordHash')
+        res.send({
+            name: userInfo.name,
+            email: userInfo.email,
+            createdAt: userInfo.createdAt,
+            avatar: userInfo.avatar
+        })
     } catch (error) {
         console.error(error)
         res.sendStatus(500).send()

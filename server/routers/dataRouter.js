@@ -26,6 +26,7 @@ router.get('/', auth, async (req, res) => {
     try {
         const user = req.user
         const data = await Data.find({owner: user})
+        // console.log(data)
         res.json(data)
     } catch (error) {
         console.error(error)
