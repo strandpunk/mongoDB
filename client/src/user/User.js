@@ -18,12 +18,20 @@ function User() {
     }, []);
 
 
+    const [selectedFile, setSelectedFile] = useState()
 
     const handlePick = () => {
         filePicker.current.click()
+        
     }
 
     const filePicker = useRef(null)
+
+    const handleChange = (e) => {
+        console.log(e.target.files)
+        setSelectedFile(e.target.files[0])
+        console.log(selectedFile)
+    }
 
 
     return (
@@ -39,7 +47,8 @@ function User() {
                         <img src={require(`../images/${user.avatar}`)} alt='img'></img>
 
                         <button type="button" onClick={handlePick} className="registerbtn">ADD PHOTO</button>
-                        <input ref={filePicker} className="hidden" type='file' accept="image/*,.png,.jpg,.gif,.web"></input>
+                        <input onChange={handleChange} ref={filePicker} className="hidden" type='file' accept="image/*,.png,.jpg,.gif,.web"></input>
+                        <button type="button" onClick={handlePick} className="registerbtn">UPLOAD PHOTO</button>
                     </>
                 ) : (
                     <div>Загрузка...</div>
