@@ -156,6 +156,8 @@ router.get('/info', auth, async (req, res) => {
 })
 
 
+
+//----------------------------------------------------------
 // update user profile picture
 
 router.put('/update', auth, async (req, res) => {
@@ -167,8 +169,8 @@ router.put('/update', auth, async (req, res) => {
         console.error(error)
         res.sendStatus(500).send()
     }
-    
-})
 
+})
+//----------------------------------------------------------
 
 module.exports = router

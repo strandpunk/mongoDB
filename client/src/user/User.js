@@ -18,11 +18,13 @@ function User() {
     }, []);
 
 
+
+    //----------------------------------------------------------
     const [selectedFile, setSelectedFile] = useState(null)
 
     const handlePick = () => {
         filePicker.current.click()
-        
+
     }
 
     const filePicker = useRef(null)
@@ -43,7 +45,9 @@ function User() {
             console.error("Ошибка при получении данных пользователя:", error);
         }
     }
+    //----------------------------------------------------------
 
+    
 
     return (
         <div>
