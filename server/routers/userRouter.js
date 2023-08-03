@@ -136,7 +136,7 @@ router.get('/loggedIn', (req, res) => {
     }
 })
 
- // get user info
+// get user info
 
 router.get('/info', auth, async (req, res) => {
     try {
@@ -154,5 +154,20 @@ router.get('/info', auth, async (req, res) => {
         res.sendStatus(500).send()
     }
 })
+
+
+// update user profile picture
+
+router.put('/update', auth, async (req, res) => {
+    try {
+        const userID = req.user
+        const updated_user = await User.findOneAndUpdate({ userID }, _req.body, { new: true })
+        res.status(200).send(updated_user)
+    } catch (error) {
+        console.error(error)
+        res.sendStatus(500).send()
+    }
+})
+
 
 module.exports = router
