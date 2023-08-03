@@ -33,6 +33,17 @@ function User() {
         console.log(selectedFile.name)
     }
 
+    async function uploadPhoto() {
+        try {
+            await axios.put('http://localhost:5000/auth/update', {
+                avatar: selectedFile.name
+            });
+            console.log('Фото отправлено')
+        } catch (error) {
+            console.error("Ошибка при получении данных пользователя:", error);
+        }
+    }
+
 
     return (
         <div>
@@ -48,7 +59,7 @@ function User() {
 
                         <button type="button" onClick={handlePick} className="registerbtn">ADD PHOTO</button>
                         <input onChange={handleChange} ref={filePicker} className="hidden" type='file' accept="image/*,.png,.jpg,.gif,.web"></input>
-                        <button type="button" onClick={handlePick} className="registerbtn">UPLOAD PHOTO</button>
+                        <button type="button" onClick={uploadPhoto} className="registerbtn">UPLOAD PHOTO</button>
                     </>
                 ) : (
                     <div>Загрузка...</div>
