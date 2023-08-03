@@ -13,7 +13,7 @@ function SignOutBtn() {
         navigate('/signin')
     }
 
-    return (<button onClick={signOut}>Exit</button>)
+    return (<button onClick={signOut}>Выйти</button>)
 }
 
 export default SignOutBtn

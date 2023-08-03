@@ -33,7 +33,7 @@ const Home = () => {
                 (
                     <>
                         <div className="home-unauthorized">
-                            <h1>Register or sign in</h1>
+                            <h1>Зарегистрируйтесь или войдите</h1>
                         </div>
                     </>
                 )}

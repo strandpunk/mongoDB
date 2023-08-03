@@ -16,15 +16,15 @@ const Navbar = () => {
                 {loggedIn === false && (
                     <>
                         <div className="navbar-linkWrapper">
-                            <NavLink className='navbar-navlink' to='/signin' element={<SignIn />}>Sign in</NavLink>
-                            <NavLink className='navbar-navlink' to='/signup' element={<SignUp />}>Sign up</NavLink>
+                            <NavLink className='navbar-navlink' to='/signin' element={<SignIn />}>Войти</NavLink>
+                            <NavLink className='navbar-navlink' to='/signup' element={<SignUp />}>Зарегистрироваться</NavLink>
                         </div>
                     </>
                 )}
                 {loggedIn === true && (
                     <>
                         <div className="navbar-linkWrapper">
-                            <div className='navbar-loggedIn'>Logged In</div>
+                            <div className='navbar-loggedIn'>Вы вошли</div>
                             <SignOut />
                         </div>
                     </>

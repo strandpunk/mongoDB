@@ -16,7 +16,7 @@ function DataList({ data }) {
         // content-wrapper?
         <div className='dataList-wrapper'>
             <div>
-                <h1>Content:</h1><br></br>
+                <h1>Записи:</h1><br></br>
                 {renderData()}
             </div>
         </div>

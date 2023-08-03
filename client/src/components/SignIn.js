@@ -78,7 +78,7 @@ const SignIn = () => {
                 <div className='form-wrapper'>
                     <form onSubmit={login} className="form">
 
-                        <h1 style={{ textAlign: 'center' }}>Enter</h1>
+                        <h1 style={{ textAlign: 'center' }}>Вход</h1>
 
                         <label>Email</label>
                         <input onChange={(e) => emailHandler(e)} value={email} name='email' type='text' placeholder='Enter your email....' />
@@ -89,7 +89,7 @@ const SignIn = () => {
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{passwordError}</div>
 
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{formError}</div>
-                        <button type='submit' disabled={!formValid} className='enterbtn'>ENTER</button>
+                        <button type='submit' disabled={!formValid} className='enterbtn'>ВОЙТИ</button>
                     </form>
                 </div>
             </div>

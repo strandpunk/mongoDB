@@ -163,7 +163,7 @@ router.get('/info', auth, async (req, res) => {
 router.put('/update', auth, async (req, res) => {
     try {
         const userID = req.user
-        const updated_user = await User.findOneAndUpdate({ userID }, req.avatar, { new: true })
+        const updated_user = await User.findOneAndUpdate({ userID }, req.body, { new: true })
         res.status(200).send(updated_user)
     } catch (error) {
         console.error(error)

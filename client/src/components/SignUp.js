@@ -141,7 +141,7 @@ const SignUp = () => {
                 <div className='form-wrapper'>
                     <form onSubmit={register} className="form">
 
-                        <h1 style={{ textAlign: 'center' }}>Registration</h1>
+                        <h1 style={{ textAlign: 'center' }}>Регистрация</h1>
 
                         <label>Name</label>
                         <input onChange={(e) => nameHandler(e)} value={name} name='name' type='text' placeholder='Enter your name....' />
@@ -160,7 +160,7 @@ const SignUp = () => {
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{passwordVerifyError}</div>
 
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{formError}</div>
-                        <button onClick={e => { Pass(e) }} disabled={!formValid} type='submit' className='registerbtn'>REGISTER</button>
+                        <button onClick={e => { Pass(e) }} disabled={!formValid} type='submit' className='registerbtn'>ЗАРЕГИСТРИРОВАТЬСЯ</button>
                     </form>
                 </div>
             </div>

@@ -32,7 +32,6 @@ function User() {
     const handleChange = (e) => {
         console.log(e.target.files)
         setSelectedFile(e.target.files[0])
-        console.log(selectedFile.name)
     }
 
     async function uploadPhoto() {
@@ -47,7 +46,7 @@ function User() {
     }
     //----------------------------------------------------------
 
-    
+
 
     return (
         <div>
@@ -61,9 +60,12 @@ function User() {
                         <div>Аватар: {user.avatar}</div>
                         <img src={require(`../images/${user.avatar}`)} alt='img'></img>
 
-                        <button type="button" onClick={handlePick} className="registerbtn">ADD PHOTO</button>
+                        <button type="button" onClick={handlePick} className="registerbtn">ДОБАВИТЬ ФОТО</button>
                         <input onChange={handleChange} ref={filePicker} className="hidden" type='file' accept="image/*,.png,.jpg,.gif,.web"></input>
-                        <button type="button" onClick={uploadPhoto} className="registerbtn">UPLOAD PHOTO</button>
+                        <button type="button" onClick={uploadPhoto} className="registerbtn">ЗАГРУЗИТЬ ФОТО</button>
+                        {selectedFile && (
+                            <div>Photo: {selectedFile.name}</div>
+                        )}
                     </>
                 ) : (
                     <div>Загрузка...</div>
