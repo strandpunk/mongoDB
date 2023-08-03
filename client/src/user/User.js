@@ -18,7 +18,7 @@ function User() {
     }, []);
 
 
-    const [selectedFile, setSelectedFile] = useState()
+    const [selectedFile, setSelectedFile] = useState(null)
 
     const handlePick = () => {
         filePicker.current.click()
@@ -30,7 +30,7 @@ function User() {
     const handleChange = (e) => {
         console.log(e.target.files)
         setSelectedFile(e.target.files[0])
-        console.log(selectedFile)
+        console.log(selectedFile.name)
     }
 
 
