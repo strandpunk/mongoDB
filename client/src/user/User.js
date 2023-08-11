@@ -36,10 +36,12 @@ function User() {
 
     async function uploadPhoto() {
         try {
+    
             await axios.put('http://localhost:5000/auth/update', {
-                avatar: selectedFile.name
+                avatar: selectedFile.name // так скорее всего нельзя // нужно вынести это в отдельный объект и уже потом поместить его сюда
             });
             console.log('Фото отправлено')
+            getUser()
         } catch (error) {
             console.error("Ошибка при получении данных пользователя:", error);
         }
