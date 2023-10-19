@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useId } from "react"
 import { useNavigate } from "react-router"
 import AuthContext from "../context/AuthContext";
 import axios from 'axios'
@@ -12,6 +12,10 @@ const SignUp = () => {
     const [password, setPassword] = useState('')
     const [passwordVerify, setPasswordVerify] = useState('')
 
+    const [city, setCity] = useState('')
+    const [gender, setGender] = useState('')
+    const [age, setAge] = useState('')
+
     const { getLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -23,7 +27,10 @@ const SignUp = () => {
                 name,
                 email,
                 password,
-                passwordVerify
+                passwordVerify,
+                city,
+                gender,
+                age
             }
 
             await axios.post('http://localhost:5000/auth/', registerData)
@@ -44,6 +51,12 @@ const SignUp = () => {
     const [emailError, setEmailError] = useState('Поле почты не может быть пустым')
     const [passwordError, setPasswordError] = useState('Поле пароля не может быть пустым')
     const [passwordVerifyError, setPasswordVerifyError] = useState('Это поле не может быть пустым')
+
+    const [cityError, setCityError] = useState('Выберите город')
+    const [genderError, setGenderError] = useState('Выберите пол')
+    const [ageError, setAgeError] = useState('Выберите возраст')
+
+
     const [formValid, setFormValid] = useState(false)
     const [formError, setFormError] = useState('')
 
@@ -135,6 +148,8 @@ const SignUp = () => {
         }
     }
 
+    const ageInputId = useId();
+
     return (
         <>
             <div className='form_placer'>
@@ -150,6 +165,30 @@ const SignUp = () => {
                         <label>Email</label>
                         <input onChange={(e) => emailHandler(e)} value={email} name='email' type='text' placeholder='Enter your email....' />
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{emailError}</div>
+
+                        <label>City</label>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{cityError}</div>
+
+                        <label htmlFor={ageInputId}>Your age:</label>
+                        <input id={ageInputId} name="age" type="number" />
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{ageError}</div>
+
+                        <label>Gender</label>
+                        <label>
+                        <input type="radio" name="myRadio" value="option1" />
+                        Муж
+                        </label>
+                        
+                        <label>
+                        <input type="radio" name="myRadio" value="option2" />
+                        Жен
+                        </label>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{genderError}</div>
+
+                        <label>
+                            Со всем согласен: <input type="checkbox" name="myCheckbox" />
+                        </label>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{formError}</div>
 
                         <label>Password</label>
                         <input onChange={(e) => passwordHandler(e)} value={password} name='password' type='password' placeholder='Enter your password....' />

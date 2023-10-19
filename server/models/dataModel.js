@@ -13,6 +13,14 @@ const DataSchema = mongoose.Schema({
     image: {
         require: true,
         type: String
+    },
+    city: {
+        require: true,
+        type: String
+    },
+    sex: {
+        require: true,
+        type: String
     }
 }, {
     timestamps: true
