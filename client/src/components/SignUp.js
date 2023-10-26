@@ -15,6 +15,7 @@ const SignUp = () => {
     const [city, setCity] = useState('')
     const [gender, setGender] = useState('')
     const [age, setAge] = useState('')
+    const [checked, setChecked] = useState(false)
 
     const { getLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -53,8 +54,9 @@ const SignUp = () => {
     const [passwordVerifyError, setPasswordVerifyError] = useState('Это поле не может быть пустым')
 
     const [cityError, setCityError] = useState('Выберите город')
-    const [genderError, setGenderError] = useState('Выберите пол')
     const [ageError, setAgeError] = useState('Выберите возраст')
+    const [myCheckboxError, setMyCheckboxError] = useState('Выберите')
+    const [myRadioError, setMyRadioError] = useState('Выберите пол')
 
 
     const [formValid, setFormValid] = useState(false)
@@ -139,6 +141,34 @@ const SignUp = () => {
         )
     }
 
+    const ageHandler = (e) => {
+        setAge(e.target.value)
+        if (18 > e.target.value || e.target.value > 90) {
+            setAgeError('Вы не можете быть зарегистрированы с таким возрастом')
+        } else {
+            setAgeError('')
+        }
+    }
+
+    const genderHandler = (e) => {
+        setGender(e.target.value)
+        if (!e.target.value) {
+            setMyRadioError('Вы должны выбрать пол')
+        } else {
+            setMyRadioError('')
+        }
+    }
+
+    const checkboxHandler = (e) => {
+        if (checked == true) {
+            setChecked(false)
+            setMyCheckboxError('Вы должны принять это')
+        } else {
+            setChecked(true)
+            setMyCheckboxError('')
+        }
+    }
+
 
     const Pass = (e) => {
         if (passwordVerify.length === 0) {
@@ -170,25 +200,25 @@ const SignUp = () => {
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{cityError}</div>
 
                         <label htmlFor={ageInputId}>Your age:</label>
-                        <input id={ageInputId} name="age" type="number" />
+                        <input onChange={(e) => ageHandler(e)} id={ageInputId} name="age" type="number" />
                         <div style={{ color: '#660000', marginBottom: '40px' }}>{ageError}</div>
 
                         <label>Gender</label>
                         <label>
-                        <input type="radio" name="myRadio" value="option1" />
+                        <input onChange={(e) => genderHandler(e)} type="radio" name="myRadio" value="option1" />
                         Муж
                         </label>
                         
                         <label>
-                        <input type="radio" name="myRadio" value="option2" />
+                        <input onChange={(e) => genderHandler(e)} type="radio" name="myRadio" value="option2" />
                         Жен
                         </label>
-                        <div style={{ color: '#660000', marginBottom: '40px' }}>{genderError}</div>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{myRadioError}</div>
 
                         <label>
-                            Со всем согласен: <input type="checkbox" name="myCheckbox" />
+                            Со всем согласен: <input onChange={(e) => checkboxHandler(e)} type="checkbox" name="myCheckbox"/>
                         </label>
-                        <div style={{ color: '#660000', marginBottom: '40px' }}>{formError}</div>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{myCheckboxError}</div>
 
                         <label>Password</label>
                         <input onChange={(e) => passwordHandler(e)} value={password} name='password' type='password' placeholder='Enter your password....' />
