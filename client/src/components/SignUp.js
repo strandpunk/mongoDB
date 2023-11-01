@@ -232,7 +232,7 @@ const SignUp = () => {
             </div>
 
             <label>City</label>
-            <select city onChange={(e) => cityHandler(e)}>
+            <select onChange={(e) => cityHandler(e)}>
               <option value=""> </option>
               <option value="Rostov">Ростов</option>
               <option value="Samara">Самара</option>

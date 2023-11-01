@@ -2,83 +2,98 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 function User() {
-    const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
-    async function getUser() {
-        try {
-            const userList = await axios.get('http://localhost:5000/auth/info');
-            setUser(userList.data);
-        } catch (error) {
-            console.error("Ошибка при получении данных пользователя:", error);
-        }
+  async function getUser() {
+    try {
+      const userList = await axios.get("http://localhost:5000/auth/info");
+      setUser(userList.data);
+    } catch (error) {
+      console.error("Ошибка при получении данных пользователя:", error);
     }
+  }
 
-    useEffect(() => {
-        getUser();
-    }, []);
+  useEffect(() => {
+    getUser();
+    // getImage();
+  }, []);
 
+  //----------------------------------------------------------
+  const [selectedFile, setSelectedFile] = useState(null);
 
+  const handlePick = () => {
+    filePicker.current.click();
+  };
 
-    //----------------------------------------------------------
-    const [selectedFile, setSelectedFile] = useState(null)
+  const filePicker = useRef(null);
 
-    const handlePick = () => {
-        filePicker.current.click()
+  const handleChange = (e) => {
+    console.log(e.target.files[0]);
+    setSelectedFile(e.target.files[0]);
+  };
 
+  async function uploadPhoto() {
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      await axios.post("http://localhost:5000/uploads", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    } catch (error) {
+      console.error("Ошибка при получении данных пользователя:", error);
     }
+  }
 
-    const filePicker = useRef(null)
+  //------------------WHAT-IS-THIS???-------------------------
 
-    const handleChange = (e) => {
-        console.log(e.target.files)
-        setSelectedFile(e.target.files[0])
-    }
+  const [allImages, setAllImages] = useState();
 
-    async function uploadPhoto() {
-        try {
-    
-            // await axios.put('http://localhost:5000/auth/update', {
-            //     avatar: selectedFile.name // так скорее всего нельзя // нужно вынести это в отдельный объект и уже потом поместить его сюда
-            // });
-            // console.log('Фото отправлено')
-            // getUser()
-            const formData = new FormData()
-            formData.append('file', selectedFile)
-            await axios.post('http://localhost:5000/uploads', formData)
-            console.log('res')
-        } catch (error) {
-            console.error("Ошибка при получении данных пользователя:", error);
-        }
-    }
-    //----------------------------------------------------------
+  const getImage = async () => {
+    const result = await axios.get("http://localhost:5000/get-image");
+    console.log(result);
+    setAllImages(result.data.data);
+  };
+  //----------------------------------------------------------
 
+  return (
+    <div>
+      <div>
+        <h1>Пользователь:</h1>
+        <br></br>
+        {user.name ? (
+          <>
+            <div>Имя: {user.name}</div>
+            <div>Email: {user.email}</div>
+            <div>Дата создания: {user.createdAt}</div>
+            <div>Аватар: {user.avatar}</div>
+            <img src={require(`../images/${user.avatar}`)} alt="img"></img>
 
+            <button type="button" onClick={handlePick} className="registerbtn">
+              ДОБАВИТЬ ФОТО
+            </button>
 
-    return (
-        <div>
-            <div>
-                <h1>Пользователь:</h1><br></br>
-                {user.name ? (
-                    <>
-                        <div>Имя: {user.name}</div>
-                        <div>Email: {user.email}</div>
-                        <div>Дата создания: {user.createdAt}</div>
-                        <div>Аватар: {user.avatar}</div>
-                        <img src={require(`../images/${user.avatar}`)} alt='img'></img>
+            {/* {allImages.map((data) => {
+              return <img src={data.image} />;
+            })} */}
 
-                        <button type="button" onClick={handlePick} className="registerbtn">ДОБАВИТЬ ФОТО</button>
-                        <input onChange={handleChange} ref={filePicker} className="hidden" type='file' accept="image/*,.png,.jpg,.gif,.web"></input>
-                        <button type="button" onClick={uploadPhoto} className="registerbtn">ЗАГРУЗИТЬ ФОТО</button>
-                        {selectedFile && (
-                            <div>Photo: {selectedFile.name}</div>
-                        )}
-                    </>
-                ) : (
-                    <div>Загрузка...</div>
-                )}
-            </div>
-        </div>
-    );
+            <input
+              onChange={handleChange}
+              ref={filePicker}
+              className="hidden"
+              type="file"
+              accept="image/*,.png,.jpg,.gif,.web"
+            ></input>
+            <button type="button" onClick={uploadPhoto} className="registerbtn">
+              ЗАГРУЗИТЬ ФОТО
+            </button>
+            {selectedFile && <div>Photo: {selectedFile.name}</div>}
+          </>
+        ) : (
+          <div>Загрузка...</div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default User;
