@@ -15,8 +15,15 @@ const SignUp = () => {
   const [age, setAge] = useState("");
   const [checked, setChecked] = useState(false);
 
+<<<<<<< HEAD
   const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+=======
+    const [city, setCity] = useState('')
+    const [gender, setGender] = useState('')
+    const [age, setAge] = useState('')
+    const [checked, setChecked] = useState(false)
+>>>>>>> 6e60a16e397f18409ac5d5b68936d72345086089
 
   async function register(e) {
     e.preventDefault();
@@ -56,10 +63,17 @@ const SignUp = () => {
     "Это поле не может быть пустым"
   );
 
+<<<<<<< HEAD
   const [cityError, setCityError] = useState("Выберите город");
   const [ageError, setAgeError] = useState("Выберите возраст");
   const [myCheckboxError, setMyCheckboxError] = useState("Выберите");
   const [myRadioError, setMyRadioError] = useState("Выберите пол");
+=======
+    const [cityError, setCityError] = useState('Выберите город')
+    const [ageError, setAgeError] = useState('Выберите возраст')
+    const [myCheckboxError, setMyCheckboxError] = useState('Выберите')
+    const [myRadioError, setMyRadioError] = useState('Выберите пол')
+>>>>>>> 6e60a16e397f18409ac5d5b68936d72345086089
 
   const [formValid, setFormValid] = useState(false);
   const [formError, setFormError] = useState("");
@@ -146,8 +160,39 @@ const SignUp = () => {
     }
   };
 
+<<<<<<< HEAD
   const confirmPasswordHandler = (e) => {
     setPasswordVerify(e.target.value);
+=======
+    const ageHandler = (e) => {
+        setAge(e.target.value)
+        if (18 > e.target.value || e.target.value > 90) {
+            setAgeError('Вы не можете быть зарегистрированы с таким возрастом')
+        } else {
+            setAgeError('')
+        }
+    }
+
+    const genderHandler = (e) => {
+        setGender(e.target.value)
+        if (!e.target.value) {
+            setMyRadioError('Вы должны выбрать пол')
+        } else {
+            setMyRadioError('')
+        }
+    }
+
+    const checkboxHandler = (e) => {
+        if (checked == true) {
+            setChecked(false)
+            setMyCheckboxError('Вы должны принять это')
+        } else {
+            setChecked(true)
+            setMyCheckboxError('')
+        }
+    }
+
+>>>>>>> 6e60a16e397f18409ac5d5b68936d72345086089
 
     if (e.target.value.length === 0) {
       setPasswordVerifyError("Это поле не может быть пустым");
@@ -201,6 +246,7 @@ const SignUp = () => {
 
   const ageInputId = useId();
 
+<<<<<<< HEAD
   return (
     <>
       <div className="form_placer">
@@ -217,6 +263,44 @@ const SignUp = () => {
             />
             <div style={{ color: "#660000", marginBottom: "40px" }}>
               {nameError}
+=======
+                        <label>City</label>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{cityError}</div>
+
+                        <label htmlFor={ageInputId}>Your age:</label>
+                        <input onChange={(e) => ageHandler(e)} id={ageInputId} name="age" type="number" />
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{ageError}</div>
+
+                        <label>Gender</label>
+                        <label>
+                        <input onChange={(e) => genderHandler(e)} type="radio" name="myRadio" value="option1" />
+                        Муж
+                        </label>
+                        
+                        <label>
+                        <input onChange={(e) => genderHandler(e)} type="radio" name="myRadio" value="option2" />
+                        Жен
+                        </label>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{myRadioError}</div>
+
+                        <label>
+                            Со всем согласен: <input onChange={(e) => checkboxHandler(e)} type="checkbox" name="myCheckbox"/>
+                        </label>
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{myCheckboxError}</div>
+
+                        <label>Password</label>
+                        <input onChange={(e) => passwordHandler(e)} value={password} name='password' type='password' placeholder='Enter your password....' />
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{passwordError}</div>
+
+                        <label>Confirm password</label>
+                        <input onChange={(e) => confirmPasswordHandler(e)} value={passwordVerify} name='confirmPassword' type='password' placeholder='Confirm your password...' />
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{passwordVerifyError}</div>
+
+                        <div style={{ color: '#660000', marginBottom: '40px' }}>{formError}</div>
+                        <button onClick={e => { Pass(e) }} disabled={!formValid} type='submit' className='registerbtn'>ЗАРЕГИСТРИРОВАТЬСЯ</button>
+                    </form>
+                </div>
+>>>>>>> 6e60a16e397f18409ac5d5b68936d72345086089
             </div>
 
             <label>Email</label>
