@@ -15,7 +15,7 @@ function User() {
 
   useEffect(() => {
     getUser();
-    // getImage();
+    getImage();
   }, []);
 
   //----------------------------------------------------------
@@ -44,13 +44,13 @@ function User() {
     }
   }
 
-  //------------------WHAT-IS-THIS???-------------------------
+  //------------------image-------------------------
 
-  const [allImages, setAllImages] = useState();
+  const [allImages, setAllImages] = useState(null);
 
   const getImage = async () => {
     const result = await axios.get("http://localhost:5000/get-image");
-    console.log(result);
+    // console.log(result.data.data);
     setAllImages(result.data.data);
   };
   //----------------------------------------------------------
@@ -72,9 +72,18 @@ function User() {
               ДОБАВИТЬ ФОТО
             </button>
 
-            {/* {allImages.map((data) => {
-              return <img src={data.image} />;
-            })} */}
+            {allImages == null
+              ? ""
+              : allImages.map((data) => {
+                  return (
+                    <img
+                      key={data._id}
+                      src={require(`../images/${data.image}`)}
+                      // height={100}
+                      // width={100}
+                    />
+                  );
+                })}
 
             <input
               onChange={handleChange}

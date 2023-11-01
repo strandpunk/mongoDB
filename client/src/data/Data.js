@@ -16,11 +16,11 @@ function Data() {
     getData();
   }, []);
 
-  console.log(data);
+  //   console.log(data);
 
   return (
     <div>
-      {data.length != 0 && (
+      {data.length !== 0 ? (
         <>
           <div>
             <DataForm getData={getData} />
@@ -29,8 +29,7 @@ function Data() {
             <DataList data={data} />
           </div>
         </>
-      )}
-      {data.length == 0 && (
+      ) : (
         <>
           <div>
             <DataForm getData={getData} />

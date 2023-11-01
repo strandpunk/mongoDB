@@ -33,7 +33,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "images/");
+    cb(null, "../client/src/images/");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -58,7 +58,7 @@ app.post("/uploads", upload.single("file"), async (req, res) => {
 app.get("/get-image", async (req, res) => {
   try {
     Image.find({}).then((data) => {
-      res.status(200).send();
+      res.status(200).send({ data: data });
     });
   } catch (error) {
     res.status(500).send();
