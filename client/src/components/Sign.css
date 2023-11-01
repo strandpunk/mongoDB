@@ -2,25 +2,13 @@
   background-color: slategrey;
   width: 100%;
   height: auto;
+  padding: 100px 0 100px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.form__wrapper {
-  background-color: lightgrey;
-  width: 800px;
-  height: 800px;
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 25px;
 }
 
 * {
-  box-sizing: border-box;
   margin: 0;
 }
 
@@ -40,7 +28,7 @@ input[type="password"]:focus {
   outline: none;
 }
 
-.registerbtn {
+.enterbtn {
   color: black;
   padding: 16px 20px;
   margin: 8px 0;
@@ -50,12 +38,23 @@ input[type="password"]:focus {
   opacity: 0.9;
 }
 
-.registerbtn:hover {
+.enterbtn:hover {
   opacity: 1;
 }
 
 form {
   border: 1px solid black;
-  padding: 20px;
+  border-radius: 8px;
   background-color: lightgray;
+}
+
+.form_content {
+  padding: 20px;
+}
+
+.error_wrapper {
+  color: #660000;
+  margin-bottom: 40px;
+  height: 20px;
+  font-size: 15px;
 }

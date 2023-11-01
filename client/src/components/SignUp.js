@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useId } from "react";
 import { useNavigate } from "react-router";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
-import "./SignUp.css";
+import "./Sign.css";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -204,8 +204,8 @@ const SignUp = () => {
   return (
     <>
       <div className="form_placer">
-        <div className="form-wrapper">
-          <form onSubmit={register} className="form">
+        <form onSubmit={register} className="form">
+          <div className="form_content">
             <h1 style={{ textAlign: "center" }}>Register</h1>
             <label>Name</label>
             <input
@@ -215,9 +215,7 @@ const SignUp = () => {
               type="text"
               placeholder="Enter your name...."
             />
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {nameError}
-            </div>
+            <div className="error_wrapper">{nameError}</div>
 
             <label>Email</label>
             <input
@@ -227,9 +225,7 @@ const SignUp = () => {
               type="text"
               placeholder="Enter your email...."
             />
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {emailError}
-            </div>
+            <div className="error_wrapper">{emailError}</div>
 
             <label>City</label>
             <select onChange={(e) => cityHandler(e)}>
@@ -237,9 +233,7 @@ const SignUp = () => {
               <option value="Rostov">Ростов</option>
               <option value="Samara">Самара</option>
             </select>
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {cityError}
-            </div>
+            <div className="error_wrapper">{cityError}</div>
 
             <label htmlFor={ageInputId}>Your age:</label>
             <input
@@ -248,9 +242,7 @@ const SignUp = () => {
               name="age"
               type="number"
             />
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {ageError}
-            </div>
+            <div className="error_wrapper">{ageError}</div>
 
             <label>Gender</label>
             <label>
@@ -272,9 +264,7 @@ const SignUp = () => {
               />
               Female
             </label>
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {myRadioError}
-            </div>
+            <div className="error_wrapper">{myRadioError}</div>
 
             <label>
               Со всем согласен:{" "}
@@ -284,9 +274,7 @@ const SignUp = () => {
                 name="myCheckbox"
               />
             </label>
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {myCheckboxError}
-            </div>
+            <div className="error_wrapper">{myCheckboxError}</div>
 
             <label>Password</label>
             <input
@@ -296,9 +284,7 @@ const SignUp = () => {
               type="password"
               placeholder="Enter your password...."
             />
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {passwordError}
-            </div>
+            <div className="error_wrapper">{passwordError}</div>
 
             <label>Подтвердите </label>
             <input
@@ -308,13 +294,9 @@ const SignUp = () => {
               type="password"
               placeholder="Confirm your password..."
             />
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {passwordVerifyError}
-            </div>
+            <div className="error_wrapper">{passwordVerifyError}</div>
 
-            <div style={{ color: "#660000", marginBottom: "40px" }}>
-              {formError}
-            </div>
+            <div className="error_wrapper">{formError}</div>
             <button
               onClick={(e) => {
                 Pass(e);
@@ -325,8 +307,8 @@ const SignUp = () => {
             >
               Register
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </>
   );

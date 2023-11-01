@@ -1,28 +1,29 @@
 .home-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items:flex-end;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
 }
 
 .home-main {
-    height: auto;
-    min-height: 90vh;
-    width: 800px;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    /* background-color: lightsteelblue; */
-    /* background-color: #000000; */
+  height: auto;
+  min-height: 90vh;
+  width: 800px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  /* background-color: lightsteelblue; */
+  /* background-color: #000000; */
 }
 
 .user-info {
-    width: 800px;
-    height: 600px;
-    border-bottom: 1px solid black;
-    color: white;
+  width: 800px;
+  height: 800px;
+  border-bottom: 1px solid black;
+  color: white;
+  padding-top: 2em;
 }
 
 .home-unauthorized {
-    min-height: 90vh;
-    height: auto;
+  min-height: 90vh;
+  height: auto;
 }

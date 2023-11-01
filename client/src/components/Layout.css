@@ -1,0 +1,13 @@
+.layout-footer {
+  background-color: lightblue;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.layout-container {
+  height: auto;
+  background-color: slategrey;
+  min-height: 1000px;
+}
