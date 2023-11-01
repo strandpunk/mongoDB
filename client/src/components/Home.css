@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: flex-end;
   text-align: center;
+  padding: 2em;
 }
 
 .home-main {
@@ -17,13 +18,13 @@
 
 .user-info {
   width: 800px;
-  height: 800px;
+  height: 600px;
+  border-top: 1px solid black;
   border-bottom: 1px solid black;
   color: white;
   padding-top: 2em;
 }
 
 .home-unauthorized {
-  min-height: 90vh;
   height: auto;
 }
