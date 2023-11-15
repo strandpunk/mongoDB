@@ -69,14 +69,13 @@ function User() {
             <div>
               <img
                 style={{
-                  height: "250px",
+                  height: "400px",
                   width: "250px",
                   objectFit: "cover",
+                  border: "2px solid black",
                 }}
                 src={require(`../images/${user.avatar}`)}
                 alt="user-avatar"
-                height={250}
-                width={250}
               ></img>
 
               <button

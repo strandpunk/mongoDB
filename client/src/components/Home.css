@@ -18,7 +18,7 @@
 
 .user-info {
   width: 800px;
-  height: 600px;
+  min-height: 600px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   color: white;
