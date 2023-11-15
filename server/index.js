@@ -25,45 +25,6 @@ app.use(
   })
 );
 
-// multer
-//importing schema
-const Image = require("./models/imageModel");
-
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/src/images/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/uploads", upload.single("file"), async (req, res) => {
-  console.log(req.file.filename);
-  const imageName = req.file.filename;
-
-  try {
-    Image.create({ image: imageName });
-    res.status(200).send();
-  } catch (error) {
-    res.status(500).send();
-  }
-});
-
-app.get("/get-image", async (req, res) => {
-  try {
-    Image.find({}).then((data) => {
-      res.status(200).send({ data: data });
-    });
-  } catch (error) {
-    res.status(500).send();
-  }
-});
 // connect to mongoDB
 
 mongoDB();

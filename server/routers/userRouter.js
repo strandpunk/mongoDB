@@ -168,26 +168,56 @@ router.get("/info", auth, async (req, res) => {
   }
 });
 
-//----------------------------------------------------------
-// update user profile picture
+// multer
+//importing schema
+const Image = require("../models/imageModel");
 
-router.patch("/update", auth, async (req, res) => {
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client/src/images/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname);
+  },
+});
+
+const mLoad = multer({ storage: storage });
+
+router.post("/uploads", mLoad.single("file"), auth, async (req, res) => {
+  console.log(req.file.filename);
+  const imageName = req.file.filename;
+
   try {
-    const userID = req.user;
-    console.log(userID);
-    const updated_user = await User.findOneAndUpdate(
-      { _id: userID },
-      req.body,
-      { new: true }
-    );
+    Image.create({ image: imageName });
+
+    // update user profile picture
+    const profilePic = imageName;
+    const filter = { _id: req.user };
+    console.log(req.body);
+    const update = { avatar: profilePic };
+    const updated_user = await User.findOneAndUpdate(filter, update, {
+      new: true,
+    });
     console.log(updated_user);
     res.status(200).send(updated_user);
-    // console.log(updated_user.name)
+
+    // res.status(200).send();
   } catch (error) {
-    console.error(error);
-    res.sendStatus(500).send();
+    res.status(500).send();
   }
 });
-//----------------------------------------------------------
+
+router.get("/get-image", auth, async (req, res) => {
+  try {
+    Image.find({}).then((data) => {
+      res.status(200).send({ data: data });
+    });
+  } catch (error) {
+    res.status(500).send();
+  }
+});
 
 module.exports = router;

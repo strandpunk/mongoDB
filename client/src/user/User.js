@@ -15,7 +15,7 @@ function User() {
 
   useEffect(() => {
     getUser();
-    getImage();
+    // getImage();
   }, []);
 
   //----------------------------------------------------------
@@ -36,7 +36,7 @@ function User() {
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
-      await axios.post("http://localhost:5000/uploads", formData, {
+      await axios.post("http://localhost:5000/auth/uploads", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
     } catch (error) {
@@ -49,7 +49,7 @@ function User() {
   const [allImages, setAllImages] = useState(null);
 
   const getImage = async () => {
-    const result = await axios.get("http://localhost:5000/get-image");
+    const result = await axios.get("http://localhost:5000/auth/get-image");
     // console.log(result.data.data);
     setAllImages(result.data.data);
   };
@@ -66,21 +66,36 @@ function User() {
             <div>Email: {user.email}</div>
             <div>Дата создания: {user.createdAt}</div>
             <div>Аватар: {user.avatar}</div>
-            <img src={require(`../images/${user.avatar}`)} alt="img"></img>
+            <div>
+              <img
+                style={{
+                  height: "250px",
+                  width: "250px",
+                  objectFit: "cover",
+                }}
+                src={require(`../images/${user.avatar}`)}
+                alt="user-avatar"
+                height={250}
+                width={250}
+              ></img>
 
-            <button type="button" onClick={handlePick} className="registerbtn">
-              ДОБАВИТЬ ФОТО
-            </button>
+              <button
+                type="button"
+                onClick={handlePick}
+                className="registerbtn"
+              >
+                ДОБАВИТЬ ФОТО
+              </button>
+            </div>
 
             {allImages == null
               ? ""
               : allImages.map((data) => {
                   return (
                     <img
+                      alt="user-images"
                       key={data._id}
                       src={require(`../images/${data.image}`)}
-                      // height={100}
-                      // width={100}
                     />
                   );
                 })}
