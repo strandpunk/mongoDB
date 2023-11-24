@@ -51,6 +51,7 @@ router.post("/", async (req, res) => {
     // create avatar
 
     avatar = "avatar.png";
+    isAdmin = false;
     // save a new user account to database
 
     const newUser = new User({
@@ -61,6 +62,7 @@ router.post("/", async (req, res) => {
       city,
       gender,
       age,
+      isAdmin,
     });
 
     const savedUser = await newUser.save();
