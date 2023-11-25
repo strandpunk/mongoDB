@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ChatSchema = new mongoose.Schema(
   {
     users: { type: Array, required: true },
-    chatName: { type: String, require: true },
+    chatName: { type: String, required: true },
     lastMessage: {
       type: mongoose.Types.ObjectId,
       ref: "Message",

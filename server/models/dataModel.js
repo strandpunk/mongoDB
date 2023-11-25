@@ -3,17 +3,13 @@ const mongoose = require("mongoose");
 const DataSchema = mongoose.Schema(
   {
     content: {
-      require: true,
+      required: true,
       type: String,
     },
     owner: {
-      require: true,
+      required: true,
       type: mongoose.Types.ObjectId,
       ref: "User",
-    },
-    image: {
-      require: true,
-      type: String,
     },
   },
   {
