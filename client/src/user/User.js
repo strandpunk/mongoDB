@@ -46,13 +46,13 @@ function User() {
 
   //------------------image-------------------------
 
-  const [allImages, setAllImages] = useState(null);
+  // const [allImages, setAllImages] = useState(null);
 
-  const getImage = async () => {
-    const result = await axios.get("http://localhost:5000/auth/get-image");
-    // console.log(result.data.data);
-    setAllImages(result.data.data);
-  };
+  // const getImage = async () => {
+  //   const result = await axios.get("http://localhost:5000/auth/get-image");
+  //   // console.log(result.data.data);
+  //   setAllImages(result.data.data);
+  // };
   //----------------------------------------------------------
 
   return (
@@ -87,7 +87,7 @@ function User() {
               </button>
             </div>
 
-            {allImages == null
+            {/* {allImages == null
               ? ""
               : allImages.map((data) => {
                   return (
@@ -97,7 +97,7 @@ function User() {
                       src={require(`../images/${data.image}`)}
                     />
                   );
-                })}
+                })} */}
 
             <input
               onChange={handleChange}

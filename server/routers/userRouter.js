@@ -222,4 +222,16 @@ router.get("/get-image", auth, async (req, res) => {
   }
 });
 
+router.get("/get-users", auth, async (req, res) => {
+  try {
+    const userID = req.user;
+    const usersInfo = await User.find({ _id: { $nin: userID } }).select(
+      "-passwordHash"
+    );
+    res.status(200).send(usersInfo);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
