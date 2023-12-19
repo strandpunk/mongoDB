@@ -266,10 +266,12 @@ router.get("/get-image", auth, async (req, res) => {
 
 router.get("/get-users", auth, async (req, res) => {
   try {
+    const curYear = new Date().getFullYear();
     const userID = req.user;
     const usersInfo = await User.find({
       _id: { $nin: userID },
       isAdmin: { $nin: true },
+      subDate: { $gt: curYear },
     }).select("-passwordHash");
     res.status(200).send(usersInfo);
   } catch (error) {

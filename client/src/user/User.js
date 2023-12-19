@@ -35,7 +35,7 @@ function User() {
 
   async function uploadPhoto() {
     if (selectedFile === null) {
-      console.log("файл не выбран");
+      alert("Файл не выбран");
     } else {
       try {
         const formData = new FormData();
@@ -80,7 +80,7 @@ function User() {
                     height: "400px",
                     width: "250px",
                     objectFit: "cover",
-                    borderRadius: "8px",
+                    borderRadius: "0px 8px 8px 0px",
                   }}
                   src={require(`../images/${user.avatar}`)}
                   alt="user-avatar"
