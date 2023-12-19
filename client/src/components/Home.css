@@ -10,19 +10,12 @@
   height: auto;
   min-height: 90vh;
   width: 800px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  background-color: rgb(73, 24, 119);
+  border-radius: 8px;
+  /* border-left: 1px solid black;
+  border-right: 1px solid black; */
   /* background-color: lightsteelblue; */
   /* background-color: #000000; */
-}
-
-.user-info {
-  width: 800px;
-  min-height: 600px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  color: white;
-  padding-top: 2em;
 }
 
 .home-unauthorized {

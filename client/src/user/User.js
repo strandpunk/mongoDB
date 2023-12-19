@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import "./User.css";
 
 function User() {
   const [user, setUser] = useState({});
@@ -33,14 +34,18 @@ function User() {
   };
 
   async function uploadPhoto() {
-    try {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-      await axios.post("http://localhost:5000/auth/uploads", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-    } catch (error) {
-      console.error("Ошибка при получении данных пользователя:", error);
+    if (selectedFile === null) {
+      console.log("файл не выбран");
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        await axios.post("http://localhost:5000/auth/uploads", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } catch (error) {
+        console.error("Ошибка при получении данных пользователя:", error);
+      }
     }
   }
 
@@ -57,35 +62,34 @@ function User() {
 
   return (
     <div>
-      <div>
-        <h1>Пользователь:</h1>
+      <div className="user__info">
+        <h1>Пользователь {user.name}</h1>
         <br></br>
         {user.name ? (
           <>
-            <div>Имя: {user.name}</div>
-            <div>Email: {user.email}</div>
-            <div>Дата создания: {user.createdAt}</div>
-            <div>Аватар: {user.avatar}</div>
-            <div>
-              <img
-                style={{
-                  height: "400px",
-                  width: "250px",
-                  objectFit: "cover",
-                  border: "1px solid black",
-                }}
-                src={require(`../images/${user.avatar}`)}
-                alt="user-avatar"
-              ></img>
-
-              <button
-                type="button"
-                onClick={handlePick}
-                className="registerbtn"
-              >
-                ДОБАВИТЬ ФОТО
-              </button>
+            <div className="user__wrapper">
+              <div className="user__wrapper-text">
+                <div>Дата подписки: {user.subDate}</div>
+                <div>Email: {user.email}</div>
+                <div>Дата создания аккаунта: {user.createdAt}</div>
+                <div>Аватар: {user.avatar}</div>
+              </div>
+              <div>
+                <img
+                  style={{
+                    height: "400px",
+                    width: "250px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
+                  src={require(`../images/${user.avatar}`)}
+                  alt="user-avatar"
+                ></img>
+              </div>
             </div>
+            <button type="button" onClick={handlePick} className="registerbtn">
+              ДОБАВИТЬ ФОТО
+            </button>
 
             {/* {allImages == null
               ? ""

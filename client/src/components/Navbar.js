@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 import SignOut from "./SignOut";
 import "./Navbar.css";
 import FindUsers from "./FindUsers";
+import Sub from "./Sub";
 
 const Navbar = () => {
   const { loggedIn } = useContext(AuthContext);
@@ -13,12 +14,7 @@ const Navbar = () => {
   return (
     <header className="navbar-header">
       <Link to={"/"}>
-        <img
-          id="Logo"
-          src="/1618916.svg"
-          alt="Logo"
-          className="cursor-pointer"
-        />
+        <img id="Logo" src="/home.svg" alt="Logo" className="cursor-pointer" />
       </Link>
       <nav>
         {loggedIn === false && (
@@ -46,6 +42,7 @@ const Navbar = () => {
             <div className="navbar-linkWrapper">
               <div className="navbar-loggedIn">Вы вошли</div>
               <FindUsers />
+              <Sub />
               <SignOut />
             </div>
           </>

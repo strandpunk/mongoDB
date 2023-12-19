@@ -32,34 +32,49 @@ function UsersList() {
       <div>
         {users.length !== 0 ? (
           <>
-            <h1>Пользователи сайта</h1>
+            <div className="user__header">
+              <h1>Пользователи сайта</h1>
+            </div>
             {/* {console.log(users)} */}
             <div className="user__card-wrapper">
               {users.map(function (data) {
                 return (
                   <div className="user__card" key={data._id}>
-                    name: {data.name} <br />
-                    city: {data.city}
-                    <br />
-                    email: {data.email}
+                    <div className="user__card-info">
+                      name: {data.name} <br />
+                      city: {data.city}
+                      <br />
+                      email: {data.email}
+                    </div>
                     <img
                       style={{
                         height: "400px",
                         width: "250px",
                         objectFit: "cover",
-                        border: "1px solid black",
+                        borderRadius: "8px",
+                        paddingBottom: "20px",
                       }}
                       alt="users-images"
                       src={require(`../images/${data.avatar}`)}
                     />
                     {admin.current === true ? (
                       <>
-                        <button onClick={() => deleteUser(data._id)}>
-                          delete
+                        <button
+                          className="custom__btn"
+                          onClick={() => deleteUser(data._id)}
+                        >
+                          Удалить
                         </button>
                       </>
                     ) : (
-                      <></>
+                      <>
+                        <button
+                          className="custom__btn-sayHi"
+                          onClick={() => console.log(`Hello, ${data.name}`)}
+                        >
+                          Познакомиться
+                        </button>
+                      </>
                     )}
                   </div>
                 );

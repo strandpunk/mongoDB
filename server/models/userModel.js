@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema(
     city: { type: String, required: true },
     gender: { type: String, required: true },
     age: { type: Number, required: true },
+    subDate: { type: Date, required: true },
     isAdmin: { type: Boolean, required: true },
   },
   {

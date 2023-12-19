@@ -6,7 +6,11 @@ function FindUsers() {
     navigate("/users");
   }
 
-  return <button onClick={nav}>FindUsers</button>;
+  return (
+    <button className="custom__btn-findUsers" onClick={nav}>
+      Поиск
+    </button>
+  );
 }
 
 export default FindUsers;

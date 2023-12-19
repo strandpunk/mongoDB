@@ -1,0 +1,37 @@
+.user__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: dimgray;
+  border-radius: 8px;
+  width: 550px;
+  height: 400px;
+  margin: 20px 0px 20px 0px;
+}
+
+.user__wrapper-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: start;
+  font-size: 20px;
+  width: 250px;
+  padding: 0px 0px 0px 30px;
+  height: 350px;
+}
+
+.user__info {
+  width: 800px;
+  min-height: 600px;
+  color: white;
+  padding-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user__info > h1 {
+  font-size: 3em;
+}

@@ -49,12 +49,21 @@ router.post("/", async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     // create avatar
-    if (gender == "male") {
-      avatar = "avatar1.svg";
-    } else {
-      avatar = "avatar2.svg";
+    function get_random(list) {
+      return list[Math.floor(Math.random() * list.length)];
     }
 
+    const m = get_random([1, 2, 3]);
+    const f = get_random([4, 5, 6]);
+
+    if (gender == "male") {
+      avatar = `avatar${m}.svg`;
+    } else {
+      avatar = `avatar${f}.svg`;
+    }
+
+    //date format
+    const subDate = new Date();
     isAdmin = false;
     // save a new user account to database
 
@@ -66,6 +75,7 @@ router.post("/", async (req, res) => {
       city,
       gender,
       age,
+      subDate,
       isAdmin,
     });
 
@@ -180,6 +190,7 @@ router.get("/info", auth, async (req, res) => {
     res.send({
       name: userInfo.name,
       email: userInfo.email,
+      subDate: userInfo.subDate,
       createdAt: userInfo.createdAt,
       avatar: userInfo.avatar,
     });
@@ -256,10 +267,29 @@ router.get("/get-image", auth, async (req, res) => {
 router.get("/get-users", auth, async (req, res) => {
   try {
     const userID = req.user;
-    const usersInfo = await User.find({ _id: { $nin: userID } }).select(
-      "-passwordHash"
-    );
+    const usersInfo = await User.find({
+      _id: { $nin: userID },
+      isAdmin: { $nin: true },
+    }).select("-passwordHash");
     res.status(200).send(usersInfo);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
+//подписка patch?
+router.get("/extendSub", auth, async (req, res) => {
+  try {
+    const filter = { _id: req.user };
+    //date format
+    const dateTime = new Date();
+    //--
+    const update = { subDate: dateTime };
+    const updated_user = await User.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    console.log(updated_user);
+    res.status(200).send();
   } catch (error) {
     res.status(500).send();
   }
