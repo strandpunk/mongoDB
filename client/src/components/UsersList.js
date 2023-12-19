@@ -1,13 +1,10 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import "./UserList.css";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
   const admin = useRef(false);
-
-  const navigate = useNavigate();
 
   async function getUsers() {
     const finded = await axios.get("http://localhost:5000/auth/get-users");
