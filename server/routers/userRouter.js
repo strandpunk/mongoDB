@@ -49,8 +49,12 @@ router.post("/", async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     // create avatar
+    if (gender == "male") {
+      avatar = "avatar1.svg";
+    } else {
+      avatar = "avatar2.svg";
+    }
 
-    avatar = "avatar.png";
     isAdmin = false;
     // save a new user account to database
 
@@ -152,6 +156,21 @@ router.get("/loggedIn", (req, res) => {
   }
 });
 
+// get isAdmin info
+
+router.get("/isAdmin", auth, async (req, res) => {
+  try {
+    const userID = req.user;
+    const userInfo = await User.findById(userID).select();
+    res.send({
+      isAdmin: userInfo.isAdmin,
+    });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).send();
+  }
+});
+
 // get user info
 
 router.get("/info", auth, async (req, res) => {
@@ -164,6 +183,18 @@ router.get("/info", auth, async (req, res) => {
       createdAt: userInfo.createdAt,
       avatar: userInfo.avatar,
     });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).send();
+  }
+});
+
+// delete user
+router.post("/delete-user", auth, async (req, res) => {
+  try {
+    const { id } = req.body;
+    await User.deleteOne({ _id: id });
+    res.sendStatus(200).send();
   } catch (error) {
     console.error(error);
     res.sendStatus(500).send();

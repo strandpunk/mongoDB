@@ -1,18 +1,33 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./UserList.css";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
+  const admin = useRef(false);
+
+  const navigate = useNavigate();
 
   async function getUsers() {
     const finded = await axios.get("http://localhost:5000/auth/get-users");
     setUsers(Array.from(finded.data));
-    console.log(finded.data);
+  }
+
+  async function isAdmin() {
+    const adminData = await axios.get("http://localhost:5000/auth/isAdmin");
+    admin.current = adminData.data.isAdmin;
+  }
+
+  async function deleteUser(id) {
+    const deleteData = { id };
+    await axios.post("http://localhost:5000/auth/delete-user", deleteData);
+    getUsers();
   }
 
   useEffect(() => {
     getUsers();
+    isAdmin();
   }, []);
 
   return (
@@ -21,7 +36,7 @@ function UsersList() {
         {users.length !== 0 ? (
           <>
             <h1>Пользователи сайта</h1>
-            {console.log(users)}
+            {/* {console.log(users)} */}
             <div className="user__card-wrapper">
               {users.map(function (data) {
                 return (
@@ -35,11 +50,20 @@ function UsersList() {
                         height: "400px",
                         width: "250px",
                         objectFit: "cover",
-                        border: "2px solid black",
+                        border: "1px solid black",
                       }}
                       alt="users-images"
                       src={require(`../images/${data.avatar}`)}
                     />
+                    {admin.current === true ? (
+                      <>
+                        <button onClick={() => deleteUser(data._id)}>
+                          delete
+                        </button>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 );
               })}

@@ -72,7 +72,7 @@ function User() {
                   height: "400px",
                   width: "250px",
                   objectFit: "cover",
-                  border: "2px solid black",
+                  border: "1px solid black",
                 }}
                 src={require(`../images/${user.avatar}`)}
                 alt="user-avatar"
