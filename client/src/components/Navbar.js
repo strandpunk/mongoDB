@@ -14,31 +14,48 @@ const Navbar = () => {
   return (
     <header className="navbar-header">
       <div>
-        <Link to={"/"}>
-          <img
-            id="Logo"
-            src="/home.svg"
-            alt="Logo"
-            className="cursor-pointer"
-          />
-        </Link>
-        <Link to={"/chats"}>
-          <img
-            id="Chat"
-            src="/chat.svg"
-            alt="Chat"
-            className="cursor-pointer"
-          />
-        </Link>
-        <Link to={"/friends"}>
-          <img
-            id="Friends"
-            src="/friends.svg"
-            alt="Friends"
-            className="cursor-pointer"
-          />
-        </Link>
+        {loggedIn === false && (
+          <>
+            <Link to={"/"}>
+              <img
+                id="Logo"
+                src="/home.svg"
+                alt="Logo"
+                className="cursor-pointer"
+              />
+            </Link>
+          </>
+        )}
+        {loggedIn === true && (
+          <>
+            <Link to={"/"}>
+              <img
+                id="Logo"
+                src="/home.svg"
+                alt="Logo"
+                className="cursor-pointer"
+              />
+            </Link>
+            <Link to={"/chats"}>
+              <img
+                id="Chat"
+                src="/chat.svg"
+                alt="Chat"
+                className="cursor-pointer"
+              />
+            </Link>
+            <Link to={"/friends"}>
+              <img
+                id="Friends"
+                src="/friends.svg"
+                alt="Friends"
+                className="cursor-pointer"
+              />
+            </Link>
+          </>
+        )}
       </div>
+
       <nav>
         {loggedIn === false && (
           <>
