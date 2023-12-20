@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
     }
 
     //date format
-    const subDate = new Date();
+    const subDate = new Date(0);
     isAdmin = false;
     // save a new user account to database
 
@@ -266,12 +266,12 @@ router.get("/get-image", auth, async (req, res) => {
 
 router.get("/get-users", auth, async (req, res) => {
   try {
-    const curYear = new Date().getFullYear();
     const userID = req.user;
+    const checkDate = new Date("2017-01-26");
     const usersInfo = await User.find({
       _id: { $nin: userID },
       isAdmin: { $nin: true },
-      subDate: { $gt: curYear },
+      subDate: { $lt: checkDate },
     }).select("-passwordHash");
     res.status(200).send(usersInfo);
   } catch (error) {
@@ -285,12 +285,13 @@ router.get("/extendSub", auth, async (req, res) => {
     const filter = { _id: req.user };
     //date format
     const dateTime = new Date();
+    //console.log(dateTime);
     //--
     const update = { subDate: dateTime };
     const updated_user = await User.findOneAndUpdate(filter, update, {
       new: true,
     });
-    console.log(updated_user);
+    //console.log(updated_user);
     res.status(200).send();
   } catch (error) {
     res.status(500).send();

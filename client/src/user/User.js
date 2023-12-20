@@ -74,18 +74,16 @@ function User() {
                 <div>Дата создания аккаунта: {user.createdAt}</div>
                 <div>Аватар: {user.avatar}</div>
               </div>
-              <div>
-                <img
-                  style={{
-                    height: "400px",
-                    width: "250px",
-                    objectFit: "cover",
-                    borderRadius: "0px 8px 8px 0px",
-                  }}
-                  src={require(`../images/${user.avatar}`)}
-                  alt="user-avatar"
-                ></img>
-              </div>
+              <img
+                style={{
+                  height: "400px",
+                  width: "250px",
+                  objectFit: "cover",
+                  borderRadius: "0px 8px 8px 0px",
+                }}
+                src={require(`../images/${user.avatar}`)}
+                alt="user-avatar"
+              ></img>
             </div>
             <button type="button" onClick={handlePick} className="registerbtn">
               ДОБАВИТЬ ФОТО

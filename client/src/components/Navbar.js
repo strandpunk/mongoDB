@@ -40,7 +40,10 @@ const Navbar = () => {
         {loggedIn === true && (
           <>
             <div className="navbar-linkWrapper">
-              <div className="navbar-loggedIn">Вы вошли</div>
+              <div className="navbar-loggedIn">
+                <div>Вы вошли,</div>
+                <div>Ваш Близкий!</div>
+              </div>
               <FindUsers />
               <Sub />
               <SignOut />

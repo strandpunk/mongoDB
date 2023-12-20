@@ -52,7 +52,7 @@ function UsersList() {
                         width: "250px",
                         objectFit: "cover",
                         borderRadius: "8px",
-                        paddingBottom: "20px",
+                        marginBottom: "20px",
                       }}
                       alt="users-images"
                       src={require(`../images/${data.avatar}`)}
