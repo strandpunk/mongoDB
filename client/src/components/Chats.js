@@ -35,7 +35,7 @@ function Chats() {
           <div className="chat__card-wrapper">{renderChats()}</div>
         </>
       ) : (
-        <>У вас пока нет чатов</>
+        <>Загрузка</>
       )}
     </div>
   );

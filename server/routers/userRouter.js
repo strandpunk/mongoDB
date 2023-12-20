@@ -328,7 +328,7 @@ router.post("/addFriend", auth, async (req, res) => {
       new: true,
     });
 
-    console.log(updated_user);
+    //console.log(updated_user);
 
     //добавляемся в друзья со стороны друга
     const filter2 = { _id: friendId };
@@ -340,7 +340,7 @@ router.post("/addFriend", auth, async (req, res) => {
       new: true,
     });
 
-    console.log(updated_friend);
+    //console.log(updated_friend);
 
     res.status(200).send();
   } catch (error) {
