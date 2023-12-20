@@ -30,6 +30,14 @@ const Navbar = () => {
             className="cursor-pointer"
           />
         </Link>
+        <Link to={"/friends"}>
+          <img
+            id="Friends"
+            src="/friends.svg"
+            alt="Friends"
+            className="cursor-pointer"
+          />
+        </Link>
       </div>
       <nav>
         {loggedIn === false && (

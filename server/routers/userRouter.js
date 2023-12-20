@@ -347,4 +347,25 @@ router.post("/addFriend", auth, async (req, res) => {
     res.status(500).send();
   }
 });
+
+//вывод друзей
+router.get("/get-friends", auth, async (req, res) => {
+  try {
+    const userID = req.user;
+
+    //получаем массив друзей пользователя
+    const userData = await User.findById(userID).select("friends");
+    const friendsId = userData.friends;
+
+    //находим друзей
+    const usersInfo = await User.find({
+      _id: { $in: friendsId },
+      isAdmin: { $nin: true },
+    }).select("-passwordHash");
+
+    res.status(200).send(usersInfo);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
 module.exports = router;
