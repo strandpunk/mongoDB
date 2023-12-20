@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const mongoDB = require("./config/mongoDB");
 const userRouter = require("./routers/userRouter");
 const dataRouter = require("./routers/dataRouter");
+const chatRouter = require("./routers/chatRouter");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -33,3 +34,4 @@ mongoDB();
 
 app.use("/auth", userRouter);
 app.use("/data", dataRouter);
+app.use("/chat", chatRouter);

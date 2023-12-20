@@ -11,6 +11,11 @@ function UsersList() {
     setUsers(Array.from(finded.data));
   }
 
+  async function startChat(friendId, friendName) {
+    const friendData = { friendId, friendName };
+    await axios.post("http://localhost:5000/chat/startChat", friendData);
+  }
+
   async function isAdmin() {
     const adminData = await axios.get("http://localhost:5000/auth/isAdmin");
     admin.current = adminData.data.isAdmin;
@@ -70,7 +75,7 @@ function UsersList() {
                       <>
                         <button
                           className="custom__btn-sayHi"
-                          onClick={() => console.log(`Hello, ${data.name}`)}
+                          onClick={() => startChat(data._id, data.name)}
                         >
                           Познакомиться
                         </button>

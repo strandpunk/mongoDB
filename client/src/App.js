@@ -8,6 +8,7 @@ import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
 import "./App.css";
 import UsersList from "./components/UsersList";
+import Chats from "./components/Chats";
 
 axios.defaults.withCredentials = true;
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="chats" element={<Chats />} />
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="users" element={<UsersList />} />

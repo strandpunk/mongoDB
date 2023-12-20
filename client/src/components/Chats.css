@@ -1,0 +1,20 @@
+.chat__card {
+  background-color: whitesmoke;
+  height: 100px;
+  width: 600px;
+  margin-top: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat__card-wrapper {
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

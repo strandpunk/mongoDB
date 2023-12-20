@@ -10,7 +10,6 @@
 
   margin: 10px;
   border-radius: 8px;
-  border: 1px solid black;
 
   transition: transform 500ms ease;
 }
@@ -36,7 +35,7 @@
 }
 
 .user__card:hover {
-  transform: scale(1.15);
+  transform: scale(1.08);
 }
 
 .user__card-wrapper {
