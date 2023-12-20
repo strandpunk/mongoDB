@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema(
     age: { type: Number, required: true },
     subDate: { type: Date, required: true },
     isAdmin: { type: Boolean, required: true },
+    friends: { type: Array, required: true },
   },
   {
     timestamps: true,

@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import "./UserList.css";
+import { useNavigate } from "react-router-dom";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
   const admin = useRef(false);
+
+  const navigate = useNavigate();
 
   async function getUsers() {
     const finded = await axios.get("http://localhost:5000/auth/get-users");
@@ -14,6 +17,13 @@ function UsersList() {
   async function startChat(friendId, friendName) {
     const friendData = { friendId, friendName };
     await axios.post("http://localhost:5000/chat/startChat", friendData);
+    addFriend(friendId);
+  }
+
+  async function addFriend(friendId) {
+    const friendData = { friendId };
+    await axios.post("http://localhost:5000/auth/addFriend", friendData);
+    navigate("/chats");
   }
 
   async function isAdmin() {

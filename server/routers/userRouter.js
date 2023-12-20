@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/userModel");
+const Chat = require("../models/chatModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const upload = require("../middleware/upload");
@@ -66,6 +67,7 @@ router.post("/", async (req, res) => {
     const subDate = new Date(0);
     isAdmin = false;
     // save a new user account to database
+    const friends = [];
 
     const newUser = new User({
       name,
@@ -77,6 +79,7 @@ router.post("/", async (req, res) => {
       age,
       subDate,
       isAdmin,
+      friends,
     });
 
     const savedUser = await newUser.save();
@@ -267,11 +270,19 @@ router.get("/get-image", auth, async (req, res) => {
 router.get("/get-users", auth, async (req, res) => {
   try {
     const userID = req.user;
+
+    //получаем массив друзей пользователя
+    const userData = await User.findById(req.user).select("friends");
+    const friendsId = userData.friends;
+
     const checkDate = new Date("2017-01-26");
+
+    //выводим пользователей не являющихся друзьями
+    //выводим пользователей у которых не просрочена подписка
     const usersInfo = await User.find({
-      _id: { $nin: userID },
+      _id: { $nin: [userID, friendsId] },
       isAdmin: { $nin: true },
-      subDate: { $lt: checkDate },
+      subDate: { $gt: checkDate },
     }).select("-passwordHash");
     res.status(200).send(usersInfo);
   } catch (error) {
@@ -298,4 +309,42 @@ router.get("/extendSub", auth, async (req, res) => {
   }
 });
 
+//добавление в друзья
+router.post("/addFriend", auth, async (req, res) => {
+  try {
+    const filter = { _id: req.user };
+    const userId = req.user;
+    const { friendId } = req.body;
+
+    //получаем массив друзей пользователя
+    const userData = await User.findById(req.user).select("friends");
+
+    //обновляем массив друзей
+    const allFriends = [...userData.friends, friendId];
+    const update = { friends: allFriends };
+
+    //заменяем массив на обновлённый
+    const updated_user = await User.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+
+    console.log(updated_user);
+
+    //добавляемся в друзья со стороны друга
+    const filter2 = { _id: friendId };
+    const userData2 = await User.findById(friendId).select("friends");
+    const allFriends2 = [...userData2.friends, userId];
+    const update2 = { friends: allFriends2 };
+
+    const updated_friend = await User.findOneAndUpdate(filter2, update2, {
+      new: true,
+    });
+
+    console.log(updated_friend);
+
+    res.status(200).send();
+  } catch (error) {
+    res.status(500).send();
+  }
+});
 module.exports = router;
