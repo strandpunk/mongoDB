@@ -7,6 +7,7 @@ const Chat = require("../models/chatModel");
 
 const router = express.Router();
 
+//добавляем новое сообщение в чат
 router.post("/", auth, async (req, res) => {
   const { content, chatId } = req.body;
 
@@ -30,19 +31,26 @@ router.post("/", auth, async (req, res) => {
     //   path: "chat.users",
     //   select: "name pic email",
     // });
-    console.log(message);
+    //console.log(message);
     const filter = req.body.chatId;
-
     const update = { lastMessage: message._id };
-    console.log(update);
-    const x = await Chat.findByIdAndUpdate(filter, update);
-
-    console.log(x);
+    await Chat.findByIdAndUpdate(filter, update);
 
     res.json(message);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    console.error(error);
+    res.status(500).send();
+  }
+});
+
+//получаем все сообщения данного чата
+router.get("/:chatId", auth, async (req, res) => {
+  try {
+    const messages = await Message.find({ chat: req.params.chatId });
+    res.json(messages);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send();
   }
 });
 
