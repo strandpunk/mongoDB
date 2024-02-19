@@ -169,6 +169,17 @@ router.get("/loggedIn", (req, res) => {
   }
 });
 
+// get user ID --SECURE--
+router.get("/id", auth, (req, res) => {
+  try {
+    const userId = req.user;
+    res.send(userId);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500).send();
+  }
+});
+
 // get isAdmin info
 
 router.get("/isAdmin", auth, async (req, res) => {
@@ -303,6 +314,45 @@ router.get("/extendSub", auth, async (req, res) => {
       new: true,
     });
     //console.log(updated_user);
+    res.status(200).send();
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
+//добавление в друзья
+router.post("/addFriend", auth, async (req, res) => {
+  try {
+    const filter = { _id: req.user };
+    const userId = req.user;
+    const { friendId } = req.body;
+
+    //получаем массив друзей пользователя
+    const userData = await User.findById(req.user).select("friends");
+
+    //обновляем массив друзей
+    const allFriends = [...userData.friends, friendId];
+    const update = { friends: allFriends };
+
+    //заменяем массив на обновлённый
+    const updated_user = await User.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+
+    //console.log(updated_user);
+
+    //добавляемся в друзья со стороны друга
+    const filter2 = { _id: friendId };
+    const userData2 = await User.findById(friendId).select("friends");
+    const allFriends2 = [...userData2.friends, userId];
+    const update2 = { friends: allFriends2 };
+
+    const updated_friend = await User.findOneAndUpdate(filter2, update2, {
+      new: true,
+    });
+
+    //console.log(updated_friend);
+
     res.status(200).send();
   } catch (error) {
     res.status(500).send();

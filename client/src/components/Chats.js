@@ -1,18 +1,21 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Chats.css";
+import ScrollChat from "./ScrollableChat";
 
 function Chats() {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState();
   const [newMessage, setNewMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   const newMessageHandler = (e) => {
     setNewMessage(e.target.value);
   };
 
-  async function sendMessage() {
-    if (newMessage) {
+  async function sendMessage(event) {
+    if (event.key === "Enter" && newMessage) {
       const data = { content: newMessage, chatId: currentChat._id };
       await axios.post("http://localhost:5000/message/", data);
       setNewMessage("");
@@ -39,6 +42,28 @@ function Chats() {
     });
   }
 
+  async function fetchMessages(ChatId) {
+    if (!ChatId) return;
+
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:5000/message/${ChatId}`
+      );
+
+      setMessages(data);
+      setLoading(false);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  useEffect(() => {
+    if (currentChat) {
+      fetchMessages(currentChat._id);
+    }
+  }, [currentChat]);
+
   useEffect(() => {
     getChats();
   }, []);
@@ -57,19 +82,32 @@ function Chats() {
       <div>
         {currentChat ? (
           <>
-            {" "}
-            <div className="chat__messageBox">
-              {currentChat.chatName}
-              {newMessage}
-              <input
-                onChange={(e) => newMessageHandler(e)}
-                value={newMessage}
-                name="email"
-                type="text"
-                placeholder="Enter your message...."
-              />
-              <button onClick={(e) => sendMessage()}>SEND</button>
-            </div>{" "}
+            {loading ? (
+              <>загрузка чата</>
+            ) : (
+              <>
+                {/* {" "} */}
+                <div className="chat__messageBox">
+                  <div>{currentChat.chatName}</div>
+                  <div className="chat__messages">
+                    <ScrollChat messages={messages} />
+                  </div>
+
+                  {/* {newMessage} */}
+                  <div onKeyDown={sendMessage}>
+                    <input
+                      onChange={(e) => newMessageHandler(e)}
+                      value={newMessage}
+                      name="email"
+                      type="text"
+                      placeholder="Enter your message...."
+                    />
+                  </div>
+                </div>
+
+                {/* {" "} */}
+              </>
+            )}
           </>
         ) : (
           <>
