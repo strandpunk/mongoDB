@@ -13,8 +13,9 @@ function Chats() {
 
   async function sendMessage() {
     if (newMessage) {
-      const data = { content: newMessage, chatId: currentChat };
+      const data = { content: newMessage, chatId: currentChat._id };
       await axios.post("http://localhost:5000/message/", data);
+      setNewMessage("");
     } else {
     }
   }
@@ -28,7 +29,7 @@ function Chats() {
     return chats.map((data, i) => {
       // content-wrapper?
       return (
-        <div key={i} onClick={(e) => setCurrentChat(data._id)}>
+        <div key={i} onClick={(e) => setCurrentChat(data)}>
           <div className="chat__card">
             <div>{data.chatName}</div>
             <div>{data.lastMessage}</div>
@@ -58,10 +59,11 @@ function Chats() {
           <>
             {" "}
             <div className="chat__messageBox">
-              chat
+              {currentChat.chatName}
               {newMessage}
               <input
                 onChange={(e) => newMessageHandler(e)}
+                value={newMessage}
                 name="email"
                 type="text"
                 placeholder="Enter your message...."
