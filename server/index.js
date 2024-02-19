@@ -5,6 +5,7 @@ const mongoDB = require("./config/mongoDB");
 const userRouter = require("./routers/userRouter");
 const dataRouter = require("./routers/dataRouter");
 const chatRouter = require("./routers/chatRouter");
+const messageRouter = require("./routers/messageRouter");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -35,3 +36,4 @@ mongoDB();
 app.use("/auth", userRouter);
 app.use("/data", dataRouter);
 app.use("/chat", chatRouter);
+app.use("/message", messageRouter);
