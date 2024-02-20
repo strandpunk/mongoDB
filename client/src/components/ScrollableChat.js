@@ -9,7 +9,6 @@ const ScrollChat = ({ messages }) => {
   const fetchUserId = async () => {
     try {
       const response = await axios.get("http://localhost:5000/auth/id");
-      console.log("Response data:", response.data); // Добавим вывод данных ответа
       setUserId(response.data);
     } catch (error) {
       console.error("Error fetching user ID:", error);
@@ -22,8 +21,6 @@ const ScrollChat = ({ messages }) => {
     fetchUserId();
   }, []);
 
-  console.log("userId:", userId); // Добавим вывод userId для отслеживания изменений
-
   if (isLoading || userId === null) {
     return <div>Loading...</div>;
   }
@@ -34,6 +31,7 @@ const ScrollChat = ({ messages }) => {
         {messages &&
           messages.map((message) => (
             <div
+              key={message._id}
               style={{
                 display: "flex",
                 justifyContent:
@@ -47,14 +45,14 @@ const ScrollChat = ({ messages }) => {
                   maxWidth: "300px",
                   height: "auto",
                   padding: "10px",
-
                   color: "black",
                   borderRadius: "20px",
                   textAlign: "justify",
                   margin: "10px",
                   backgroundColor:
                     message.sender === userId ? "lightblue" : "lightgreen",
-                  wordWrap: "break-word", // Переносить длинные слова на новую строку
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word", // Добавление свойства overflow-wrap
                 }}
               >
                 <div>{message.content}</div>
