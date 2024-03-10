@@ -25,7 +25,7 @@ router.post('/', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
     try {
         const user = req.user
-        const data = await Data.find({owner: user})
+        const data = await Data.find({ owner: user })
         // console.log(data)
         res.json(data)
     } catch (error) {
@@ -33,5 +33,17 @@ router.get('/', auth, async (req, res) => {
         res.status(500).send()
     }
 })
+
+router.get('/friend/:friendId', auth, async (req, res) => {
+    try {
+        const friendId = req.params.friendId; // Получаем friendId из параметров URL запроса
+        const data = await Data.find({ owner: friendId });
+        //console.log(data);
+        res.json(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send();
+    }
+});
 
 module.exports = router

@@ -284,24 +284,26 @@ router.get("/get-users", auth, async (req, res) => {
   try {
     const userID = req.user;
 
-    //получаем массив друзей пользователя
-    const userData = await User.findById(req.user).select("friends");
+    // Получаем массив друзей пользователя
+    const userData = await User.findById(userID).select("friends");
     const friendsId = userData.friends;
 
     const checkDate = new Date("2017-01-26");
 
-    //выводим пользователей не являющихся друзьями
-    //выводим пользователей у которых не просрочена подписка
+    // Выводим пользователей не являющихся друзьями и у которых не просрочена подписка
     const usersInfo = await User.find({
-      _id: { $nin: [userID, friendsId] },
+      _id: { $nin: [userID, ...friendsId] }, // Используем оператор ...spread для объединения массивов
       isAdmin: { $nin: true },
       subDate: { $gt: checkDate },
     }).select("-passwordHash");
+
     res.status(200).send(usersInfo);
   } catch (error) {
+    console.error(error);
     res.status(500).send();
   }
 });
+
 
 //подписка patch?
 router.get("/extendSub", auth, async (req, res) => {

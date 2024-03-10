@@ -1,13 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./UserList.css";
+import { useNavigate } from "react-router-dom";
 
 function Friends() {
   const [users, setUsers] = useState([]);
 
+  const navigate = useNavigate()
+
   async function getFriends() {
     const finded = await axios.get("http://localhost:5000/auth/get-friends");
     setUsers(Array.from(finded.data));
+  }
+
+  async function openFriendProfile(data) {
+    navigate('/friend', { state: data });
   }
 
   useEffect(() => {
@@ -26,7 +33,7 @@ function Friends() {
             <div className="user__card-wrapper">
               {users.map(function (data) {
                 return (
-                  <div className="user__card" key={data._id}>
+                  <div className="user__card" key={data._id} onClick={() => openFriendProfile(data)}>
                     <div className="user__card-info">
                       name: {data.name} <br />
                       city: {data.city}

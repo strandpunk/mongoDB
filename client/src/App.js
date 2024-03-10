@@ -11,6 +11,7 @@ import UsersList from "./components/friends/UsersList";
 import Chats from "./components/chats/Chats";
 import Friends from "./components/friends/Friends";
 import TemperamentTest from "./components/temperamentTest/TemperamentTest";
+import Friend from "./components/friend/Friend";
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="signup" element={<SignUp />} />
             <Route path="users" element={<UsersList />} />
             <Route path="test" element={<TemperamentTest />} />
+            <Route path="friend" element={<Friend />} />
           </Route>
         </Routes>
       </AuthContextProvider>

@@ -115,7 +115,7 @@ function Chats() {
       <div key={index} onClick={() => handleChatClick(chat)}>
         <div className="chat__card">
           <div>{chat.chatName}</div>
-          <div>{chat.lastMessage}</div>
+          {/* <div>{chat.lastMessage}</div> */}
         </div>
       </div>
     ));

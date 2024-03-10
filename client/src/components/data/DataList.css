@@ -1,6 +1,10 @@
 .dataList-wrapper {
     margin-top: 2em;
     color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 li {
@@ -16,11 +20,17 @@ ul {
 }
 
 .content-wrapper {
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+width: 700px;
+    background-color: #666666;;
+    border-radius: 10px;
     margin-bottom: 10px;
-    height: 500px;
+    min-height: 100px;
 }
+
 .content-date {
-    border: 1px solid black;
+
     margin-bottom: 40px;
 }
