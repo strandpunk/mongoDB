@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import "./User.css";
+const moment = require('moment');
 
 function User() {
   const [user, setUser] = useState({});
@@ -59,7 +60,7 @@ function User() {
   //   setAllImages(result.data.data);
   // };
   //----------------------------------------------------------
-
+ 
   return (
     <div>
       <div className="user__info">
@@ -69,10 +70,10 @@ function User() {
             <br></br>
             <div className="user__wrapper">
               <div className="user__wrapper-text">
-                <div>Дата подписки: {user.subDate}</div>
+                <div>Дата подписки: {moment(user.subDate).format('DD-MMM-YYYY HH:mm')}</div>
                 <div>Email: {user.email}</div>
                 <div>Тип темперамента: {user.temperament}</div>
-                <div>Дата создания аккаунта: {user.createdAt}</div>
+                <div>Дата создания аккаунта: {moment(user.createdAt).format('DD-MMM-YYYY HH:mm')}</div>
                 <div>Аватар: {user.avatar}</div>
               </div>
               <img

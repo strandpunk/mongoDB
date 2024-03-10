@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import FriendData from "../friendData/FriendData";
 import './Friend.css'
 
+const moment = require('moment');
 
 function Friend() {
 
@@ -20,10 +21,10 @@ function Friend() {
                                 <br></br>
                                 <div className="user__wrapper">
                                     <div className="user__wrapper-text">
-                                        <div>Дата подписки: {friend.subDate}</div>
+                                        <div>Дата подписки: {moment(friend.subDate).format('DD-MMM-YYYY HH:mm')}</div>
                                         <div>Email: {friend.email}</div>
                                         <div>Тип темперамента: {friend.temperament}</div>
-                                        <div>Дата создания аккаунта: {friend.createdAt}</div>
+                                        <div>Дата создания аккаунта: {moment(friend.subDate).format('DD-MMM-YYYY HH:mm')}</div>
                                         <div>Аватар: {friend.avatar}</div>
                                     </div>
 
