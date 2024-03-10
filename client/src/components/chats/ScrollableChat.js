@@ -29,9 +29,9 @@ const ScrollChat = ({ messages }) => {
     <ScrollableFeed>
       <div>
         {messages &&
-          messages.map((message) => (
+          messages.map((message, index) => (
             <div
-              key={message._id}
+              key={index} // Используем индекс в качестве ключа
               style={{
                 display: "flex",
                 justifyContent:
@@ -40,7 +40,6 @@ const ScrollChat = ({ messages }) => {
               }}
             >
               <div
-                key={message._id}
                 style={{
                   maxWidth: "300px",
                   height: "auto",
@@ -52,7 +51,7 @@ const ScrollChat = ({ messages }) => {
                   backgroundColor:
                     message.sender === userId ? "lightblue" : "lightgreen",
                   wordWrap: "break-word",
-                  overflowWrap: "break-word", // Добавление свойства overflow-wrap
+                  overflowWrap: "break-word",
                 }}
               >
                 <div>{message.content}</div>
