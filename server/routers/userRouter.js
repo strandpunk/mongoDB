@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const upload = require("../middleware/upload");
 const auth = require("../middleware/auth");
-const temperamentInfo = require('../middleware/temperamentInfo')
 
 // register
 
@@ -199,7 +198,7 @@ router.get("/isAdmin", auth, async (req, res) => {
 
 // get user info
 
-router.get("/info", auth, temperamentInfo, async (req, res) => {
+router.get("/info", auth, async (req, res) => {
   try {
     const userID = req.user;
     const userInfo = await User.findById(userID).select("-passwordHash"); //.select('-passwordHash')
@@ -234,7 +233,6 @@ router.post("/delete-user", auth, async (req, res) => {
 const Image = require("../models/imageModel");
 
 const multer = require("multer");
-const temperament = require("../middleware/temperamentInfo");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

@@ -10,6 +10,7 @@ import "./App.css";
 import UsersList from "./components/UsersList";
 import Chats from "./components/Chats";
 import Friends from "./components/Friends";
+import TemperamentTest from "./components/TemperamentTest";
 
 axios.defaults.withCredentials = true;
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="users" element={<UsersList />} />
+            <Route path="test" element={<TemperamentTest />} />
           </Route>
         </Routes>
       </AuthContextProvider>
