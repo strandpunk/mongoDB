@@ -2,20 +2,24 @@ import axios from "axios";
 import { useState } from "react";
 import "./DataForm.css";
 
-function DataForm({ getData }) {
+function DataForm({ getData, samurai }) {
   const [data, setData] = useState("");
 
   async function saveData(e) {
     e.preventDefault();
 
-    try {
-      const Data = {
-        content: data,
-      };
-      await axios.post("http://localhost:5000/data/", Data);
-      getData();
-    } catch (error) {
-      console.error(error);
+    if (data === '') {
+      samurai();
+    } else {
+      try {
+        const Data = {
+          content: data,
+        };
+        await axios.post("http://localhost:5000/data/", Data);
+        getData();
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 

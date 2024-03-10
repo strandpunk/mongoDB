@@ -4,8 +4,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Data.css";
 
-function Data() {
+function Data({samurai}) {
   const [data, setData] = useState([]);
+
 
   async function getData() {
     const dataList = await axios.get("http://localhost:5000/data/");
@@ -23,7 +24,7 @@ function Data() {
       {data.length !== 0 ? (
         <>
           <div>
-            <DataForm getData={getData} />
+            <DataForm getData={getData} samurai={samurai} />
           </div>
           <div>
             <DataList data={data} />

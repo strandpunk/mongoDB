@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import "./User.css";
 const moment = require('moment');
 
-function User() {
+function User({ samuraiInfo, setSamuraiInfo }) {
   const [user, setUser] = useState({});
 
   async function getUser() {
@@ -15,6 +15,24 @@ function User() {
     }
   }
 
+  //--for--fun--
+  useEffect(() => {
+    // Создаём переменную для хранения id таймера
+    let timerId;
+    if (samuraiInfo === true) {
+      // Устанавливаем таймер
+      timerId = setTimeout(() => {
+        // По истечении времени меняем значение переменной
+        setSamuraiInfo(false);
+      }, 1000);
+    }
+  
+    // Возвращаем функцию очистки таймера для предотвращения утечки памяти
+    return () => clearTimeout(timerId);
+  }, [samuraiInfo, setSamuraiInfo]); // Зависимость только от samuraiInfo
+  //------------
+
+  
   useEffect(() => {
     getUser();
     // getImage();
@@ -60,33 +78,61 @@ function User() {
   //   setAllImages(result.data.data);
   // };
   //----------------------------------------------------------
- 
+
   return (
     <div>
       <div className="user__info">
         {user.name ? (
           <>
-            <h1>Пользователь {user.name}</h1>
-            <br></br>
-            <div className="user__wrapper">
-              <div className="user__wrapper-text">
-                <div>Дата подписки: {moment(user.subDate).format('DD-MMM-YYYY HH:mm')}</div>
-                <div>Email: {user.email}</div>
-                <div>Тип темперамента: {user.temperament}</div>
-                <div>Дата создания аккаунта: {moment(user.createdAt).format('DD-MMM-YYYY HH:mm')}</div>
-                <div>Аватар: {user.avatar}</div>
+            {samuraiInfo === true ? (<>
+
+              <h1>Пользователь Самурай</h1>
+              <br></br>
+              <div className="user__wrapper">
+                <div className="user__wrapper-text">
+                  <div>Дата подписки: Never fade away</div>
+                  <div>Email: silverhand@yandex.ru</div>
+                  <div>Тип темперамента: samurai</div>
+                  <div>Дата создания аккаунта: 1 may 2077</div>
+                  <div>Аватар: samurai</div>
+                </div>
+                <img
+                  style={{
+                    height: "400px",
+                    width: "250px",
+                    objectFit: "cover",
+                    borderRadius: "0px 8px 8px 0px",
+                  }}
+                  src={require(`../../gif/intro.gif`)}
+                  alt="user-avatar"
+                ></img>
               </div>
-              <img
-                style={{
-                  height: "400px",
-                  width: "250px",
-                  objectFit: "cover",
-                  borderRadius: "0px 8px 8px 0px",
-                }}
-                src={require(`../../images/${user.avatar}`)}
-                alt="user-avatar"
-              ></img>
-            </div>
+
+            </>) : (<>
+
+              <h1>Пользователь {user.name}</h1>
+              <br></br>
+              <div className="user__wrapper">
+                <div className="user__wrapper-text">
+                  <div>Дата подписки: {moment(user.subDate).format('DD-MMM-YYYY HH:mm')}</div>
+                  <div>Email: {user.email}</div>
+                  <div>Тип темперамента: {user.temperament}</div>
+                  <div>Дата создания аккаунта: {moment(user.createdAt).format('DD-MMM-YYYY HH:mm')}</div>
+                  <div>Аватар: {user.avatar}</div>
+                </div>
+                <img
+                  style={{
+                    height: "400px",
+                    width: "250px",
+                    objectFit: "cover",
+                    borderRadius: "0px 8px 8px 0px",
+                  }}
+                  src={require(`../../images/${user.avatar}`)}
+                  alt="user-avatar"
+                ></img>
+              </div>
+            </>)}
+
             <button type="button" onClick={handlePick} className="registerbtn">
               ДОБАВИТЬ ФОТО
             </button>

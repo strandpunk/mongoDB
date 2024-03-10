@@ -293,7 +293,7 @@ router.get("/get-users", auth, async (req, res) => {
     const temperamentList = ['sanguine', 'choleric', 'melancholic', 'phlegmatic']
 
     const temperamentInfo = await User.findById(userID).select();
-    console.log(temperamentInfo.temperament)
+    //console.log(temperamentInfo.temperament)
 
     let findTemperament = []
 
