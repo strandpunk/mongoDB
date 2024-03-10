@@ -1,24 +1,9 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./User.css";
 const moment = require('moment');
 
-function User() {
-  const [user, setUser] = useState({});
-
-  async function getUser() {
-    try {
-      const userList = await axios.get("http://localhost:5000/auth/info");
-      setUser(userList.data);
-    } catch (error) {
-      console.error("Ошибка при получении данных пользователя:", error);
-    }
-  }
-
-  useEffect(() => {
-    getUser();
-    // getImage();
-  }, []);
+function User({ user}) {
 
   //----------------------------------------------------------
   const [selectedFile, setSelectedFile] = useState(null);

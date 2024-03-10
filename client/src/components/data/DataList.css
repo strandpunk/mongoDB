@@ -7,30 +7,64 @@
     flex-direction: column;
 }
 
-li {
-    list-style-type: none;
-    /* Убираем маркеры */
-}
-
-ul {
-    margin-left: 0;
-    /* Отступ слева в браузере IE и Opera */
-    padding-left: 0;
-    /* Отступ слева в браузере Firefox, Safari, Chrome */
-}
-
 .content-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    /* Располагаем элементы по краям контейнера */
     align-items: center;
-width: 700px;
-    background-color: #666666;;
+    flex-direction: row;
+    /* Горизонтальное расположение элементов */
+    width: 700px;
+    background-color: #666666;
     border-radius: 10px;
     margin-bottom: 10px;
     min-height: 100px;
+    position: relative;
+    /* Для позиционирования кнопки */
+}
+
+.data-wrapper {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 80px;
 }
 
 .content-date {
-
     margin-bottom: 40px;
+}
+
+.delete-button, .edit-button {
+    width: 80px;
+    /* Ширина кнопки 10% от контейнера */
+    height: 100px;
+    /* Занимает всю высоту контейнера */
+    color: #000000;
+    border: none;
+    font-size: 3em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button {
+    border-radius: 0 10px 10px 0;
+}
+
+.edit-button {
+    border-radius: 10px 0 0 10px;
+}
+
+.delete-button:hover {
+    background-color: #b60000;
+    /* Цвет кнопки при наведении */
+    color: #ffffff;
+}
+
+.edit-button:hover {
+    background-color: darkgoldenrod;
+    /* Цвет кнопки при наведении */
+    color: #ffffff;
 }

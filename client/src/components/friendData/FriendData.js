@@ -24,7 +24,7 @@ function FriendData(props) {
   return (
     <div>
       {data.length !== 0 ? (
-        <DataList data={data} />
+        <DataList data={data} isFriend={true} />
       ) : (
         <div className="nodata">У этого человека пока нет записей</div>
       )}

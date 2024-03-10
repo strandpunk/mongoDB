@@ -26,7 +26,7 @@ function Data() {
             <DataForm getData={getData} />
           </div>
           <div>
-            <DataList data={data} />
+            <DataList data={data} getData = {getData} />
           </div>
         </>
       ) : (

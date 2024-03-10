@@ -8,15 +8,22 @@ function DataForm({ getData }) {
   async function saveData(e) {
     e.preventDefault();
 
-    try {
-      const Data = {
-        content: data,
-      };
-      await axios.post("http://localhost:5000/data/", Data);
-      getData();
-    } catch (error) {
-      console.error(error);
+    if (data.length === 0) {
+      alert('Вы ничего не написали')
+    } else {
+      try {
+        const Data = {
+          content: data,
+        };
+        await axios.post("http://localhost:5000/data/", Data);
+        getData();
+        setData('')
+      } catch (error) {
+        console.error(error);
+      }
     }
+
+
   }
 
   return (
