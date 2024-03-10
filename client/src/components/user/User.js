@@ -86,15 +86,15 @@ function User({ samuraiInfo, setSamuraiInfo }) {
           <>
             {samuraiInfo === true ? (<>
 
-              <h1>Пользователь Самурай</h1>
+              <h1>Never fade away</h1>
               <br></br>
               <div className="user__wrapper">
                 <div className="user__wrapper-text">
-                  <div>Дата подписки: Never fade away</div>
+                  <div>Дата подписки: 20-aug-2023 04:45</div>
                   <div>Email: silverhand@yandex.ru</div>
-                  <div>Тип темперамента: samurai</div>
-                  <div>Дата создания аккаунта: 1 may 2077</div>
-                  <div>Аватар: samurai</div>
+                  <div>Тип темперамента: silverhand</div>
+                  <div>Дата создания аккаунта: 20-aug-2023 04:45</div>
+                  <div>Аватар: JOHNI-SILVERHAND-20aug2023-Q.jpg</div>
                 </div>
                 <img
                   style={{
