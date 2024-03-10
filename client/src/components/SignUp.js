@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState, useId } from "react";
+import { useEffect, useState, useId } from "react";
 import { useNavigate } from "react-router";
-import AuthContext from "../context/AuthContext";
-import axios from "axios";
 import "./Sign.css";
 
 const SignUp = () => {
@@ -16,33 +14,24 @@ const SignUp = () => {
   const [age, setAge] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  async function register(e) {
+  function register(e) {
     e.preventDefault();
 
-    try {
-      const registerData = {
-        name,
-        email,
-        password,
-        passwordVerify,
-        city,
-        gender,
-        age,
-        temperament,
-      };
 
-      await axios.post("http://localhost:5000/auth/", registerData);
-      navigate("/");
-      getLoggedIn();
-      //console.log(getLoggedIn())
-    } catch (error) {
-      // console.log(error.response.data);
-      const x = error.response.data;
-      setFormError(x.errorMessage);
-    }
+    const registerData = {
+      name,
+      email,
+      password,
+      passwordVerify,
+      city,
+      gender,
+      age,
+      temperament,
+    };
+
+    navigate("/test", { state: registerData });
   }
 
   // VALIDATION
@@ -64,7 +53,6 @@ const SignUp = () => {
   const [myRadioError, setMyRadioError] = useState("Выберите пол");
 
   const [formValid, setFormValid] = useState(false);
-  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     if (
@@ -298,7 +286,6 @@ const SignUp = () => {
             />
             <div className="error_wrapper">{passwordVerifyError}</div>
 
-            <div className="error_wrapper">{formError}</div>
             <button
               onClick={(e) => {
                 Pass(e);

@@ -1,3 +1,13 @@
+.form_placer {
+    background-color: slategrey;
+    width: 100%;
+    height: auto;
+    padding: 100px 0 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 .temperament-test {
     max-width: 600px;
     margin: 0 auto;
@@ -30,7 +40,7 @@
     margin-bottom: 5px;
   }
   
-  button {
+  .temperamet_button {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -39,7 +49,7 @@
     cursor: pointer;
   }
   
-  button:hover {
+  .temperamet_button:hover {
     background-color: #0056b3;
   }
   

@@ -63,14 +63,15 @@ function User() {
   return (
     <div>
       <div className="user__info">
-        <h1>Пользователь {user.name}</h1>
-        <br></br>
         {user.name ? (
           <>
+            <h1>Пользователь {user.name}</h1>
+            <br></br>
             <div className="user__wrapper">
               <div className="user__wrapper-text">
                 <div>Дата подписки: {user.subDate}</div>
                 <div>Email: {user.email}</div>
+                <div>Тип темперамента: {user.temperament}</div>
                 <div>Дата создания аккаунта: {user.createdAt}</div>
                 <div>Аватар: {user.avatar}</div>
               </div>

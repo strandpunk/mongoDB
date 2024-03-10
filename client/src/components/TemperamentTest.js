@@ -1,7 +1,30 @@
 import React, { useState } from "react";
-import "./TemperamentTest.css"; // Стили можно определить в отдельном файле
+import "./TemperamentTest.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
 
 function TemperamentTest() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userData = location.state;
+
+  const { getLoggedIn } = useContext(AuthContext);
+
+  async function register(data) {
+
+    try {
+      const registerData = data
+
+      await axios.post("http://localhost:5000/auth/", registerData);
+      navigate("/");
+      getLoggedIn();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const questions = [
     {
       id: 1,
@@ -31,13 +54,18 @@ function TemperamentTest() {
   ];
 
   const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState("");
+  const [error, setError] = useState("");
 
   const handleOptionSelect = (questionId, optionIndex) => {
     setAnswers({ ...answers, [questionId]: optionIndex });
   };
 
   const calculateResult = () => {
+    if (Object.keys(answers).length < questions.length) {
+      setError("Пожалуйста, ответьте на все вопросы перед получением результата");
+      return;
+    }
+
     // Суммируем ответы и определяем тип темперамента
     const scores = { sanguine: 0, choleric: 0, melancholic: 0, phlegmatic: 0 };
     for (const answer in answers) {
@@ -61,36 +89,47 @@ function TemperamentTest() {
 
     // Определяем результат по наибольшему количеству баллов
     const maxScore = Math.max(...Object.values(scores));
-    if (scores.sanguine === maxScore) setResult("Сангвиник");
-    else if (scores.choleric === maxScore) setResult("Холерик");
-    else if (scores.melancholic === maxScore) setResult("Меланхолик");
-    else if (scores.phlegmatic === maxScore) setResult("Флегматик");
+    let temperamentResult = "";
+    if (scores.sanguine === maxScore) temperamentResult = "Сангвиник";
+    else if (scores.choleric === maxScore) temperamentResult = "Холерик";
+    else if (scores.melancholic === maxScore) temperamentResult = "Меланхолик";
+    else if (scores.phlegmatic === maxScore) temperamentResult = "Флегматик";
+
+    // Передаем результат в userData
+    userData.temperament = temperamentResult;
+
+    // Регистрируем пользователя
+    register(userData)
   };
 
+
   return (
-    <div className="temperament-test">
-      <h2>Тест на определение типа темперамента</h2>
-      <div className="questions">
-        {questions.map((question) => (
-          <div key={question.id} className="question">
-            <h3>{question.text}</h3>
-            {question.options.map((option, index) => (
-              <label key={index}>
-                <input
-                  type="radio"
-                  name={`question${question.id}`}
-                  value={index}
-                  checked={answers[question.id] === index}
-                  onChange={() => handleOptionSelect(question.id, index)}
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-        ))}
+    <div className="form_placer ">
+      <div className="temperament-test">
+        <h1>Регистрация почти завершена, осталось совсем чуть-чуть</h1>
+        <h2>Тест на определение типа темперамента</h2>
+        <div className="questions">
+          {questions.map((question) => (
+            <div key={question.id} className="question">
+              <h3>{question.text}</h3>
+              {question.options.map((option, index) => (
+                <label key={index}>
+                  <input
+                    type="radio"
+                    name={`question${question.id}`}
+                    value={index}
+                    checked={answers[question.id] === index}
+                    onChange={() => handleOptionSelect(question.id, index)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+          ))}
+        </div>
+        {error && <div className="error">{error}</div>}
+        <button className="temperamet_button" onClick={calculateResult}>Получить результат</button>
       </div>
-      <button onClick={calculateResult}>Получить результат</button>
-      {result && <div className="result">Ваш тип темперамента: {result}</div>}
     </div>
   );
 }
