@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema(
     subDate: { type: Date, required: true },
     isAdmin: { type: Boolean, required: true },
     friends: { type: Array, required: true },
+    temperament: {type: String, required: true},
   },
   {
     timestamps: true,

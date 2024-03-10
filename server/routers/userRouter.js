@@ -5,12 +5,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const upload = require("../middleware/upload");
 const auth = require("../middleware/auth");
+const temperamentInfo = require('../middleware/temperamentInfo')
 
 // register
 
 router.post("/", async (req, res) => {
   try {
-    const { name, email, password, passwordVerify, city, gender, age } =
+    const { name, email, password, passwordVerify, city, gender, age, temperament } =
       req.body;
 
     // validation
@@ -80,6 +81,7 @@ router.post("/", async (req, res) => {
       subDate,
       isAdmin,
       friends,
+      temperament,
     });
 
     const savedUser = await newUser.save();
@@ -197,7 +199,7 @@ router.get("/isAdmin", auth, async (req, res) => {
 
 // get user info
 
-router.get("/info", auth, async (req, res) => {
+router.get("/info", auth, temperamentInfo, async (req, res) => {
   try {
     const userID = req.user;
     const userInfo = await User.findById(userID).select("-passwordHash"); //.select('-passwordHash')
@@ -207,6 +209,7 @@ router.get("/info", auth, async (req, res) => {
       subDate: userInfo.subDate,
       createdAt: userInfo.createdAt,
       avatar: userInfo.avatar,
+      temperament: userInfo.temperament,
     });
   } catch (error) {
     console.error(error);
@@ -231,6 +234,7 @@ router.post("/delete-user", auth, async (req, res) => {
 const Image = require("../models/imageModel");
 
 const multer = require("multer");
+const temperament = require("../middleware/temperamentInfo");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

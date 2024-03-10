@@ -9,6 +9,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
+  const temperament = 'none'
 
   const [city, setCity] = useState("");
   const [gender, setGender] = useState("");
@@ -30,6 +31,7 @@ const SignUp = () => {
         city,
         gender,
         age,
+        temperament,
       };
 
       await axios.post("http://localhost:5000/auth/", registerData);
