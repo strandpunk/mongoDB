@@ -1,6 +1,6 @@
 import { useContext } from "react";
 // import { useNavigate } from 'react-router-dom'
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import "./Home.css";
 import Data from "../data/Data";
 import User from "../user/User";

@@ -42,7 +42,7 @@ function Friends() {
                         marginBottom: "20px",
                       }}
                       alt="users-images"
-                      src={require(`../images/${data.avatar}`)}
+                      src={require(`../../images/${data.avatar}`)}
                     />
                   </div>
                 );

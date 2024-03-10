@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./components/Home";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import Layout from "./components/layout/Layout";
+import Home from "./components/home/Home";
+import SignIn from "./components/authentication/SignIn";
+import SignUp from "./components/authentication/SignUp";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
 import "./App.css";
-import UsersList from "./components/UsersList";
-import Chats from "./components/Chats";
-import Friends from "./components/Friends";
-import TemperamentTest from "./components/TemperamentTest";
+import UsersList from "./components/friends/UsersList";
+import Chats from "./components/chats/Chats";
+import Friends from "./components/friends/Friends";
+import TemperamentTest from "./components/temperamentTest/TemperamentTest";
 
 axios.defaults.withCredentials = true;
 

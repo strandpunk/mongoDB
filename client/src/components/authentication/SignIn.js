@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import "./Sign.css";
 

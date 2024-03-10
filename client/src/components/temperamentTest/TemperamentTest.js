@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./TemperamentTest.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
 
 function TemperamentTest() {

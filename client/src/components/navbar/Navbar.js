@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import SignOut from "./SignOut";
+import AuthContext from "../../context/AuthContext";
+import SignIn from "../authentication/SignIn";
+import SignUp from "../authentication/SignUp";
+import SignOut from "../authentication/SignOut";
 import "./Navbar.css";
-import FindUsers from "./FindUsers";
-import Sub from "./Sub";
+import FindUsers from "../findUsers/FindUsers";
+import Sub from "../subscription/Sub";
 
 const Navbar = () => {
   const { loggedIn } = useContext(AuthContext);
