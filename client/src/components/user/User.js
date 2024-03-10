@@ -82,7 +82,7 @@ function User() {
                   objectFit: "cover",
                   borderRadius: "0px 8px 8px 0px",
                 }}
-                src={require(`../images/${user.avatar}`)}
+                src={require(`../../images/${user.avatar}`)}
                 alt="user-avatar"
               ></img>
             </div>
