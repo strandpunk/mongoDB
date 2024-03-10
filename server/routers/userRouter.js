@@ -290,11 +290,26 @@ router.get("/get-users", auth, async (req, res) => {
 
     const checkDate = new Date("2017-01-26");
 
+    const temperamentList = ['sanguine', 'choleric', 'melancholic', 'phlegmatic']
+
+    const temperamentInfo = await User.findById(userID).select();
+    console.log(temperamentInfo.temperament)
+
+    let findTemperament = []
+
+    if (temperamentInfo.temperament === 'sanguine') findTemperament = ["sanguine", 'choleric'];
+    else if (temperamentInfo.temperament === 'choleric') findTemperament = ["choleric", 'sanguine'];
+    else if (temperamentInfo.temperament === 'melancholic') findTemperament = ["melancholic", 'phlegmatic'];
+    else if (temperamentInfo.temperament === 'phlegmatic') findTemperament = ["phlegmatic", 'melancholic'];
+
+    //console.log(findTemperament)
+
     // Выводим пользователей не являющихся друзьями и у которых не просрочена подписка
     const usersInfo = await User.find({
       _id: { $nin: [userID, ...friendsId] }, // Используем оператор ...spread для объединения массивов
       isAdmin: { $nin: true },
       subDate: { $gt: checkDate },
+      temperament: {$in: findTemperament},
     }).select("-passwordHash");
 
     res.status(200).send(usersInfo);
