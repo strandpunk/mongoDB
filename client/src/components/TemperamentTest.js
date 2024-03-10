@@ -90,10 +90,10 @@ function TemperamentTest() {
     // Определяем результат по наибольшему количеству баллов
     const maxScore = Math.max(...Object.values(scores));
     let temperamentResult = "";
-    if (scores.sanguine === maxScore) temperamentResult = "Сангвиник";
-    else if (scores.choleric === maxScore) temperamentResult = "Холерик";
-    else if (scores.melancholic === maxScore) temperamentResult = "Меланхолик";
-    else if (scores.phlegmatic === maxScore) temperamentResult = "Флегматик";
+    if (scores.sanguine === maxScore) temperamentResult = "sanguine";
+    else if (scores.choleric === maxScore) temperamentResult = "choleric";
+    else if (scores.melancholic === maxScore) temperamentResult = "melancholic";
+    else if (scores.phlegmatic === maxScore) temperamentResult = "phlegmatic";
 
     // Передаем результат в userData
     userData.temperament = temperamentResult;
