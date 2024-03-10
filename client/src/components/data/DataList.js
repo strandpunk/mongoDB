@@ -40,6 +40,7 @@ function DataList({ data, getData, isFriend }) {
                         </>)} */}
                         <div className='data-wrapper'>{data.content} </div>
                         {isFriend === true ? (<>
+                        <div className='plug'></div>
                         </>) : (<>
                             <button className='delete-button' onClick={() => handleDeleteConfirmation(data._id)}>D</button>
                         </>)}

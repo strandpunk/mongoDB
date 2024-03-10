@@ -49,6 +49,10 @@
     transition: background-color 0.3s;
 }
 
+.plug{
+    width: 80px;
+}
+
 .delete-button {
     border-radius: 0 10px 10px 0;
 }
