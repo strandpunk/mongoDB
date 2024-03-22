@@ -297,10 +297,10 @@ router.get("/get-users", auth, async (req, res) => {
 
     let findTemperament = []
 
-    if (temperamentInfo.temperament === 'sanguine') findTemperament = ["sanguine", 'choleric', 'phlegmatic'];
-    else if (temperamentInfo.temperament === 'choleric') findTemperament = ["choleric", 'sanguine', 'melancholic'];
-    else if (temperamentInfo.temperament === 'melancholic') findTemperament = ["melancholic", 'phlegmatic', 'choleric'];
-    else if (temperamentInfo.temperament === 'phlegmatic') findTemperament = ["phlegmatic", 'melancholic', 'sanguine'];
+    if (temperamentInfo.temperament === 'sanguine') findTemperament = 'melancholic'
+    else if (temperamentInfo.temperament === 'choleric') findTemperament = 'phlegmatic'
+    else if (temperamentInfo.temperament === 'melancholic') findTemperament = 'sanguine'
+    else if (temperamentInfo.temperament === 'phlegmatic') findTemperament = 'choleric'
 
     //console.log(findTemperament)
 
@@ -309,7 +309,7 @@ router.get("/get-users", auth, async (req, res) => {
       _id: { $nin: [userID, ...friendsId] }, // Используем оператор ...spread для объединения массивов
       isAdmin: { $nin: true },
       subDate: { $gt: checkDate },
-      temperament: {$in: findTemperament},
+      temperament: {$nin: findTemperament},
     }).select("-passwordHash");
 
     res.status(200).send(usersInfo);
