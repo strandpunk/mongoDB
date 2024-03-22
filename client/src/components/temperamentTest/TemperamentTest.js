@@ -1,110 +1,164 @@
-import React, { useState } from "react";
-import "./TemperamentTest.css";
+import React, { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
-import { useContext } from "react";
+import "./TemperamentTest.css";
 
 function TemperamentTest() {
   const navigate = useNavigate();
   const location = useLocation();
   const userData = location.state;
-
   const { getLoggedIn } = useContext(AuthContext);
-
-  async function register(data) {
-
-    try {
-      const registerData = data
-
-      await axios.post("http://localhost:5000/auth/", registerData);
-      navigate("/");
-      getLoggedIn();
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   const questions = [
     {
       id: 1,
-      text: "Как вы реагируете на новые задачи или ситуации?",
-      options: ["Быстро адаптируюсь и начинаю действовать", "Энергично принимаюсь за работу, не теряя времени", "Переживаю и чувствую себя неуверенно", "Медленно адаптируюсь, предпочитая рассмотреть все стороны вопроса"],
+      text: "Часто ли вы испытываете тягу к новым впечатлениям, что-бы отвлечься, испытать сильные ощущения?",
+      options: ["Да", "Нет"],
     },
     {
       id: 2,
-      text: "Какой ваш обычный темп речи?",
-      options: ["Очень быстрый и энергичный", "Быстрый и уверенный", "Медленный и задумчивый", "Медленный и спокойный"],
+      text: "Часто ли вы чувствуете, что нуждаетесь в друзьях, которые могут вас понять, ободрить, выразить сочувствие??",
+      options: ["Да", "Нет"],
     },
     {
-      id: 3,
-      text: "Как вы реагируете на стресс?",
-      options: ["Быстро реагирую, но легко могу переключиться на что-то другое", "Продолжаю работать, стремясь завершить текущую задачу", "Очень переживаю и могу забыть о других вещах", "Ощущаю внутреннее напряжение, но стараюсь сохранять спокойствие"],
+      id: 7,
+      text: "Часто ли у вас бывают спады и подъемы настроения?",
+      options: ["Да", "Нет"],
     },
     {
-      id: 4,
-      text: "Как вы обычно проводите свободное время?",
-      options: ["Активно и общительно, предпочитая новые впечатления", "Занимаюсь различными проектами или хобби", "Провожу время в одиночестве, занятый своими мыслями", "Предпочитаю спокойные занятия дома или чтение"],
+      id: 8,
+      text: "Быстро ли вы обычно действуете и говорите, и не растрачиваете ли много времени на обдумывание?",
+      options: ["Да", "Нет"],
     },
     {
-      id: 5,
-      text: "Как вы реагируете на изменения в планах или расписании?",
-      options: ["Легко приспосабливаюсь к изменениям и ищу новые возможности", "Пытаюсь найти решение и продолжаю двигаться вперед", "Чувствую себя раздраженно или стрессованно", "Принимаю изменения смиренно и постепенно адаптируюсь"],
+      id: 11,
+      text: "Смущаетесь ли вы, когда хотите познакомиться с человеком противоположного пола, который вам симпатичен?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 13,
+      text: "Часто ли вы действуете под влиянием момента?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 15,
+      text: "Предпочитаете ли вы чтение книг встречи с людьми?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 20,
+      text: "Стараетесь ли вы ограничить круг знакомств небольшим числом близких людей?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 22,
+      text: "Когда на вас кричат, отвечаете ли вы тем же?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 27,
+      text: "Считают ли вас человеком живым и веселым?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 31,
+      text: "Бывает ли, что вам не спится от того, что разные мысли лезут в голову?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 34,
+      text: "Нравится ли вам работа, которая требует пристального внимания?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 37,
+      text: "Верно ли, что вам неприятно бывать в компании, где постоянно подшучивают друг над другом?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 44,
+      text: "Верно ли, что вы такой любитель поговорить, что никогда не упустите удобного случая побеседовать с незнакомым человеком?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 49,
+      text: "Легко ли вас задевает критика ваших недостатков или вашей работы?",
+      options: ["Да", "Нет"],
+    },
+    {
+      id: 50,
+      text: "Могли бы вы сказать, что вы уверенный в себе человек?",
+      options: ["Да", "Нет"],
     },
   ];
 
   const [answers, setAnswers] = useState({});
   const [error, setError] = useState("");
+  const [extrovertScores, setExtrovertScores] = useState({});
+  const [neuroticismScores, setNeuroticismScores] = useState({});
+  
+
+  const extrovertQuestions = questions.filter(question => [1, 8, 13, 15, 20, 22, 27, 34, 37, 44, 49].includes(question.id));
+  const neuroticismQuestions = questions.filter(question => ![1, 8, 13, 15, 20, 22, 27, 34, 37, 44, 49].includes(question.id));
 
   const handleOptionSelect = (questionId, optionIndex) => {
-    setAnswers({ ...answers, [questionId]: optionIndex });
+    const updatedAnswers = { ...answers, [questionId]: optionIndex };
+    setAnswers(updatedAnswers);
+  
+    if (extrovertQuestions.find(question => question.id === questionId)) {
+      if ([15, 20, 37].includes(questionId)) {
+        setExtrovertScores(prevScores => ({ ...prevScores, [questionId]: optionIndex === 1 ? 1 : 0 }));
+      } else {
+        setExtrovertScores(prevScores => ({ ...prevScores, [questionId]: optionIndex === 0 ? 1 : 0 }));
+      }
+    } else if (neuroticismQuestions.find(question => question.id === questionId)) {
+      setNeuroticismScores(prevScores => ({ ...prevScores, [questionId]: optionIndex === 0 ? 1 : 0 }));
+    }
   };
+
 
   const calculateResult = () => {
     if (Object.keys(answers).length < questions.length) {
       setError("Пожалуйста, ответьте на все вопросы перед получением результата");
       return;
     }
+  
+    const extrovertScore = Object.values(extrovertScores).reduce((acc, curr) => acc + curr, 0);
+    const neuroticismScore = Object.values(neuroticismScores).reduce((acc, curr) => acc + curr, 0);
+    console.log(extrovertScore);
+    console.log(neuroticismScore);
+    const extrovertResult = extrovertScore > 8 ? "extrovert" : "introvert";
+    const neuroticismResult = neuroticismScore > 3 ? "neurotic" : "stable";
+  
 
-    // Суммируем ответы и определяем тип темперамента
-    const scores = { sanguine: 0, choleric: 0, melancholic: 0, phlegmatic: 0 };
-    for (const answer in answers) {
-      switch (answers[answer]) {
-        case 0:
-          scores.sanguine++;
-          break;
-        case 1:
-          scores.choleric++;
-          break;
-        case 2:
-          scores.melancholic++;
-          break;
-        case 3:
-          scores.phlegmatic++;
-          break;
-        default:
-          break;
-      }
-    }
+    let type = ''
 
-    // Определяем результат по наибольшему количеству баллов
-    const maxScore = Math.max(...Object.values(scores));
-    let temperamentResult = "";
-    if (scores.sanguine === maxScore) temperamentResult = "sanguine";
-    else if (scores.choleric === maxScore) temperamentResult = "choleric";
-    else if (scores.melancholic === maxScore) temperamentResult = "melancholic";
-    else if (scores.phlegmatic === maxScore) temperamentResult = "phlegmatic";
+    if (extrovertResult === "extrovert" && neuroticismResult === "stable") (type = "sanguine")
+    else if (extrovertResult === "extrovert" && neuroticismResult === "neurotic") (type = "choleric")
+    else if (extrovertResult === "introvert" && neuroticismResult === "stable") (type = "melancholic")
+    else if (extrovertResult === "introvert" && neuroticismResult === "neurotic") (type = "phlegmatic")
 
-    // Передаем результат в userData
-    userData.temperament = temperamentResult;
+    userData.temperament = type;
 
-    // Регистрируем пользователя
-    register(userData)
+    
+    console.log(type)
+    console.log(userData);
+    register(userData);
   };
 
+  const register = async (data) => {
+    try {
+      await axios.post("http://localhost:5000/auth/", data);
+      navigate("/");
+      getLoggedIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="form_placer ">
+    <div className="form_placer">
       <div className="temperament-test">
         <h1>Регистрация почти завершена, осталось совсем чуть-чуть</h1>
         <h2>Тест на определение типа темперамента</h2>

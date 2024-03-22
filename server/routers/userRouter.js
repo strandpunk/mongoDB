@@ -297,10 +297,10 @@ router.get("/get-users", auth, async (req, res) => {
 
     let findTemperament = []
 
-    if (temperamentInfo.temperament === 'sanguine') findTemperament = ["sanguine", 'choleric'];
-    else if (temperamentInfo.temperament === 'choleric') findTemperament = ["choleric", 'sanguine'];
-    else if (temperamentInfo.temperament === 'melancholic') findTemperament = ["melancholic", 'phlegmatic'];
-    else if (temperamentInfo.temperament === 'phlegmatic') findTemperament = ["phlegmatic", 'melancholic'];
+    if (temperamentInfo.temperament === 'sanguine') findTemperament = ["sanguine", 'choleric', 'phlegmatic'];
+    else if (temperamentInfo.temperament === 'choleric') findTemperament = ["choleric", 'sanguine', 'melancholic'];
+    else if (temperamentInfo.temperament === 'melancholic') findTemperament = ["melancholic", 'phlegmatic', 'choleric'];
+    else if (temperamentInfo.temperament === 'phlegmatic') findTemperament = ["phlegmatic", 'melancholic', 'sanguine'];
 
     //console.log(findTemperament)
 
