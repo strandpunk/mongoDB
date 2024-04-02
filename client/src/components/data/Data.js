@@ -8,7 +8,7 @@ function Data() {
   const [data, setData] = useState([]);
 
   async function getData() {
-    const dataList = await axios.get("http://localhost:5000/data/");
+    const dataList = await axios.get("https://localhost:5000/data/");
     setData(dataList.data);
   }
 

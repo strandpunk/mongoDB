@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import "./User.css";
 const moment = require('moment');
 
-function User({ user}) {
+function User({ user, getUser }) {
 
   //----------------------------------------------------------
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,11 +29,17 @@ function User({ user}) {
         await axios.post("http://localhost:5000/auth/uploads", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
+        
+        //--надо--подумать--
+        setTimeout(() => {
+          getUser();
+        }, 1000);
+        
       } catch (error) {
-        console.error("Ошибка при получении данных пользователя:", error);
+        console.error("Ошибка при загрузке фото:", error);
       }
     }
-  }
+  }  
 
   //------------------image-------------------------
 
@@ -45,7 +51,7 @@ function User({ user}) {
   //   setAllImages(result.data.data);
   // };
   //----------------------------------------------------------
- 
+
   return (
     <div>
       <div className="user__info">

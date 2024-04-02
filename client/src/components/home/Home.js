@@ -13,7 +13,7 @@ const Home = () => {
 
   async function getUser() {
     try {
-      const userList = await axios.get("http://localhost:5000/auth/info");
+      const userList = await axios.get("https://localhost:5000/auth/info");
       setUser(userList.data);
     } catch (error) {
       console.error("Ошибка при получении данных пользователя:", error);
@@ -33,7 +33,7 @@ const Home = () => {
             <div className="home-main">
               <div className="user-info">
                 {" "}
-                <User user={user} />
+                <User user={user} getUser={getUser} />
               </div>
               <section>
                 <Data />

@@ -9,7 +9,7 @@ function Friends() {
   const navigate = useNavigate()
 
   async function getFriends() {
-    const finded = await axios.get("http://localhost:5000/auth/get-friends");
+    const finded = await axios.get("https://localhost:5000/auth/get-friends");
     setUsers(Array.from(finded.data));
   }
 

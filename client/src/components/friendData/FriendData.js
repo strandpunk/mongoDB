@@ -10,7 +10,7 @@ function FriendData(props) {
     async function getFriendData() {
       try {
         const friendId = props.data;
-        const response = await axios.get(`http://localhost:5000/data/friend/${friendId}`);
+        const response = await axios.get(`https://localhost:5000/data/friend/${friendId}`);
         setData(response.data);
       } catch (error) {
         console.error('Ошибка при получении данных:', error);

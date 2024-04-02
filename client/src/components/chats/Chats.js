@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import "./Chats.css";
 import ScrollChat from "./ScrollableChat";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://localhost:5000";
 
 function Chats() {
   const [chats, setChats] = useState([]);
@@ -17,7 +17,7 @@ function Chats() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/auth/id");
+        const response = await axios.get("https://localhost:5000/auth/id");
         setUserId(response.data);
       } catch (error) {
         console.error("Error fetching user ID:", error);
@@ -41,7 +41,7 @@ function Chats() {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/chat/get-chats");
+        const response = await axios.get("https://localhost:5000/chat/get-chats");
         setChats(response.data);
       } catch (error) {
         console.error("Error fetching chats:", error);
@@ -55,7 +55,7 @@ function Chats() {
     if (currentChat) {
       const fetchMessages = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/message/${currentChat._id}`);
+          const response = await axios.get(`https://localhost:5000/message/${currentChat._id}`);
           setMessages(response.data);
         } catch (error) {
           console.error("Error fetching messages:", error);
@@ -97,7 +97,7 @@ function Chats() {
       };
 
       try {
-        await axios.post("http://localhost:5000/message/", data);
+        await axios.post("https://localhost:5000/message/", data);
         setNewMessage("");
         setMessages([...messages, data]);
 
