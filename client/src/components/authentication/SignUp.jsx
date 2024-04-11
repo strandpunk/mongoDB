@@ -1,4 +1,4 @@
-import { useEffect, useState, useId } from "react";
+import { useState, useId } from "react";
 import { useNavigate } from "react-router";
 import "./Sign.scss";
 
@@ -15,6 +15,19 @@ const SignUp = () => {
   const [checked, setChecked] = useState(false);
 
   const navigate = useNavigate();
+
+  const cities = [
+    "Москва",
+    "Санкт-Петербург",
+    "Новосибирск",
+    "Екатеринбург",
+    "Нижний Новгород",
+    "Казань",
+    "Челябинск",
+    "Омск",
+    "Самара",
+    "Ростов-на-Дону"
+  ];
 
   function register(e) {
     e.preventDefault();
@@ -36,49 +49,20 @@ const SignUp = () => {
 
   // VALIDATION
 
-  const [nameError, setNameError] = useState("Это поле не может быть пустым");
+  const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState(
-    "Поле почты не может быть пустым"
+    ""
   );
   const [passwordError, setPasswordError] = useState(
-    "Поле пароля не может быть пустым"
+    ""
   );
   const [passwordVerifyError, setPasswordVerifyError] = useState(
-    "Это поле не может быть пустым"
+    ""
   );
 
-  const [cityError, setCityError] = useState("Выберите город");
-  const [ageError, setAgeError] = useState("Выберите возраст");
-  const [myCheckboxError, setMyCheckboxError] = useState("Выберите");
-  const [myRadioError, setMyRadioError] = useState("Выберите пол");
-
-  const [formValid, setFormValid] = useState(false);
-
-  useEffect(() => {
-    if (
-      nameError ||
-      emailError ||
-      passwordError ||
-      passwordVerifyError ||
-      cityError ||
-      ageError ||
-      myCheckboxError ||
-      myRadioError
-    ) {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-    }
-  }, [
-    nameError,
-    emailError,
-    passwordError,
-    passwordVerifyError,
-    cityError,
-    ageError,
-    myCheckboxError,
-    myRadioError,
-  ]);
+  const [ageError, setAgeError] = useState("");
+  const [myCheckboxError, setMyCheckboxError] = useState("");
+  const [myRadioError, setMyRadioError] = useState("");
 
   const nameHandler = (e) => {
     setName(e.target.value);
@@ -120,17 +104,17 @@ const SignUp = () => {
     const minLengthPassword = minLengthRegExp.test(e.target.value);
 
     if (passwordLength === 0) {
-      setPasswordError("Password is empty");
+      setPasswordError("Поле пароля не может быть пустым");
     } else if (!uppercasePassword) {
-      setPasswordError("At least one Uppercase");
+      setPasswordError("Введите как минимум один символ с верхним регистром");
     } else if (!lowercasePassword) {
-      setPasswordError("At least one Lowercase");
+      setPasswordError("Введите как минимум один символ с нижним регистром");
     } else if (!digitsPassword) {
-      setPasswordError("At least one digit");
+      setPasswordError("Введите как минимум одну цифру");
     } else if (!specialCharPassword) {
-      setPasswordError("At least one Special Characters");
+      setPasswordError("введите как минимум один специальный символ");
     } else if (!minLengthPassword) {
-      setPasswordError("At least minimum 8 characters");
+      setPasswordError("Минимальная длина пароля - 8 символов");
     } else {
       setPasswordError("");
     }
@@ -147,7 +131,7 @@ const SignUp = () => {
   const ageHandler = (e) => {
     setAge(e.target.value);
     if (18 > e.target.value || e.target.value > 90) {
-      setAgeError("Вы не можете быть зарегистрированы с таким возрастом");
+      setAgeError("Недопустимый возраст");
     } else {
       setAgeError("");
     }
@@ -173,12 +157,8 @@ const SignUp = () => {
   };
 
   const cityHandler = (e) => {
-    if (!e.target.value) {
-      setCityError("Выберите город");
-    } else {
-      setCity(e.target.value);
-      setCityError("");
-    }
+    const selectedCity = e.target.value;
+    setCity(selectedCity);
   };
 
   const Pass = (e) => {
@@ -193,112 +173,126 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="form_placer">
-        <form onSubmit={register} className="form">
-          <div className="form_content">
-            <h1 style={{ textAlign: "center" }}>Register</h1>
-            <label>Name</label>
+      <form onSubmit={register} className="form__container form__container--signUp">
+        <h3>Регистрация</h3>
+
+        <label className="form__label">Имя</label>
+        <input
+          onChange={(e) => nameHandler(e)}
+          value={name}
+          name="name"
+          type="text"
+          className="form__input"
+          placeholder="Введите имя"
+        />
+        <div className="form__error">{nameError}</div>
+
+        <label className="form__label">Почта</label>
+        <input
+          onChange={(e) => emailHandler(e)}
+          value={email}
+          name="email"
+          type="text"
+          className="form__input"
+          placeholder="Введите почту"
+        />
+        <div className="form__error">{emailError}</div>
+
+        <label className="form__label">Город</label>
+        <select
+          onChange={cityHandler}
+          value={city}
+          className="form__select"
+          style={{ width: "100%" }}
+        >
+          {cities.map((cityName) => (
+            <option key={cityName} value={cityName}>
+              {cityName}
+            </option>
+          ))}
+        </select>
+
+       
+
+        <label htmlFor={ageInputId} className="form__label">Возраст</label>
+        <input
+          onChange={(e) => ageHandler(e)}
+          id={ageInputId}
+          name="age"
+          type="number"
+          className="form__input form__input--age"
+        />
+        <div className="form__error">{ageError}</div>
+        <label htmlFor={ageInputId} className="form__label">Пол</label>
+        <div className="form__gender">
+          <label className="form__radio-label">
             <input
-              onChange={(e) => nameHandler(e)}
-              value={name}
-              name="name"
-              type="text"
-              placeholder="Enter your name...."
+              onChange={(e) => genderHandler(e)}
+              type="radio"
+              name="myRadio"
+              value="male"
+              className="form__radio"
             />
-            <div className="error_wrapper">{nameError}</div>
+            Мужчина
+          </label>
 
-            <label>Email</label>
+          <label className="form__radio-label">
             <input
-              onChange={(e) => emailHandler(e)}
-              value={email}
-              name="email"
-              type="text"
-              placeholder="Enter your email...."
+              onChange={(e) => genderHandler(e)}
+              type="radio"
+              name="myRadio"
+              value="female"
+              className="form__radio"
             />
-            <div className="error_wrapper">{emailError}</div>
+            Женщина
+          </label>
+        </div>
+        <div className="form__error">{myRadioError}</div>
+        <span className="form__checkbox-wrapper">
+        <label className="form__label form__label--checkbox">
+   
+       Подтверждаю свое совершеннолетие и даю согласие на обработку персональных данных{" "}
+          <input
+            onChange={(e) => checkboxHandler(e)}
+            type="checkbox"
+            name="myCheckbox"
+            className="form__checkbox"
+          />
+              
+        </label>
+        </span>
+        <div className="form__error">{myCheckboxError}</div>
 
-            <label>City</label>
-            <select onChange={(e) => cityHandler(e)}>
-              <option value=""> </option>
-              <option value="Rostov">Ростов</option>
-              <option value="Samara">Самара</option>
-            </select>
-            <div className="error_wrapper">{cityError}</div>
+        <label className="form__label">Пароль</label>
+        <input
+          onChange={(e) => passwordHandler(e)}
+          value={password}
+          name="password"
+          type="password"
+          className="form__input"
+          placeholder="Придумайте пароль"
+        />
+        <div className="form__error">{passwordError}</div>
 
-            <label htmlFor={ageInputId}>Your age:</label>
-            <input
-              onChange={(e) => ageHandler(e)}
-              id={ageInputId}
-              name="age"
-              type="number"
-            />
-            <div className="error_wrapper">{ageError}</div>
+        <label className="form__label">Подтверждение пароля</label>
+        <input
+          onChange={(e) => confirmPasswordHandler(e)}
+          value={passwordVerify}
+          name="confirmPassword"
+          type="password"
+          className="form__input"
+          placeholder="Введите пароль повторно"
+        />
+        <div className="form__error">{passwordVerifyError}</div>
 
-            <label>Gender</label>
-            <label>
-              <input
-                onChange={(e) => genderHandler(e)}
-                type="radio"
-                name="myRadio"
-                value="male"
-              />
-              Male
-            </label>
-
-            <label>
-              <input
-                onChange={(e) => genderHandler(e)}
-                type="radio"
-                name="myRadio"
-                value="female"
-              />
-              Female
-            </label>
-            <div className="error_wrapper">{myRadioError}</div>
-
-            <label>
-              Со всем согласен:{" "}
-              <input
-                onChange={(e) => checkboxHandler(e)}
-                type="checkbox"
-                name="myCheckbox"
-              />
-            </label>
-            <div className="error_wrapper">{myCheckboxError}</div>
-
-            <label>Password</label>
-            <input
-              onChange={(e) => passwordHandler(e)}
-              value={password}
-              name="password"
-              type="password"
-              placeholder="Enter your password...."
-            />
-            <div className="error_wrapper">{passwordError}</div>
-
-            <label>Подтвердите </label>
-            <input
-              onChange={(e) => confirmPasswordHandler(e)}
-              value={passwordVerify}
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm your password..."
-            />
-            <div className="error_wrapper">{passwordVerifyError}</div>
-
-            <button
-              onClick={(e) => {
-                Pass(e);
-              }}
-              disabled={!formValid}
-              type="submit"
-              className="registerbtn"
-            >
-              Register
-            </button>
-          </div>
-        </form>
-      </div>
+        <button
+          onClick={(e) => Pass(e)}
+          type="submit"
+          className="form__button"
+        >
+          ЗАРЕГИСТРИРОВАТЬСЯ
+        </button>
+      </form>
     </>
   );
 };

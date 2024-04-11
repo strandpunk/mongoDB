@@ -25,7 +25,7 @@ const SignIn = () => {
     } catch (error) {
       const errorMessage = error.response?.data?.errorMessage;
       console.log(errorMessage)
-      alert('Введите корректные данные');
+      alert('Пользователь с такими данными не найден');
     }
   };
 
@@ -41,11 +41,12 @@ const SignIn = () => {
 
   const passwordHandler = (e) => {
     setPassword(e.target.value);
-    setPasswordError(e.target.value.trim() === "" ? "Поле пароля не может быть пустым" : "");
+    setPasswordError(e.target.value.trim() === "" ? "Недопустимый пароль" : "");
+    
   };
 
   return (
-    <div className="form-container">
+    <div className="form__container form__container--signIn">
       <form onSubmit={login} className="form">
         <h3>Вход</h3>
         <label className="form__label">Почта</label>
@@ -55,7 +56,7 @@ const SignIn = () => {
           name="email"
           type="text"
           className="form__input"
-          placeholder="Введите вашу почту"
+          placeholder="Введите почту"
         />
         <div className="form__error">{emailError}</div>
 
@@ -66,7 +67,7 @@ const SignIn = () => {
           name="password"
           type="password"
           className="form__input"
-          placeholder="Введите ваш пароль"
+          placeholder="Введите пароль"
         />
         <div className="form__error">{passwordError}</div>
 

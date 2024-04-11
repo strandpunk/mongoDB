@@ -1,7 +1,5 @@
-.form-container {
+.form__container {
   box-sizing: border-box;
-  height: 450px;
-  width: 400px;
   background-color: rgba(255, 255, 255, 0.13);
   position: absolute;
   transform: translate(-50%, -50%);
@@ -12,7 +10,42 @@
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
   padding: 35px 35px;
+
+  &--signIn {
+    height: 450px;
+    width: 400px;
+  }
+
+  &--signUp {
+    height: 1000px;
+    width: 500px;
+    top: 600px;
+    /* Отступ сверху */
+
+  }
+
 }
+
+.form__select {
+  width: 100%;
+  height: 40px;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #37373e;
+  /* Темный цвет фона для селекта */
+  color: #fff;
+  /* Белый цвет текста */
+}
+
+.form__select option {
+  font-size: 16px;
+  text-align: center;
+  /* Выравнивание опций по центру */
+}
+
 
 form * {
   font-family: 'Poppins', sans-serif;
@@ -35,6 +68,12 @@ form h3 {
   margin-top: 10px;
   font-size: 16px;
   font-weight: 500;
+
+  &--checkbox {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically in the center */
+   }
+
 }
 
 .form__input {
@@ -48,6 +87,17 @@ form h3 {
   margin-top: 8px;
   font-size: 14px;
   font-weight: 300;
+
+  &--age {
+    text-align: center; 
+   }
+}
+
+/* Убираем стрелочки у input[type="number"] */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 ::placeholder {
@@ -70,4 +120,20 @@ form h3 {
   margin-top: 10px;
   text-align: center;
   height: 20px;
+  color: yellow;
+}
+
+.form__gender {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.form__checkbox-wrapper {
+  display: flex;
+}
+
+.form__checkbox {
+  margin-right: 20px;
 }
