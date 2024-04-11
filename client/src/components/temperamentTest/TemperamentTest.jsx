@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
-import "./TemperamentTest.css";
+import "./TemperamentTest.scss";
 
 function TemperamentTest() {
   const navigate = useNavigate();

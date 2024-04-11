@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import "./UserList.css";
+import "./UserList.scss";
 import { useNavigate } from "react-router-dom";
 
 function UsersList() {
@@ -63,11 +63,12 @@ function UsersList() {
                     </div>
                     <img
                       style={{
-                        height: "400px",
+                        minHeight: "350px",
+                        maxHeight: "350px",
                         width: "250px",
                         objectFit: "cover",
                         borderRadius: "8px",
-                        marginBottom: "20px",
+                        marginBottom: "10px",
                       }}
                       alt="users-images"
                       src={require(`../../images/${data.avatar}`)}

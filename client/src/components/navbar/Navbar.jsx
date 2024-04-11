@@ -4,7 +4,7 @@ import AuthContext from "../../context/AuthContext";
 import SignIn from "../authentication/SignIn";
 import SignUp from "../authentication/SignUp";
 import SignOut from "../authentication/SignOut";
-import "./Navbar.css";
+import "./Navbar.scss";
 import FindUsers from "../findUsers/FindUsers";
 import Sub from "../subscription/Sub";
 

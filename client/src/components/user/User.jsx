@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef, useState } from "react";
-import "./User.css";
+import "./User.scss";
 const moment = require('moment');
 
 function User({ user, getUser }) {

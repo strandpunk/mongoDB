@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import FriendData from "../friendData/FriendData";
-import './Friend.css'
+import './Friend.scss'
 
 const moment = require('moment');
 

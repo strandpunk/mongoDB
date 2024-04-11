@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './DataList.css'
+import './DataList.scss'
 const moment = require('moment');
 
 function DataList({ data, getData, isFriend }) {

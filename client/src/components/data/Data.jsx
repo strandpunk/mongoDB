@@ -2,7 +2,7 @@ import DataForm from "./DataForm";
 import DataList from "./DataList";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./Data.css";
+import "./Data.scss";
 
 function Data() {
   const [data, setData] = useState([]);

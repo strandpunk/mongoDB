@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./UserList.css";
+import "./UserList.scss";
 import { useNavigate } from "react-router-dom";
 
 function Friends() {

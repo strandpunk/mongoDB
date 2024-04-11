@@ -1,6 +1,6 @@
 import { useEffect, useState, useId } from "react";
 import { useNavigate } from "react-router";
-import "./Sign.css";
+import "./Sign.scss";
 
 const SignUp = () => {
   const [name, setName] = useState("");

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import io from "socket.io-client";
-import "./Chats.css";
+import "./Chats.scss";
 import ScrollChat from "./ScrollableChat";
 
 const ENDPOINT = "https://localhost:5000";

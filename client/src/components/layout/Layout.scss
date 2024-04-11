@@ -7,8 +7,10 @@
   align-items: center;
 }
 
-.layout-container {
+.layout-outlet {
   height: auto;
-  background-color: slategrey;
+  background-image: url('../../../public/1.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 1000px;
 }

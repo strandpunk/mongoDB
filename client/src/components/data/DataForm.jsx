@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import "./DataForm.css";
+import "./DataForm.scss";
 
 function DataForm({ getData }) {
   const [data, setData] = useState("");
