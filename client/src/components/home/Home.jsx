@@ -13,7 +13,7 @@ const Home = () => {
 
   async function getUser() {
     try {
-      const userList = await axios.get("https://localhost:5000/auth/info");
+      const userList = await axios.get("http://localhost:5000/auth/info");
       setUser(userList.data);
     } catch (error) {
       console.error("Ошибка при получении данных пользователя:", error);

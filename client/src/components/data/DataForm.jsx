@@ -15,7 +15,7 @@ function DataForm({ getData }) {
         const Data = {
           content: data,
         };
-        await axios.post("https://localhost:5000/data/", Data);
+        await axios.post("http://localhost:5000/data/", Data);
         getData();
         setData('')
       } catch (error) {

@@ -17,7 +17,7 @@ function DataList({ data, getData, isFriend }) {
     async function deleteData(dataId) {
         try {
             //console.log(dataId)
-            await axios.get(`https://localhost:5000/data/${dataId}`);
+            await axios.get(`http://localhost:5000/data/${dataId}`);
             //window.location.reload(); ^_^
             getData()
         } catch (error) {

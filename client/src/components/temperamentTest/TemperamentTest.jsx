@@ -149,7 +149,7 @@ function TemperamentTest() {
 
   const register = async (data) => {
     try {
-      await axios.post("https://localhost:5000/auth/", data);
+      await axios.post("http://localhost:5000/auth/", data);
       navigate("/");
       getLoggedIn();
     } catch (error) {
