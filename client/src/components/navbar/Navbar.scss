@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
-
+  padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -14,7 +14,6 @@
 .navbar__tools {
   display: flex;
   flex-direction: row;
-  padding-top: 10px;
   width: 500px;
   align-items: center;
   justify-content: space-evenly;
