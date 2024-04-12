@@ -149,11 +149,14 @@ function TemperamentTest() {
 
   const register = async (data) => {
     try {
-      await axios.post("http://localhost:5000/auth/", data);
+      console.log(data);
+      const response = await axios.post("http://localhost:5000/auth/", data);
+      console.log(response.data); // Вывод ответа сервера для отладки
       navigate("/");
       getLoggedIn();
     } catch (error) {
-      console.log(error);
+      console.error("Ошибка при отправке запроса:", error);
+      setError("Произошла ошибка при отправке запроса");
     }
   };
 

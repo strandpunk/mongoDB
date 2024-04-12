@@ -42,7 +42,18 @@ function DataList({ data, getData, isFriend }) {
                         {isFriend === true ? (<>
                         <div className='plug'></div>
                         </>) : (<>
-                            <button className='delete-button' onClick={() => handleDeleteConfirmation(data._id)}>D</button>
+                            <img className='delete-button' 
+                style={{
+                  height: "95px",
+                  width: "75px",
+                  objectFit: "cover",
+                  padding: '5px',
+                  borderRadius: "0px 8px 8px 0px",
+                }}
+                onClick={() => handleDeleteConfirmation(data._id)}
+                src="/delete.svg"
+                alt="user-avatar"
+              ></img>
                         </>)}
 
                     </div>

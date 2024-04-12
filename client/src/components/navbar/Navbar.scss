@@ -1,12 +1,11 @@
 .navbar-header {
-  background-color: #114c7c;
-  /* background-color: #CC0000; */
+  //background-color: #114c7c;
+  background-color: #CCCCCC; 
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  color: white;
 
   padding-left: 10px;
   padding-right: 10px;
@@ -17,12 +16,12 @@ img {
 }
 
 .navbar-navlink {
-  color: black;
+  color: #171A21;
   margin-right: 10px;
 }
 
 .active {
-  color: black;
+  color: #171A21;;
   opacity: 0.5;
   cursor: default;
 }

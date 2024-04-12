@@ -10,30 +10,30 @@ function UsersList() {
   const navigate = useNavigate();
 
   async function getUsers() {
-    const finded = await axios.get("https://localhost:5000/auth/get-users");
+    const finded = await axios.get("http://localhost:5000/auth/get-users");
     setUsers(Array.from(finded.data));
   }
 
   async function startChat(friendId, friendName) {
     const friendData = { friendId, friendName };
-    await axios.post("https://localhost:5000/chat/startChat", friendData);
+    await axios.post("http://localhost:5000/chat/startChat", friendData);
     addFriend(friendId);
   }
 
   async function addFriend(friendId) {
     const friendData = { friendId };
-    await axios.post("https://localhost:5000/auth/addFriend", friendData);
+    await axios.post("http://localhost:5000/auth/addFriend", friendData);
     navigate("/chats");
   }
 
   async function isAdmin() {
-    const adminData = await axios.get("https://localhost:5000/auth/isAdmin");
+    const adminData = await axios.get("http://localhost:5000/auth/isAdmin");
     admin.current = adminData.data.isAdmin;
   }
 
   async function deleteUser(id) {
     const deleteData = { id };
-    await axios.post("https://localhost:5000/auth/delete-user", deleteData);
+    await axios.post("http://localhost:5000/auth/delete-user", deleteData);
     getUsers();
   }
 

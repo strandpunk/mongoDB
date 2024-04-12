@@ -9,7 +9,7 @@ const SignUp = () => {
   const [passwordVerify, setPasswordVerify] = useState("");
   const temperament = 'none'
 
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Москва");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
   const [checked, setChecked] = useState(false);

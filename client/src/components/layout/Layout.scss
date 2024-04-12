@@ -1,6 +1,7 @@
 .layout-footer {
-  background-color: #114c7c;
-  color: white;
+  // background-color: #114c7c;
+  background-color: #CCCCCC;
+  color: #171A21;
   height: 60px;
   display: flex;
   justify-content: center;
@@ -8,9 +9,12 @@
 }
 
 .layout-outlet {
+  position: static;
   height: auto;
-  background-image: url('../../../public/1.svg');
+  background-image: url('../../../public/4.svg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; /* Растянуть изображение на всю область фона */
+  background-attachment: fixed; /* Зафиксировать фоновое изображение */
   min-height: 1100px;
 }
+
