@@ -5,17 +5,20 @@ import "./Layout.scss";
 const Layout = () => {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <div className="layout__container">
 
-      <main className="layout-outlet">
-        <Outlet />
-      </main>
+          <header className="layout__header">
+            <Navbar />
+          </header>
 
-      <footer className="layout-footer">
-        © {new Date().getFullYear()} Anatoly Grankov
-      </footer>
+        <main className="layout__outlet">
+          <Outlet />
+        </main>
+
+        {/* <footer className="layout__footer">
+          © {new Date().getFullYear()} Anatoly Grankov
+        </footer> */}
+      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
 .navbar-header {
   //background-color: #114c7c;
-  background-color: #CCCCCC; 
+  background: rgba(0,0,0,0);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -11,17 +11,28 @@
   padding-right: 10px;
 }
 
+.navbar__tools {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  width: 500px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 img {
   height: 60px;
 }
 
 .navbar-navlink {
-  color: #171A21;
+  color: whitesmoke;
   margin-right: 10px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .active {
-  color: #171A21;;
+  color: whitesmoke;
   opacity: 0.5;
   cursor: default;
 }
@@ -36,9 +47,4 @@ img {
 .navbar-loggedIn,
 .navbar-signout {
   margin-right: 10px;
-}
-
-.navbar-signout {
-  cursor: pointer;
-  border-bottom: 1px solid black;
 }

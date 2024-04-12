@@ -1,4 +1,4 @@
-.layout-footer {
+.layout__footer {
   // background-color: #114c7c;
   background-color: #CCCCCC;
   color: #171A21;
@@ -8,13 +8,21 @@
   align-items: center;
 }
 
-.layout-outlet {
+.layout__outlet {
+  min-height: 1100px;
+}
+
+.layout__header {
+  position: fixed;
+  width: 100%;
+}
+
+.layout__container {
   position: static;
   height: auto;
   background-image: url('../../../public/4.svg');
   background-repeat: no-repeat;
   background-size: cover; /* Растянуть изображение на всю область фона */
   background-attachment: fixed; /* Зафиксировать фоновое изображение */
-  min-height: 1100px;
 }
 

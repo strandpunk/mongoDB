@@ -98,7 +98,11 @@ function UsersList() {
             </div>
           </>
         ) : (
-          <div>Загрузка...</div>
+          <>
+            <div className="user__header">
+              <h3>Пользователи</h3>
+            </div>
+      </>
         )}
       </div>
     </div>

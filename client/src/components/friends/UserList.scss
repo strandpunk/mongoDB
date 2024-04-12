@@ -1,7 +1,10 @@
 .user__card {
-  background-color: whitesmoke;
-  height: 520px;
-  width: 300px;
+  background-color: rgba(50, 50, 50, 0.2);
+  box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  height: 400px;
+  width: 240px;
 
   display: flex;
   flex-direction: column;
@@ -11,22 +14,26 @@
   margin: 10px;
   border-radius: 8px;
 
-  transition: transform 500ms ease;
+  // transition: transform 500ms ease;
 }
 
-.user__card-info {
+.user__cardInfo {
+  text-align: center;
   box-sizing: border-box;
-  width: 250px;
+  width: 200px;
   margin-top: 20px;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 8px;
   color: white;
-  background-color: #114c7c;
+  background-color: rgba(102, 102, 102, 0.8);
+  box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
+  border-radius: 10px;
+  backdrop-filter: blur(100px);
 }
 
 .user__header {
-  padding-top: 40px;
+  padding-top: 20px;
   font-size: 3em;
   display: flex;
   justify-content: center;
@@ -35,7 +42,7 @@
 }
 
 .user__card:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .user__card-wrapper {

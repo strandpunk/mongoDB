@@ -57,7 +57,7 @@ function User({ user, getUser }) {
       <div className="user__info">
         {user.name ? (
           <>
-            <h1>Пользователь {user.name}</h1>
+            <h1>{user.name}</h1>
             <br></br>
             <div className="user__wrapper">
               <div className="user__wrapper-text">

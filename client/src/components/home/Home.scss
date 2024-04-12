@@ -10,8 +10,10 @@
   height: auto;
   min-height: 90vh;
   width: 800px;
-  background-color: rgb(66, 45, 56);
-  border-radius: 8px;
+  background-color: rgba(50, 50, 50, 0.2);
+  box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
   /* border-left: 1px solid black;
   border-right: 1px solid black; */
   /* background-color: lightsteelblue; */

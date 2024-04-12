@@ -27,23 +27,23 @@ function Friends() {
         {users.length !== 0 ? (
           <>
             <div className="user__header">
-              <h1>Близкие</h1>
+              <h1>Знакомые</h1>
             </div>
             {/* {console.log(users)} */}
             <div className="user__card-wrapper">
               {users.map(function (data) {
                 return (
                   <div className="user__card" key={data._id} onClick={() => openFriendProfile(data)}>
-                    <div className="user__card-info">
-                      name: {data.name} <br />
-                      city: {data.city}
+                    <div className="user__cardInfo">
+                      {data.name} <br />
+                      {data.city}
                       <br />
-                      email: {data.email}
+                      {/* email: {data.email} */}
                     </div>
                     <img
                       style={{
-                        height: "400px",
-                        width: "250px",
+                        height: "300px",
+                        width: "200px",
                         objectFit: "cover",
                         borderRadius: "8px",
                         marginBottom: "20px",

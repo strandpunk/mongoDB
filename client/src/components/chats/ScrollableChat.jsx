@@ -8,7 +8,7 @@ const ScrollChat = ({ messages }) => {
 
   const fetchUserId = async () => {
     try {
-      const response = await axios.get("https://localhost:5000/auth/id");
+      const response = await axios.get("http://localhost:5000/auth/id");
       setUserId(response.data);
     } catch (error) {
       console.error("Error fetching user ID:", error);
