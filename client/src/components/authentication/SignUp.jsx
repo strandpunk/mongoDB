@@ -1,5 +1,6 @@
-import { useState, useId } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import moment from 'moment'
 import "./Sign.scss";
 
 const SignUp = () => {
@@ -169,7 +170,9 @@ const SignUp = () => {
     }
   };
 
-  const ageInputId = useId();
+  const getCurrentDate = () => {
+    return moment().format('YYYY-MM-DD');
+  };
 
   return (
     <>
@@ -211,19 +214,22 @@ const SignUp = () => {
             </option>
           ))}
         </select>
-
-       
-
-        <label htmlFor={ageInputId} className="form__label">Возраст</label>
-        <input
-          onChange={(e) => ageHandler(e)}
-          id={ageInputId}
-          name="age"
-          type="number"
-          className="form__input form__input--age"
-        />
+        <div></div>
+        <div className="form__error">{}</div>
+        <div>
+          <label className="form__label">Дата рождения</label>
+          <input
+            type="date"
+            id="birthdate"
+            name="birthdate"
+            className="form__input form__input--age"
+            onChange={(e) => ageHandler(e)}
+            max={getCurrentDate()} // Устанавливаем максимальное значение в текущую дату
+          />
+        </div>        
         <div className="form__error">{ageError}</div>
-        <label htmlFor={ageInputId} className="form__label">Пол</label>
+
+        <label className="form__label">Пол</label>
         <div className="form__gender">
           <label className="form__radio-label">
             <input
@@ -249,17 +255,17 @@ const SignUp = () => {
         </div>
         <div className="form__error">{myRadioError}</div>
         <span className="form__checkbox-wrapper">
-        <label className="form__label form__label--checkbox">
-   
-       Подтверждаю свое совершеннолетие и даю согласие на обработку персональных данных{" "}
-          <input
-            onChange={(e) => checkboxHandler(e)}
-            type="checkbox"
-            name="myCheckbox"
-            className="form__checkbox"
-          />
-              
-        </label>
+          <label className="form__label form__label--checkbox">
+
+            Подтверждаю свое совершеннолетие и даю согласие на обработку персональных данных{" "}
+            <input
+              onChange={(e) => checkboxHandler(e)}
+              type="checkbox"
+              name="myCheckbox"
+              className="form__checkbox"
+            />
+
+          </label>
         </span>
         <div className="form__error">{myCheckboxError}</div>
 

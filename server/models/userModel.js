@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
     avatar: { type: String, required: true },
     city: { type: String, required: true },
     gender: { type: String, required: true },
-    age: { type: Number, required: true },
+    age: { type: Date, required: true },
     subDate: { type: Date, required: true },
     isAdmin: { type: Boolean, required: true },
     friends: { type: Array, required: true },
