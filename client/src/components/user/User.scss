@@ -3,13 +3,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(102, 102, 102, 0.8);
-  box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
-  border-radius: 10px;
-  backdrop-filter: blur(100px);
-  width: 550px;
+
+  width: 600px;
   height: 400px;
   margin: 20px 0px 20px 0px;
+}
+
+.user__image {
+  box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
 }
 
 .user__wrapper-text {

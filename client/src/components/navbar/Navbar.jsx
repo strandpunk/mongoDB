@@ -45,49 +45,24 @@ const Navbar = () => {
               <>
                 <div className="navbar__tools">
                   <Link to={"/"}>
-                    <div className="navbar__img">
-                      <img
-                        id="Logo"
-                        src="/user.svg"
-                        alt="Logo"
-                        className="cursor-pointer"
-                      /></div>
+                    <div className="navbar__navlink">
+                      Профиль</div>
                   </Link>
                   <Link to={"/chats"}>
-                    <div className="navbar__img">
-                      <img
-                        id="Chat"
-                        src="/chat4.svg"
-                        alt="Chat"
-                        className="cursor-pointer"
-                      /></div>
+                    <div className="navbar__navlink">
+                      Сообщения</div>
                   </Link>
                   <Link to={"/friends"}>
-                    <div className="navbar__img">
-                      <img
-                        id="Friends"
-                        src="/friends3.svg"
-                        alt="Friends"
-                        className="cursor-pointer"
-                      /></div>
+                  <div className="navbar__navlink">
+                      Друзья</div>
                   </Link>
                   <Link to={"/users"}>
-                    <div className="navbar__img">
-                      <img
-                        id="FindUsers"
-                        src="/find.svg"
-                        alt="FindUsers"
-                        className="cursor-pointer"
-                      /></div>
+                  <div className="navbar__navlink">
+                      Пользователи</div>
                   </Link>
                   <Link onClick={(e) => extendSub()}>
-                    <div className="navbar__img">
-                    <img
-                        id="Subscribe"
-                        src="/sub.svg"
-                        alt="Subscribe"
-                        className="cursor-pointer"
-                      /></div>
+                  <div className="navbar__navlink">
+                      Подписка</div>
                   </Link>
                 </div>
             </>
@@ -99,14 +74,14 @@ const Navbar = () => {
             <>
               <div className="navbar-linkWrapper">
                 <NavLink
-                  className="navbar-navlink"
+                  className="navbar__navlink"
                   to="/signin"
                   element={<SignIn />}
                 >
                   Войти
                 </NavLink>
                 <NavLink
-                  className="navbar-navlink"
+                  className="navbar__navlink"
                   to="/signup"
                   element={<SignUp />}
                 >
@@ -118,7 +93,7 @@ const Navbar = () => {
           {loggedIn === true && (
             <>
               <div className="navbar-linkWrapper">
-                <div className="navbar-navlink"
+                <div className="navbar__navlink"
                   onClick={(e) => endSession()}
                 >
                   Выйти

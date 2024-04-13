@@ -44,7 +44,7 @@ const SignUp = () => {
       temperament,
     };
 
-    navigate("/test", { state: registerData });
+    navigate("/hobby", { state: registerData });
   }
 
   // VALIDATION

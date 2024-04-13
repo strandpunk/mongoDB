@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, required: true },
     friends: { type: Array, required: true },
     temperament: {type: String, required: true},
+    hobby: {type: Array, required: true},
   },
   {
     timestamps: true,

@@ -35,7 +35,7 @@ function DataForm({ getData }) {
             value={data}
             name="data"
             type="text"
-            placeholder="Введите информацию...."
+            placeholder="Что нового?"
           />
           <button type="submit" className="registerbtn">
             ОТПРАВИТЬ

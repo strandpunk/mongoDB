@@ -5,29 +5,41 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
-  padding-top: 10px;
+  height: 200px;
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 10px;
+}
+
+nav {
+  height: 180px;
 }
 
 .navbar__tools {
   display: flex;
-  flex-direction: row;
-  width: 500px;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
+  height: 180px;
+  justify-content: space-between;
 }
 
 img {
   height: 60px;
 }
 
-.navbar-navlink {
+.navbar__navlink {
   color: whitesmoke;
   margin-right: 10px;
+  margin-left: 10px;
   cursor: pointer;
   text-decoration: none;
+
+}
+a {
+  text-decoration: none; // Убираем подчеркивание по умолчанию
+
+  &:active {
+    text-decoration: none !important; // Убираем подчеркивание в активном состоянии
+  }
 }
 
 .active {

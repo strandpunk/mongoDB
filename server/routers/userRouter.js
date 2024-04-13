@@ -10,7 +10,7 @@ const auth = require("../middleware/auth");
 
 router.post("/", async (req, res) => {
   try {
-    const { name, email, password, passwordVerify, city, gender, age, temperament } =
+    const { name, email, password, passwordVerify, city, gender, hobby, age, temperament } =
       req.body;
 
     // validation
@@ -80,6 +80,7 @@ router.post("/", async (req, res) => {
       subDate,
       isAdmin,
       friends,
+      hobby,
       temperament,
     });
 
@@ -209,6 +210,8 @@ router.get("/info", auth, async (req, res) => {
       createdAt: userInfo.createdAt,
       avatar: userInfo.avatar,
       temperament: userInfo.temperament,
+      age: userInfo.age,
+      hobby: userInfo.hobby,
     });
   } catch (error) {
     console.error(error);
