@@ -34,7 +34,7 @@ function Data() {
           <div>
             <DataForm getData={getData} />
           </div>
-          <div className="nodata">У вас пока нет записей</div>
+          <div className="nodata">Здесь будут находиться ваши публикации</div>
         </>
       )}
     </div>

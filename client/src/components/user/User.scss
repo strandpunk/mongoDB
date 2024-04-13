@@ -9,8 +9,43 @@
   margin: 20px 0px 20px 0px;
 }
 
-.user__image {
+.user__image-container {
+  position: relative;
+  display: inline-block;
   box-shadow: 0 0 10px rgba(8, 7, 16, 0.6);
+  border-radius: 8px;
+  height: 400px;
+}
+
+.user__image-container:hover .user__image-overlay {
+  opacity: 1; /* Показать текст при наведении на изображение */
+}
+
+.user__image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Задаем полупрозрачный цвет для подложки */
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Скрыть текст по умолчанию */
+  transition: opacity 0.3s ease; /* Анимация появления текста */
+  cursor: pointer;
+}
+
+.user__image-overlay-icon{ 
+  height: 100px;
+  width: 100px;
+}
+
+.user__image-overlay-text {
+  text-align: center;
+  font-size: 16px;
 }
 
 .user__wrapper-text {

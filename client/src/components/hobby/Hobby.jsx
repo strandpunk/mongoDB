@@ -29,23 +29,28 @@ function Hobby() {
     ];
 
     const toggleInterest = (interest) => {
+        console.log(selectedInterests)
         if (selectedInterests.includes(interest)) {
-          setSelectedInterests(selectedInterests.filter((item) => item !== interest));
+            setSelectedInterests(selectedInterests.filter((item) => item !== interest));
         } else {
-          if (selectedInterests.length < 5) { // Проверяем лимит выбранных интересов
-            setSelectedInterests([...selectedInterests, interest]);
-          } else {
-            alert('Можно выбрать не более 5 интересов.');
-          }
+            if (selectedInterests.length < 5) { // Проверяем лимит выбранных интересов
+                setSelectedInterests([...selectedInterests, interest]);
+            } else {
+                alert('Нужно выбрать не более 5 интересов.');
+            }
         }
-      };
+    };
 
     const handleSaveInterests = () => {
-        console.log('Выбранные интересы:', selectedInterests);
-        userData.hobby = selectedInterests
-        console.log(userData)
-        navigate("/test", { state: userData });
-        // Здесь можно выполнить другие действия с выбранными интересами
+        if (selectedInterests.length >= 3) {
+            console.log('Выбранные интересы:', selectedInterests);
+            userData.hobby = selectedInterests
+            console.log(userData)
+            navigate("/test", { state: userData });
+            // Здесь можно выполнить другие действия с выбранными интересами
+        } else {
+            alert('Нужно выбрать не менее 3 интересов.');
+        }
     };
 
     const isInterestSelected = (interest) => {

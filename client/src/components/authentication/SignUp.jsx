@@ -44,7 +44,7 @@ const SignUp = () => {
       age,
       temperament,
     };
-
+console.log(registerData)
     navigate("/hobby", { state: registerData });
   }
 
@@ -104,20 +104,28 @@ const SignUp = () => {
     const specialCharPassword = specialCharRegExp.test(e.target.value);
     const minLengthPassword = minLengthRegExp.test(e.target.value);
 
-    if (passwordLength === 0) {
-      setPasswordError("Поле пароля не может быть пустым");
-    } else if (!uppercasePassword) {
-      setPasswordError("Введите как минимум один символ с верхним регистром");
-    } else if (!lowercasePassword) {
-      setPasswordError("Введите как минимум один символ с нижним регистром");
-    } else if (!digitsPassword) {
-      setPasswordError("Введите как минимум одну цифру");
-    } else if (!specialCharPassword) {
-      setPasswordError("введите как минимум один специальный символ");
-    } else if (!minLengthPassword) {
-      setPasswordError("Минимальная длина пароля - 8 символов");
-    } else {
-      setPasswordError("");
+    switch (true) {
+      case passwordLength === 0:
+        setPasswordError("Поле пароля не может быть пустым");
+        break;
+      case !uppercasePassword:
+        setPasswordError("Введите символ с верхним регистром");
+        break;
+      case !lowercasePassword:
+        setPasswordError("Введите символ с нижним регистром");
+        break;
+      case !digitsPassword:
+        setPasswordError("Введите цифру");
+        break;
+      case !specialCharPassword:
+        setPasswordError("Введите специальный символ");
+        break;
+      case !minLengthPassword:
+        setPasswordError("Минимальная длина пароля - 8 символов");
+        break;
+      default:
+        setPasswordError("");
+        break;
     }
   };
 
@@ -130,11 +138,24 @@ const SignUp = () => {
   };
 
   const ageHandler = (e) => {
-    setAge(e.target.value);
-    if (18 > e.target.value || e.target.value > 90) {
-      setAgeError("Недопустимый возраст");
+    const selectedDate = e.target.value; // Получаем введенную дату из инпута
+    console.log(selectedDate)
+    const minAdultAge = 18; // Минимальный возраст для совершеннолетия
+    const maxAdultAge = 100; // Максимальный возраст для регистрации
+  
+    // Проверяем совершеннолетие на основе введенной даты
+    const age = moment().diff(selectedDate, 'years');
+
+    if (!selectedDate || selectedDate === null) {
+      setAgeError("Пожалуйста, введите дату рождения"); // Устанавливаем ошибку, если поле пустое
+      return; // Прекращаем выполнение функции
+    }
+  
+    if (age < minAdultAge || age > maxAdultAge) {
+      setAgeError("Недопустимый возраст"); // Устанавливаем ошибку, если возраст меньше 18 лет
     } else {
-      setAgeError("");
+      setAge(selectedDate); // Устанавливаем возраст
+      setAgeError(""); // Сбрасываем ошибку
     }
   };
 
@@ -170,9 +191,22 @@ const SignUp = () => {
     }
   };
 
-  const getCurrentDate = () => {
-    return moment().format('YYYY-MM-DD');
+  const getCurrentAdultDate = () => {
+    const today = moment(); // Текущая дата и время
+    const minAdultAge = 18; // Минимальный возраст для совершеннолетия
+  
+    // Определяем дату рождения, учитывая минимальный возраст для совершеннолетия
+    const birthDate = today.subtract(minAdultAge, 'years');
+  
+    // Проверяем, нужно ли корректировать дату рождения из-за месяца и дня
+    if (birthDate.isAfter(today)) {
+      birthDate.subtract(1, 'years'); // Если родился в этом году, вычитаем год
+    }
+  
+    return birthDate.format('YYYY-MM-DD');
   };
+  
+  // Пример использования функции getCurrentDate для получения даты рождения совершеннолетнего
 
   return (
     <>
@@ -224,7 +258,7 @@ const SignUp = () => {
             name="birthdate"
             className="form__input form__input--age"
             onChange={(e) => ageHandler(e)}
-            max={getCurrentDate()} // Устанавливаем максимальное значение в текущую дату
+            max={getCurrentAdultDate()} // Устанавливаем максимальное значение в текущую дату
           />
         </div>        
         <div className="form__error">{ageError}</div>
