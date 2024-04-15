@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./DataForm.scss";
 
-function DataForm({ getData }) {
+function DataForm({ getData, onClose }) {
   const [data, setData] = useState("");
 
   async function saveData(e) {
@@ -16,6 +16,7 @@ function DataForm({ getData }) {
           content: data,
         };
         await axios.post("http://localhost:5000/data/", Data);
+        onClose();
         getData();
         setData('')
       } catch (error) {
@@ -30,11 +31,12 @@ function DataForm({ getData }) {
     <div className="dataForm-wrapper">
       <form onSubmit={saveData}>
         <div className="form_content">
-          <input
+          <textarea
             onChange={(e) => setData(e.target.value)}
             value={data}
             name="data"
             type="text"
+            className="data__input"
             placeholder="Что нового?"
           />
           <button type="submit" className="registerbtn">

@@ -1,11 +1,22 @@
-import DataForm from "./DataForm";
+// import DataForm from "./DataForm";
 import DataList from "./DataList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Data.scss";
+import Popup from "../popup/Popup";
 
 function Data() {
   const [data, setData] = useState([]);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   async function getData() {
     const dataList = await axios.get("http://localhost:5000/data/");
@@ -19,25 +30,33 @@ function Data() {
   //   console.log(data);
 
   return (
-    <div>
+    <>
       {data.length !== 0 ? (
         <>
-          <div>
+          {/* <div>
             <DataForm getData={getData} />
-          </div>
+          </div> */}
+                  <button type="button" onClick={openPopup} className="registerbtn">
+              ДОБАВИТЬ ЗАПИСЬ
+            </button>
           <div>
-            <DataList data={data} getData = {getData} />
+            <DataList data={data} getData={getData} />
           </div>
+          <Popup isOpen={isPopupOpen} onClose={closePopup} getData={getData}/>
         </>
       ) : (
         <>
-          <div>
+                <button type="button" onClick={openPopup} className="registerbtn">
+              ДОБАВИТЬ ЗАПИСЬ
+            </button>
+            <Popup isOpen={isPopupOpen} onClose={closePopup} getData={getData}/>
+          {/* <div>
             <DataForm getData={getData} />
-          </div>
-          <div className="nodata">Здесь будут находиться ваши публикации</div>
+          </div> */}
+          <div className="data__nodata">Здесь будут находиться ваши публикации</div>
         </>
       )}
-    </div>
+    </>
   );
 }
 export default Data;

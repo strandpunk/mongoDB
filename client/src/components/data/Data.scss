@@ -1,7 +1,21 @@
-.nodata {
+.data__nodata {
   height: 50px;
   padding-top: 2em;
   padding-bottom: 2em;
   color: white;
   /* border-bottom: 1px solid black; */
+}
+
+.data__input {
+  width: 400px; /* Ширина текстового поля */
+    height: 200px; /* Высота текстового поля */
+    font-size: 16px; /* Размер шрифта */
+    padding: 10px; /* Внутренний отступ */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
+    border: 1px solid #ccc; /* Граница текстового поля */
+    resize: none; /* Запрет на изменение размера поля пользователем */
+    line-height: 1.4; /* Межстрочный интервал для текста */
+    vertical-align: top; /* Вертикальное выравнивание текста по верхнему краю */
+    text-align: left; /* Горизонтальное выравнивание текста слева */
+    color: black;
 }

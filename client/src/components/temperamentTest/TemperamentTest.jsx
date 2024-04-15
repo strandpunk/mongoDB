@@ -163,7 +163,6 @@ function TemperamentTest() {
   return (
     <div className="form_placer">
       <div className="temperament-test">
-        <h1>Регистрация почти завершена, осталось совсем чуть-чуть</h1>
         <h2>Тест на определение типа темперамента</h2>
         <div className="questions">
           {questions.map((question) => (

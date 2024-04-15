@@ -1,22 +1,13 @@
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import "./User.scss";
-import Popup from "../popup/Popup";
 const moment = require('moment');
 
 function User({ user, getUser }) {
 
   //----------------------------------------------------------
   // const [selectedFile, setSelectedFile] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const openPopup = () => {
-    setIsPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
 
   const handlePick = () => {
     filePicker.current.click();
@@ -152,10 +143,8 @@ function User({ user, getUser }) {
 
 
 
-            <button type="button" onClick={openPopup} className="registerbtn">
-              ДОБАВИТЬ ЗАПИСЬ
-            </button>
-            <Popup isOpen={isPopupOpen} onClose={closePopup} />
+    
+          
 
             {/* <input
               onChange={handleChange}
