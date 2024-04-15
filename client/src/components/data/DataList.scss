@@ -23,20 +23,35 @@
     /* Для позиционирования кнопки */
 }
 
+.data-close {
+
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #888;
+
+}
+
+.data-close:hover {
+    color: #ccc;
+  }
+
 .data-wrapper {
-    height: 80px;
+    height: 100px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 80px;
 }
 
 .content-date {
     margin-bottom: 40px;
 }
 
-.delete-button, .edit-button {
+.delete-button,
+.edit-button {
     width: 80px;
     /* Ширина кнопки 10% от контейнера */
     height: 100px;
@@ -49,7 +64,7 @@
     transition: background-color 0.3s;
 }
 
-.plug{
+.plug {
     width: 80px;
 }
 

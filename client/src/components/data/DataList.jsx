@@ -40,20 +40,9 @@ function DataList({ data, getData, isFriend }) {
                         </>)} */}
                         <div className='data-wrapper'>{data.content} </div>
                         {isFriend === true ? (<>
-                        <div className='plug'></div>
+                            <div className='plug'></div>
                         </>) : (<>
-                            <img className='delete-button' 
-                style={{
-                  height: "95px",
-                  width: "75px",
-                  objectFit: "cover",
-                  padding: '5px',
-                  borderRadius: "0px 8px 8px 0px",
-                }}
-                onClick={() => handleDeleteConfirmation(data._id)}
-                src="/delete.svg"
-                alt="user-avatar"
-              ></img>
+                            <span className="data-close" onClick={() => handleDeleteConfirmation(data._id)}>&times;</span>
                         </>)}
 
                     </div>
@@ -67,7 +56,7 @@ function DataList({ data, getData, isFriend }) {
         // content-wrapper?
         <div className='dataList-wrapper'>
             <div>
-                <h1>Записи:</h1><br></br>
+                <h1>Ваши публикации</h1><br></br>
                 {renderData()}
             </div>
         </div>

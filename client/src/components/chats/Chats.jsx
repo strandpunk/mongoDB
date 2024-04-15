@@ -127,7 +127,7 @@ function Chats() {
         {chats.length !== 0 ? (
           <div className="chat__card-wrapper">{renderChats()}</div>
         ) : (
-          <div>Загрузка...</div>
+          <div>У вас пока нет активных чатов</div>
         )}
       </div>
       <div>

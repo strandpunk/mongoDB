@@ -94,6 +94,7 @@ function User({ user, getUser }) {
                 <div className="user__image-overlay" onClick={handlePick}>
                   {/* <p className="user__image-overlay-text">Текст поверх изображения</p> */}
                   <img className="user__image-overlay-icon" src={process.env.PUBLIC_URL + '/upload.svg'}alt="upload"></img>
+                  <p>Обновить фото</p>
                 </div></div>
               <input
                 onChange={handleChangeAndUpload}

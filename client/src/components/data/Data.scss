@@ -18,4 +18,13 @@
     vertical-align: top; /* Вертикальное выравнивание текста по верхнему краю */
     text-align: left; /* Горизонтальное выравнивание текста слева */
     color: black;
+    border-radius: 8px;
+
+
+      &::placeholder {
+        color: #a5a5a5; /* Цвет текста подсказки */
+        font-size: 14px; /* Размер шрифта подсказки */
+      }
+    
+  
 }

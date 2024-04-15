@@ -37,9 +37,9 @@ function DataForm({ getData, onClose }) {
             name="data"
             type="text"
             className="data__input"
-            placeholder="Что нового?"
+            placeholder="Что будем публиковать?"
           />
-          <button type="submit" className="registerbtn">
+          <button type="submit" className="data__sendBtn">
             ОТПРАВИТЬ
           </button>
         </div>
