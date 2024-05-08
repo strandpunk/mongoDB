@@ -123,32 +123,34 @@ function Chats() {
 
   return (
     <div className="chat-wrapper">
-      <div>
-        {chats.length !== 0 ? (
-          <div className="chat__card-wrapper">{renderChats()}</div>
-        ) : (
-          <div>У вас пока нет активных чатов</div>
-        )}
-      </div>
-      <div>
-        {currentChat ? (
-          <div className="chat__messageBox">
-            <div>{currentChat.chatName}</div>
-            <div className="chat__messages">
-              <ScrollChat messages={messages} />
+      <div className="chat-menu">
+        <div>
+          {chats.length !== 0 ? (
+            <div className="chat__card-wrapper">{renderChats()}</div>
+          ) : (
+            <div>У вас пока нет активных чатов</div>
+          )}
+        </div>
+        <div>
+          {currentChat ? (
+            <div className="chat__messageBox">
+              <div>{currentChat.chatName}</div>
+              <div className="chat__messages">
+                <ScrollChat messages={messages} />
+              </div>
+              <input
+                onChange={handleNewMessageChange}
+                value={newMessage}
+                onKeyDown={handleSendMessage}
+                name="email"
+                type="text"
+                placeholder="Введите сообщение..."
+              />
             </div>
-            <input
-              onChange={handleNewMessageChange}
-              value={newMessage}
-              onKeyDown={handleSendMessage}
-              name="email"
-              type="text"
-              placeholder="Введите сообщение..."
-            />
-          </div>
-        ) : (
-          <div className="chat__messageBox">Выберите чат</div>
-        )}
+          ) : (
+            <div className="chat__messageBox">Выберите чат</div>
+          )}
+        </div>
       </div>
     </div>
   );

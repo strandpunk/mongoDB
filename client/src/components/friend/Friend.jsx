@@ -9,45 +9,84 @@ function Friend() {
     const location = useLocation();
     const friend = location.state;
 
-    return (
-        <div>
+    const calculateAge = (birthDate) => {
+        // Создаем объект Moment для текущей даты
+        const currentDate = moment();
+    
+        // Создаем объект Moment для даты рождения
+        const birthMoment = moment(birthDate);
+    
+        // Проверяем, является ли дата рождения позже текущей даты в текущем году
+        // Если да, то уменьшаем год на 1, чтобы получить корректный возраст
+        if (birthMoment.isAfter(currentDate)) {
+          birthMoment.subtract(1, 'years');
+        }
+    
+        // Вычисляем разницу между текущей датой и датой рождения в годах
+        const ageInYears = currentDate.diff(birthMoment, 'years');
+    
+        return ageInYears;
+      };
 
-            {friend ? (
-                <>
-                    <div className="friendHome-wrapper">
-                        <div className="friendHome-main">
+    return (
+        <div className="home-wrapper">
+            <div className="home-main">
+
+                {friend ? (
+                    <>
+                        <div className="user__info">
+
                             <div className="user__info">
-                                <h1>Пользователь {friend.name}</h1>
+                                <h1>{friend.name}</h1>
                                 <br></br>
                                 <div className="user__wrapper">
-                                    <div className="user__wrapper-text">
-                                        <div>Дата подписки: {moment(friend.subDate).format('DD-MMM-YYYY HH:mm')}</div>
-                                        <div>Email: {friend.email}</div>
-                                        <div>Тип темперамента: {friend.temperament}</div>
-                                        <div>Дата создания аккаунта: {moment(friend.subDate).format('DD-MMM-YYYY HH:mm')}</div>
-                                        <div>Аватар: {friend.avatar}</div>
+                                    <div className="user__image-container">
+                                        <img
+                                            style={{
+                                                height: "400px",
+                                                width: "250px",
+                                                objectFit: "cover",
+                                                borderRadius: "8px",
+                                            }}
+                                            src={require(`../../images/${friend.avatar}`)}
+                                            alt="user-avatar"
+                                        ></img>
                                     </div>
+                                    <div className="user__wrapper-text">
+                {/* <div>Дата подписки: {moment(user.subDate).format('DD-MMM-YYYY HH:mm')}</div>
+                <div>Email: {user.email}</div>
+                <div>Тип темперамента: {user.temperament}</div>
+                <div>Дата создания аккаунта: {moment(user.createdAt).format('DD-MMM-YYYY HH:mm')}</div>
+                <div>Аватар: {user.avatar}</div> */}
+                <div>Возраст - {calculateAge(friend.age)}</div>
 
-                                    <img
-                                        style={{
-                                            height: "400px",
-                                            width: "250px",
-                                            objectFit: "cover",
-                                            borderRadius: "0px 8px 8px 0px",
-                                        }}
-                                        src={require(`../../images/${friend.avatar}`)}
-                                        alt="user-avatar"
-                                    ></img>
+                {friend.hobby.length > 0 ? (
+                  <>
+                    <div>
+                      <h3>Интересы - </h3><br></br>
+                      <ul>
+                        {friend.hobby.map((hobby, index) => (
+                          <li key={index}>{hobby}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <p>Пользователь {friend.name} пока не добавил хобби.</p>
+                )}
+              </div>
+
                                 </div>
                             </div>
                             <FriendData data={friend._id} />
                         </div>
-                    </div>
 
-                </>
-            ) : (
-                <div>Загрузка...</div>
-            )}
+
+                    </>
+                ) : (
+                    <div>Загрузка...</div>
+                )}
+            </div>
         </div>
 
     )

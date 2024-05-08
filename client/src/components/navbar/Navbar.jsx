@@ -54,7 +54,7 @@ const Navbar = () => {
                   </Link>
                   <Link to={"/friends"}>
                   <div className="navbar__navlink">
-                      Друзья</div>
+                      Знакомые</div>
                   </Link>
                   <Link to={"/users"}>
                   <div className="navbar__navlink">
