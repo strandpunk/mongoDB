@@ -54,7 +54,7 @@
   height: 800px;
 
   
-  border-left: 1px dashed whitesmoke;
+
 
   // background-color: #4d4d4d86;
   font-size: 1.5em;
@@ -79,4 +79,51 @@
 .chat__messages {
   height: 600px;
   width: 100%;
+  border: 1px solid whitesmoke;
+  border-radius: 8px;
+
+  /* W3C standard
+   сейчас только для Firefox */
+   * {
+    scrollbar-width: thin;
+    scrollbar-color: whitesmoke rgba(192, 131, 18, 0);
+  }
+  
+  /* для Chrome/Edge/Safari */
+  *::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+  }
+  *::-webkit-scrollbar-track {
+    background: rgba(255, 166, 0, 0);
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: whitesmoke;
+    border-radius: 5px;
+    border: 3px solid rgba(255, 166, 0, 0);
+  }
+  
+}
+
+.chat__input {
+  width: 100%; /* Ширина текстового поля */
+    height: 70px; /* Высота текстового поля */
+    font-size: 16px; /* Размер шрифта */
+    padding: 10px; /* Внутренний отступ */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
+    border: 1px solid #ccc; /* Граница текстового поля */
+    resize: none; /* Запрет на изменение размера поля пользователем */
+    line-height: 1.4; /* Межстрочный интервал для текста */
+    vertical-align: top; /* Вертикальное выравнивание текста по верхнему краю */
+    text-align: left; /* Горизонтальное выравнивание текста слева */
+    color: black;
+    border-radius: 8px;
+
+
+      &::placeholder {
+        color: #a5a5a5; /* Цвет текста подсказки */
+        font-size: 14px; /* Размер шрифта подсказки */
+      }
+    
+  
 }

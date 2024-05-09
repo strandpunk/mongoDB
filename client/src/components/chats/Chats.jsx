@@ -138,13 +138,14 @@ function Chats() {
               <div className="chat__messages">
                 <ScrollChat messages={messages} />
               </div>
-              <input
+              <textarea
                 onChange={handleNewMessageChange}
                 value={newMessage}
                 onKeyDown={handleSendMessage}
                 name="email"
                 type="text"
                 placeholder="Введите сообщение..."
+                className="chat__input"
               />
             </div>
           ) : (
