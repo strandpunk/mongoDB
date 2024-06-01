@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
-import AuthContext from "../../context/AuthContext";
+// import axios from "axios";
+// import AuthContext from "../../context/AuthContext";
 import "./Hobby.scss";
 
 function Hobby() {
     const navigate = useNavigate();
     const location = useLocation();
     const userData = location.state;
-    const { getLoggedIn } = useContext(AuthContext);
+    // const { getLoggedIn } = useContext(AuthContext);
 
     const [selectedInterests, setSelectedInterests] = useState([]);
 
@@ -17,19 +17,18 @@ function Hobby() {
         'Музыка',
         'Путешествия',
         'Фотография',
-        'Еда и кулинария',
+        'Кулинария',
         'Спорт',
         'Кино и театр',
         'Литература',
         'Технологии',
         'Игры',
         'Наука',
-        'Дизайн',
         'Мода',
     ];
 
     const toggleInterest = (interest) => {
-        console.log(selectedInterests)
+        // console.log(selectedInterests)
         if (selectedInterests.includes(interest)) {
             setSelectedInterests(selectedInterests.filter((item) => item !== interest));
         } else {
@@ -43,9 +42,9 @@ function Hobby() {
 
     const handleSaveInterests = () => {
         if (selectedInterests.length >= 3) {
-            console.log('Выбранные интересы:', selectedInterests);
+            // console.log('Выбранные интересы:', selectedInterests);
             userData.hobby = selectedInterests
-            console.log(userData)
+            // console.log(userData)
             navigate("/test", { state: userData });
             // Здесь можно выполнить другие действия с выбранными интересами
         } else {
@@ -57,44 +56,31 @@ function Hobby() {
         return selectedInterests.includes(interest);
     };
 
-
-    const register = async (data) => {
-        try {
-            console.log(data);
-            const response = await axios.post("http://localhost:5000/auth/", data);
-            console.log(response.data); // Вывод ответа сервера для отладки
-            navigate("/");
-            getLoggedIn();
-        } catch (error) {
-            console.error("Ошибка при отправке запроса:", error);
-            // setError("Произошла ошибка при отправке запроса");
-        }
-    };
-
     return (
         <>
-            <div className="w123">
-                <h2>Выберите ваши интересы:</h2>
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {interests.map((interest) => (
-                        <button
-                            key={interest}
-                            style={{
-                                margin: '5px',
-                                padding: '8px',
-                                backgroundColor: isInterestSelected(interest) ? 'lightblue' : 'white',
-                                fontWeight: isInterestSelected(interest) ? 'bold' : 'normal',
-                            }}
-                            onClick={() => toggleInterest(interest)}
-                        >
-                            {interest}
-                        </button>
-                    ))}
-                </div>
-                <button onClick={handleSaveInterests} style={{ marginTop: '10px' }}>
+            <div className="hobby-wrapper">
+                <div className="hobby-container">
+                    <h3>Выберите ваши интересы:</h3>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                        {interests.map((interest) => (
+                            <button
+                                className="hobby-button"
+                                key={interest}
+                                style={{
+                                    backgroundColor: isInterestSelected(interest) ? 'orange' : 'rgba(255, 255, 255, 0.411)',
+                                    fontWeight: isInterestSelected(interest) ? 'bold' : 'normal',
+                                }}
+                                onClick={() => toggleInterest(interest)}
+                            >
+                                {interest}
+                            </button>
+                        ))}
+                    </div>
+                    <button className={'form__button'} onClick={handleSaveInterests} >
                     Сохранить выбранные интересы
                 </button>
             </div>
+        </div >
         </>
     );
 }

@@ -1,60 +1,65 @@
 .form_placer {
-    background-color: slategrey;
-    width: 100%;
-    height: auto;
-    padding: 100px 0 100px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+
+  width: 100%;
+  height: auto;
+  padding: 100px 0 100px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .temperament-test {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .temperament-test h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .questions {
-    margin-bottom: 20px;
-  }
-  
-  .question {
-    margin-bottom: 10px;
-  }
-  
-  .question h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .temperamet_button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .temperamet_button:hover {
-    background-color: #0056b3;
-  }
-  
-  .result {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(50, 50, 50, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  color: whitesmoke;
+}
+
+.temperament-test h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.questions {
+  margin-bottom: 20px;
+}
+
+.question {
+  margin-bottom: 10px;
+}
+
+.question h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 40px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.temperamet_button {
+  padding: 10px 20px;
+  background-color: #0063cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.temperamet_button:hover {
+  background-color: #0056b3;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}

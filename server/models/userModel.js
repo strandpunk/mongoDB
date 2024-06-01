@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema(
     friends: { type: Array, required: true },
     temperament: {type: String, required: true},
     hobby: {type: Array, required: true},
+    lie: {type: Boolean, required: true}
   },
   {
     timestamps: true,

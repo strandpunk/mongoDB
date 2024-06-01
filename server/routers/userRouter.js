@@ -10,7 +10,7 @@ const auth = require("../middleware/auth");
 
 router.post("/", async (req, res) => {
   try {
-    const { name, email, password, passwordVerify, city, gender, hobby, age, temperament } =
+    const { name, email, password, passwordVerify, city, gender, hobby, age, temperament, lie } =
       req.body;
 
     // validation
@@ -82,6 +82,7 @@ router.post("/", async (req, res) => {
       friends,
       hobby,
       temperament,
+      lie,
     });
 
     const savedUser = await newUser.save();
@@ -212,6 +213,7 @@ router.get("/info", auth, async (req, res) => {
       temperament: userInfo.temperament,
       age: userInfo.age,
       hobby: userInfo.hobby,
+      lie: userInfo.lie,
     });
   } catch (error) {
     console.error(error);
