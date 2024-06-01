@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import "./UserList.scss";
 import { useNavigate } from "react-router-dom";
+const moment = require('moment');
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -13,6 +14,29 @@ function UsersList() {
     const finded = await axios.get("http://localhost:5000/auth/get-users");
     setUsers(Array.from(finded.data));
   }
+
+  async function openUserProfile(data) {
+    navigate('/friend', { state: data });
+  }
+
+  const calculateAge = (birthDate) => {
+    // Создаем объект Moment для текущей даты
+    const currentDate = moment();
+
+    // Создаем объект Moment для даты рождения
+    const birthMoment = moment(birthDate);
+
+    // Проверяем, является ли дата рождения позже текущей даты в текущем году
+    // Если да, то уменьшаем год на 1, чтобы получить корректный возраст
+    if (birthMoment.isAfter(currentDate)) {
+      birthMoment.subtract(1, 'years');
+    }
+
+    // Вычисляем разницу между текущей датой и датой рождения в годах
+    const ageInYears = currentDate.diff(birthMoment, 'years');
+
+    return ageInYears;
+  };
 
   async function startChat(friendId, friendName) {
     const friendData = { friendId, friendName };
@@ -56,12 +80,13 @@ function UsersList() {
                 return (
                   <div className="user__card" key={data._id}>
                     <div className="user__card-info">
-                      name: {data.name} <br />
-                      city: {data.city}
+                      {data.name} {calculateAge(data.age)}<br />
+                      {data.city}
                       <br />
-                      email: {data.email}
-                    </div>
-                    <img
+                    </div>                    
+                    {admin.current === true ? (
+                      <>
+                      <img
                       style={{
                         minHeight: "350px",
                         maxHeight: "350px",
@@ -70,11 +95,10 @@ function UsersList() {
                         borderRadius: "8px",
                         marginBottom: "10px",
                       }}
+                      onClick={() => openUserProfile(data)}
                       alt="users-images"
                       src={require(`../../images/${data.avatar}`)}
                     />
-                    {admin.current === true ? (
-                      <>
                         <button
                           className="custom__btn"
                           onClick={() => deleteUser(data._id)}
@@ -84,6 +108,18 @@ function UsersList() {
                       </>
                     ) : (
                       <>
+                      <img
+                      style={{
+                        minHeight: "350px",
+                        maxHeight: "350px",
+                        width: "250px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        marginBottom: "10px",
+                      }}
+                      alt="users-images"              
+                      src={require(`../../images/${data.avatar}`)}
+                    />
                         <button
                           className="custom__btn-sayHi"
                           onClick={() => startChat(data._id, data.name)}
@@ -102,7 +138,7 @@ function UsersList() {
             <div className="user__header">
               <h3>Пользователи</h3>
             </div>
-      </>
+          </>
         )}
       </div>
     </div>
