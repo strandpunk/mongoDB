@@ -289,39 +289,68 @@ router.get("/get-users", auth, async (req, res) => {
   try {
     const userID = req.user;
 
-    // Получаем данные пользователя
-    const userData = await User.findById(userID).select("friends city temperament isAdmin");
+    // Получаем массив друзей пользователя
+    const userData = await User.findById(userID).select("friends city temperament isAdmin age");
     const friendsId = userData.friends;
     const userCity = userData.city;
-    const isAdmin = userData.isAdmin;
+    const userTemperament = userData.temperament;
+    const isAdmin = userData.isAdmin
+    const userAge = userData.age
 
     const checkDate = new Date("2017-01-26");
 
-    let usersInfo = [];
+    let usersInfo = []
+    let findTemperament = [];
 
-    // Если пользователь - администратор, ищем только по полю lie
-    if (isAdmin) {
-      // Запрос для пользователей с lie: true
-      const usersLieTrue = await User.find({ _id: { $nin: [userID, ...friendsId] }, isAdmin: { $ne: true }, subDate: { $gt: checkDate }, lie: true }).select("-passwordHash");
+    if (userTemperament === 'sanguine') findTemperament = 'melancholic';
+    else if (userTemperament === 'choleric') findTemperament = 'phlegmatic';
+    else if (userTemperament === 'melancholic') findTemperament = 'sanguine';
+    else if (userTemperament === 'phlegmatic') findTemperament = 'choleric';
 
-      // Запрос для пользователей с lie: false или без lie
-      const usersLieFalseOrMissing = await User.find({ _id: { $nin: [userID, ...friendsId] }, isAdmin: { $ne: true }, subDate: { $gt: checkDate }, $or: [{ lie: false }, { lie: { $exists: false } }] }).select("-passwordHash");
+    if (isAdmin === true) {
+      // Если пользователь - администратор, сортируем только по lie
+      const usersLieTrue = await User.aggregate([
+        { $match: { _id: { $nin: [userID] }, isAdmin: { $ne: true }, lie: true } },
+      ]);
+
+      const usersLieFalseOrMissing = await User.aggregate([
+        { $match: { _id: { $nin: [userID] }, isAdmin: { $ne: true }, lie: { $ne: true } } },
+      ]);
+
+      usersInfo = [...usersLieTrue, ...usersLieFalseOrMissing];
+      console.log(usersInfo)
+    } else {
+
+      // Находим пользователей из того же города
+      const usersFromSameCity = await User.find({
+        _id: { $nin: [userID, ...friendsId] },
+        isAdmin: { $ne: true },
+        subDate: { $gt: checkDate },
+        temperament: { $nin: [findTemperament] },
+        city: userCity,
+      }).select("-passwordHash");
+
+      // Находим остальных пользователей
+      const otherUsers = await User.find({
+        _id: { $nin: [userID, ...friendsId] },
+        isAdmin: { $ne: true },
+        subDate: { $gt: checkDate },
+        temperament: { $nin: [findTemperament] },
+        city: { $ne: userCity },
+      }).select("-passwordHash");
+
 
       // Объединяем результаты
-      usersInfo = [...usersLieTrue, ...usersLieFalseOrMissing];
-    } else {
-      // Если пользователь не администратор, ищем только по городу
-      usersInfo = await User.find({ _id: { $nin: [userID, ...friendsId] }, isAdmin: { $ne: true }, subDate: { $gt: checkDate }, city: userCity }).select("-passwordHash");
+      usersInfo = [...usersFromSameCity, ...otherUsers];
+
     }
 
     res.status(200).send(usersInfo);
   } catch (error) {
-    console.error('Error:', error);
+    console.error(error);
     res.status(500).send();
   }
 });
-
-
 
 
 
