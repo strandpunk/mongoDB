@@ -289,40 +289,40 @@ router.get("/get-users", auth, async (req, res) => {
   try {
     const userID = req.user;
 
-    // Получаем массив друзей пользователя
-    const userData = await User.findById(userID).select("friends");
+    // Получаем данные пользователя
+    const userData = await User.findById(userID).select("friends city temperament isAdmin");
     const friendsId = userData.friends;
+    const userCity = userData.city;
+    const isAdmin = userData.isAdmin;
 
     const checkDate = new Date("2017-01-26");
 
-    const temperamentList = ['sanguine', 'choleric', 'melancholic', 'phlegmatic']
+    let usersInfo = [];
 
-    const temperamentInfo = await User.findById(userID).select();
-    console.log(temperamentInfo.temperament)
+    // Если пользователь - администратор, ищем только по полю lie
+    if (isAdmin) {
+      // Запрос для пользователей с lie: true
+      const usersLieTrue = await User.find({ _id: { $nin: [userID, ...friendsId] }, isAdmin: { $ne: true }, subDate: { $gt: checkDate }, lie: true }).select("-passwordHash");
 
-    let findTemperament = []
+      // Запрос для пользователей с lie: false или без lie
+      const usersLieFalseOrMissing = await User.find({ _id: { $nin: [userID, ...friendsId] }, isAdmin: { $ne: true }, subDate: { $gt: checkDate }, $or: [{ lie: false }, { lie: { $exists: false } }] }).select("-passwordHash");
 
-    if (temperamentInfo.temperament === 'sanguine') findTemperament = 'melancholic'
-    else if (temperamentInfo.temperament === 'choleric') findTemperament = 'phlegmatic'
-    else if (temperamentInfo.temperament === 'melancholic') findTemperament = 'sanguine'
-    else if (temperamentInfo.temperament === 'phlegmatic') findTemperament = 'choleric'
-
-    //console.log(findTemperament)
-
-    // Выводим пользователей не являющихся друзьями и у которых не просрочена подписка
-    const usersInfo = await User.find({
-      _id: { $nin: [userID, ...friendsId] }, // Используем оператор ...spread для объединения массивов
-      isAdmin: { $nin: true },
-      subDate: { $gt: checkDate },
-      temperament: {$nin: findTemperament},
-    }).select("-passwordHash");
+      // Объединяем результаты
+      usersInfo = [...usersLieTrue, ...usersLieFalseOrMissing];
+    } else {
+      // Если пользователь не администратор, ищем только по городу
+      usersInfo = await User.find({ _id: { $nin: [userID, ...friendsId] }, isAdmin: { $ne: true }, subDate: { $gt: checkDate }, city: userCity }).select("-passwordHash");
+    }
 
     res.status(200).send(usersInfo);
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error);
     res.status(500).send();
   }
 });
+
+
+
 
 
 //подписка patch?
