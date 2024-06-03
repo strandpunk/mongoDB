@@ -358,7 +358,7 @@ router.get("/get-users", auth, async (req, res) => {
 
 
       // Объединяем результаты
-      usersInfo = [...usersFromSameCityT, ...usersFromSameCityN, ...otherUsersT, ...othreUsersN];
+      usersInfo = [...usersFromSameCityT, ...usersFromSameCityN, ...otherUsersT, ...otherUsersN];
 
     }
 
