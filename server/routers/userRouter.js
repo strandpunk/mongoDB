@@ -322,7 +322,7 @@ router.get("/get-users", auth, async (req, res) => {
     } else {
 
       // Находим пользователей из того же города
-      const usersFromSameCity = await User.find({
+      const usersFromSameCityT = await User.find({
         _id: { $nin: [userID, ...friendsId] },
         isAdmin: { $ne: true },
         subDate: { $gt: checkDate },
@@ -330,8 +330,17 @@ router.get("/get-users", auth, async (req, res) => {
         city: userCity,
       }).select("-passwordHash");
 
+      const usersFromSameCityN = await User.find({
+        _id: { $nin: [userID, ...friendsId] },
+        isAdmin: { $ne: true },
+        subDate: { $gt: checkDate },
+        temperament: { $in: [findTemperament] },
+        city: userCity,
+      }).select("-passwordHash");
+
+
       // Находим остальных пользователей
-      const otherUsers = await User.find({
+      const otherUsersT = await User.find({
         _id: { $nin: [userID, ...friendsId] },
         isAdmin: { $ne: true },
         subDate: { $gt: checkDate },
@@ -339,9 +348,17 @@ router.get("/get-users", auth, async (req, res) => {
         city: { $ne: userCity },
       }).select("-passwordHash");
 
+      const otherUsersN = await User.find({
+        _id: { $nin: [userID, ...friendsId] },
+        isAdmin: { $ne: true },
+        subDate: { $gt: checkDate },
+        temperament: { $in: [findTemperament] },
+        city: { $ne: userCity },
+      }).select("-passwordHash");
+
 
       // Объединяем результаты
-      usersInfo = [...usersFromSameCity, ...otherUsers];
+      usersInfo = [...usersFromSameCityT, ...usersFromSameCityN, ...otherUsersT, ...othreUsersN];
 
     }
 
