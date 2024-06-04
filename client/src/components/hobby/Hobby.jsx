@@ -67,7 +67,7 @@ function Hobby() {
                                 className="hobby-button"
                                 key={interest}
                                 style={{
-                                    backgroundColor: isInterestSelected(interest) ? 'orange' : 'rgba(255, 255, 255, 0.411)',
+                                    backgroundColor: isInterestSelected(interest) ? 'lightblue' : 'rgba(255, 255, 255, 0.411)',
                                     fontWeight: isInterestSelected(interest) ? 'bold' : 'normal',
                                 }}
                                 onClick={() => toggleInterest(interest)}

@@ -40,7 +40,7 @@ function DataList({ data, getData, isFriend }) {
                         </>)} */}
                         <div className='data-wrapper'>{data.content} </div>
                         {isFriend === true ? (<>
-                            <div className='plug'></div>
+                            <span className="data-close" ></span>
                         </>) : (<>
                             <span className="data-close" onClick={() => handleDeleteConfirmation(data._id)}>&times;</span>
                         </>)}
@@ -56,7 +56,12 @@ function DataList({ data, getData, isFriend }) {
         // content-wrapper?
         <div className='dataList-wrapper'>
             <div>
-                <h1>Ваши публикации</h1><br></br>
+                {isFriend === true ? (<>
+                    <h1>Публикации пользователя</h1><br></br>
+                </>) : (<>
+                    <h1>Ваши публикации</h1><br></br>
+                </>)}
+
                 {renderData()}
             </div>
         </div>

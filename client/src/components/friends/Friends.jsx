@@ -48,7 +48,7 @@ function Friends() {
         {users.length !== 0 ? (
           <>
             <div className="user__header">
-              <h1>Знакомые</h1>
+              <h1>Друзья</h1>
             </div>
             {/* {console.log(users)} */}
             <div className="user__card-wrapper">
